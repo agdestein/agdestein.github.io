@@ -1,10 +1,9 @@
 +++
-title = "Curriculum Vitae"
+title = "About"
 tags = ["info"]
 +++
 
-
-# Curriculum Vitae
+# About
 
 ## Employment
 
@@ -34,14 +33,32 @@ tags = ["info"]
 
 ## Publications
 
-- Syver Døving Agdestein, Benjamin Sanderse,
-  Learning filtered discretization operators: non-intrusive versus intrusive approaches.
-  arxiv:[2208.09363](https://arxiv.org/abs/2208.09363), 2022
+- S. Agdestein and B. Sanderse, Discretize first, filter next – a new closure
+  model approach, in: eccomas2022. URL
+  <https://www.scipedia.com/public/Agdestein_Sanderse_2022a>.
+  doi: [10.23967/eccomas.2022.094](https://doi.org/10.23967/eccomas.2022.094)
 - Syver Døving Agdestein, Try Nguyen Tran, Jing-Rebecca Li, Practical
   computation of the diffusion MRI signal based on Laplace eigenfunctions:
   permeable interfaces, NMR in Biomedicine. 2022; 35(3):e4646.
-  doi:[10.1002/nbm.4646](https://doi.org/10.1002/nbm.4646)
+  doi: [10.1002/nbm.4646](https://doi.org/10.1002/nbm.4646)
 - Syver D. Agdestein and Kristian Valen-Sendstad and Alexandra K. Diem, (2018).
   Artery.FE: An implementation of the 1D blood flow equations in FEniCS.
   Journal of Open Source Software, 3(32), 1107,
-  doi:[10.21105/joss.01107](https://doi.org/10.21105/joss.01107)
+  doi: [10.21105/joss.01107](https://doi.org/10.21105/joss.01107)
+
+## Software
+
+- [IncompressibleNavierStokes.jl](https://github.com/agdestein/IncompressibleNavierStokes.jl)
+  (Julia): Incompressible fluid flow simulator in 2D and 3D
+- [DiscreteFiltering.jl](https://github.com/agdestein/DiscreteFiltering.jl)
+  (Julia): Embedded learning of discretely filtered convection operators
+- [SpinDoctor](https://github.com/SpinDoctorMRI/SpinDoctor) (MATLAB) and
+  [SpinDoctor.jl](https://github.com/SpinDoctorMRI/SpinDoctor.jl) (Julia):
+  Finite element diffusion MRI simulator for articificial and real neuron
+  geometries in 2D and 3D
+- [Gemseo](https://gemseo.readthedocs.io/en/stable/) (Python): Generic Engine
+  for Multidisciplinary Scenarios, Exploration and Optimization
+- [Artery.FE](https://github.com/KVSlab/bloodflow/) (Python): 1D blood flow
+  equation solver based on FEniCS
+
+See also my [GitHub page](https://github.com/agdestein).
