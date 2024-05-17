@@ -65,4 +65,3 @@ plot(
     label = false,
 )
 savefig(joinpath(@OUTPUT, "homogeneity.png")); #hide
-
