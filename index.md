@@ -12,4 +12,5 @@ Amsterdam, the Netherlands.
 - [GitHub](https://github.com/agdestein)
 - [ORCID](https://orcid.org/0000-0002-1589-2916)
 - [ResearchGate](https://www.researchgate.net/profile/Syver-Agdestein)
+- [LinkedIn](www.linkedin.com/in/sdagdestein)
 - [Centrum Wiskunde & Informatica](https://www.cwi.nl/people/syver-agdestein)
