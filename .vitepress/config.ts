@@ -14,7 +14,12 @@ export default defineConfig({
       "light": "/logo.png",
       "dark": "/logo.png"
     },
-    editLink: true,
+    editLink: {
+      repo: 'agdestein/personal-website', // GitHub repository
+      dir: '', // Directory of the files
+      branch: 'main', // Branch name
+      text: 'Edit this page on GitHub' // Link text
+    },
 
     // footer: {
     //   message: 'Released under the MIT License.',
@@ -43,11 +48,11 @@ export default defineConfig({
       {
         icon: { svg: '<img src="researchgate.svg" width="20" height="20"/>' },
         link: "https://www.researchgate.net/profile/Syver-Agdestein",
-      }, 
+      },
       {
         icon: { svg: '<img src="orcid.svg" width="20" height="20"/>' },
         link: "https://orcid.org/0000-0002-1589-2916",
-      }, 
+      },
     ],
   },
 })
