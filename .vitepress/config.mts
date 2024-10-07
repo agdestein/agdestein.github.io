@@ -7,12 +7,20 @@ export default defineConfig({
   markdown: {
     math: true,
   },
+  lastUpated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: {
       "light": "/logo.png",
       "dark": "/logo.png"
     },
+    editLink: true,
+
+    // footer: {
+    //   message: 'Released under the MIT License.',
+    //   copyright: 'Copyright © 2024-present Syver Døving Agdestein',
+    // },
+
     nav: [
       { text: "Home", link: "/" },
       { text: "About", link: "/about" },
