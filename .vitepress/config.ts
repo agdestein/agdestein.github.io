@@ -7,7 +7,6 @@ export default defineConfig({
   markdown: {
     math: true,
   },
-  lastUpated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: {
@@ -19,6 +18,14 @@ export default defineConfig({
       dir: '', // Directory of the files
       branch: 'main', // Branch name
       text: 'Edit this page on GitHub' // Link text
+    },
+    lastUpdated: {
+      // text: 'Updated at',
+      formatOptions: {
+        dateStyle: 'long',
+        // timeStyle: 'short',
+        hour12: false, // Use 24-hour clock
+      },
     },
 
     // footer: {
