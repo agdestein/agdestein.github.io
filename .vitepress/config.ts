@@ -14,10 +14,7 @@ export default defineConfig({
       "dark": "/logo.png"
     },
     editLink: {
-      repo: 'agdestein/personal-website', // GitHub repository
-      dir: '', // Directory of the files
-      branch: 'main', // Branch name
-      text: 'Edit this page on GitHub' // Link text
+      pattern: 'https://github.com/agdestein/agdestein.github.io/tree/main/:path'
     },
     lastUpdated: {
       // text: 'Updated at',
