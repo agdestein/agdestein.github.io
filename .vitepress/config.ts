@@ -14,7 +14,7 @@ export default defineConfig({
       "dark": "/logo.png"
     },
     editLink: {
-      pattern: 'https://github.com/agdestein/agdestein.github.io/tree/main/:path'
+      pattern: 'https://github.com/agdestein/agdestein.github.io/tree/main/:path',
     },
     lastUpdated: {
       // text: 'Updated at',
