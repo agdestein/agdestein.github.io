@@ -1,3 +1,4 @@
+import footnote from 'markdown-it-footnote'
 import { defineConfig } from "vitepress"
 
 // https://vitepress.dev/reference/site-config
@@ -6,6 +7,9 @@ export default defineConfig({
   description: "Personal website",
   markdown: {
     math: true,
+    config: (md) => {
+      md.use(footnote)
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
