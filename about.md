@@ -23,10 +23,13 @@
 
 ## Publications
 
+- S. D. Agdestein, R. Verstappen, and B. Sanderse.
+    "Exact closure for discrete large-eddy simulation".
+    arXiv preprint [arXiv:2507.17051](https://arxiv.org/abs/2507.17051)
 - S. D. Agdestein and B. Sanderse.
-    "Discretize first, filter next: learning divergence-consistent closure models for large-eddy simulation".
-    In: arXiv [math.NA] (2024).
-    doi: [10.48550/arXiv.2403.18088](https://doi.org/10.48550/arXiv.2403.18088)
+    "Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation".
+    In: Journal of Computational Physics, Volume 522 (2025).
+    doi: [10.1016/j.jcp.2024.113577](https://doi.org/10.1016/j.jcp.2024.113577)
 - S. D. Agdestein and B. Sanderse.
     "Discretize first, filter next – a new closure model approach".
     In: Eccomas2022 (2022).
