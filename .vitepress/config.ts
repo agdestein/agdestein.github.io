@@ -40,15 +40,15 @@ export default defineConfig({
       { text: "Blog posts", link: "/posts", activeMatch: "/posts/.*" },
     ],
 
-    sidebar: {
-      "/posts/": {
-        items: [
-          { text: "Overview", link: "/posts/" },
-          { text: "Writing a differentiable fluid solver in Julia", link: "/posts/2024-10-06" },
-          { text: "What is the difference between forward and reverse mode automatic differentiation?", link: "/posts/2024-10-05" },
-        ],
-      },
-    },
+    // sidebar: {
+    //   "/posts/": {
+    //     items: [
+    //       { text: "Overview", link: "/posts/" },
+    //       { text: "Writing a differentiable fluid solver in Julia", link: "/posts/2024-10-06" },
+    //       { text: "What is the difference between forward and reverse mode automatic differentiation?", link: "/posts/2024-10-05" },
+    //     ],
+    //   },
+    // },
 
     socialLinks: [
       { icon: "github", link: "https://github.com/agdestein" },
