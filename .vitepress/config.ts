@@ -36,7 +36,7 @@ export default defineConfig({
 
     nav: [
       { text: "Home", link: "/" },
-      { text: "About", link: "/about" },
+      { text: "CV", link: "/about" },
       { text: "Blog posts", link: "/posts", activeMatch: "/posts/.*" },
     ],
 
