@@ -23,23 +23,50 @@
 
 ## Publications
 
-- S. D. Agdestein, R. Verstappen, and B. Sanderse.
-    "Exact closure for discrete large-eddy simulation".
-    arXiv preprint [arXiv:2507.17051](https://arxiv.org/abs/2507.17051)
-- S. D. Agdestein and B. Sanderse.
-    "Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation".
-    In: Journal of Computational Physics, Volume 522 (2025).
+- Syver Døving Agdestein, Roel Verstappen, and Benjamin Sanderse.
+    "Exact Expressions for the Unresolved Stress in a Finite-Volume Based Large-Eddy Simulation".
+    In: Journal of Computational Physics 556 (July 2026), p. 114810.
+    doi: [10.1016/j.jcp.2026.114810](https://doi.org/10.1016/j.jcp.2026.114810)
+- Anna Ivagnes et al.
+    "A New Data-Driven Energy-Stable Evolve-Filter-Relax Model for Turbulent Flow Simulation".
+    In: Computer Methods in Applied Mechanics and Engineering 450 (Mar. 2026), p. 118654.
+    doi: [10.1016/j.cma.2025.118654](https://doi.org/10.1016/j.cma.2025.118654)
+- Syver Døving Agdestein and Benjamin Sanderse.
+    "Discretize First, Filter next: Learning Divergence-Consistent Closure Models for Large-Eddy Simulation".
+    In: Journal of Computational Physics 522 (Feb. 2025), p. 113577.
     doi: [10.1016/j.jcp.2024.113577](https://doi.org/10.1016/j.jcp.2024.113577)
-- S. D. Agdestein and B. Sanderse.
-    "Discretize first, filter next – a new closure model approach".
-    In: Eccomas2022 (2022).
+- Syver Døving Agdestein and Benjamin Sanderse.
+    "Discretize First, Filter next – a New Closure Model Approach".
+    In: 8th European Congress on Computational Methods in Applied Sciences and Engineering. CIMNE, 2022.
     doi: [10.23967/eccomas.2022.094](https://doi.org/10.23967/eccomas.2022.094)
-- S. D. Agdestein, T. N. Tran, J.-R. Li.
-    "Practical computation of the diffusion MRI signal based on Laplace
-    eigenfunctions: permeable interfaces".
-    In: NMR in Biomedicine 35.3 (2022), e4646.
+- Syver Døving Agdestein, Try Nguyen Tran, and Jing-Rebecca Li.
+    "Practical Computation of the Diffusion MRI Signal Based on Laplace Eigenfunctions: Permeable Interfaces".
+    In: NMR in Biomedicine 35.3 (Mar. 2022), e4646.
     doi: [10.1002/nbm.4646](https://doi.org/10.1002/nbm.4646)
-- S. D. Agdestein, K. Valen-Sendstad and A. K. Diem.
-  "Artery.FE: An implementation of the 1D blood flow equations in FEniCS".
-  In: Journal of Open Source Software, 3.32 (2018), p. 1107,
-  doi: [10.21105/joss.01107](https://doi.org/10.21105/joss.01107)
+- Syver Agdestein, Kristian Valen-Sendstad, and Alexandra Diem.
+    "Artery.FE: An Implementation of the 1D Blood Flow Equations in FEniCS".
+    In: Journal of Open Source Software 3.32 (Dec. 2018), p. 1107.
+    doi: [10.21105/joss.01107](https://doi.org/10.21105/joss.01107)
+
+## Contributed talks
+
+- SCS Spring Meeting, Hasselt, Belgium, June 2025.
+  *Should structural turbulence closures be non-symmetric?*
+- SIAM CSE, Fort Worth, USA, February 2025.
+  *Model-data consistent closure models in large-eddy simulation*
+- DTE & AICOMAS, Paris, France, February 2025.
+  *Model-data consistent closure models in large-eddy simulation*
+- Meetup of the NL-RSE Community, Amsterdam, the Netherlands, November 2024.
+  *Discrete closure models for turbulent flows: Exploiting differentiable programming*
+- ECCOMAS, Lisbon, Portugal, June 2024.
+  *Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation*
+- ERCOFTAC ML4FLUIDS, Paris, France, March 2024.
+  *Learning neural closure models for discretely filtered turbulence*
+- CFC, Cannes, France, April 2023.
+  *Closure models for discretely filtered differential equations*
+- Seminar, Bernoulli Institute for Mathematics, Groningen University, Groningen, the Netherlands, February 2023.
+  *Closure models for discretely filtered differential equations*
+- SIAM CSE, Amsterdam, the Netherlands, February 2023.
+  *Closure models for discretely filtered differential equations*
+- ECCOMAS, Oslo, Norway, June 2022.
+  *Data-driven filtering of differential equations*
