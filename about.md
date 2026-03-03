@@ -50,6 +50,8 @@
 
 ## Contributed talks
 
+- INRIA SPADES associate team meeting, Rome, Italy, December 2025.
+  *Data-driven closure modeling: From deterministic to probabilistic models*
 - SCS Spring Meeting, Hasselt, Belgium, June 2025.
   *Should structural turbulence closures be non-symmetric?*
 - SIAM CSE, Fort Worth, USA, February 2025.
