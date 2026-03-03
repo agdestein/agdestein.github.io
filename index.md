@@ -14,7 +14,7 @@ hero:
       text: GitHub
       link: https://github.com/agdestein
     - theme: alt
-      text: About
+      text: Curriculum Vitae
       link: /about
     - theme: alt
       text: Blog posts
