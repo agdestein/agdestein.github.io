@@ -11,6 +11,9 @@ hero:
     alt: Syver Døving Agdestein
   actions:
     - theme: brand
+      text: GitHub
+      link: https://github.com/agdestein
+    - theme: alt
       text: About
       link: /about
     - theme: alt
