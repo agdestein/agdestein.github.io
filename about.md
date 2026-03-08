@@ -27,29 +27,4 @@
 
 ## Contributed talks
 
-- ERCOFTAC ML4FLUIDS, Amsterdam, the Netherlands, March 2026.
-  *Symmetry-preserving LES: Comparison of data-driven closure models*
-  \[[slides](/slides/20260304-ML4FLUIDS.pdf)\]
-- INRIA SPADES associate team meeting, Rome, Italy, December 2025.
-  *Data-driven closure modeling: From deterministic to probabilistic models*
-  \[[slides](/slides/20251216-SPADES.pdf)\]
-- SCS Spring Meeting, Hasselt, Belgium, June 2025.
-  *Should structural turbulence closures be non-symmetric?*
-- SIAM CSE, Fort Worth, USA, February 2025.
-  *Model-data consistent closure models in large-eddy simulation*
-- DTE & AICOMAS, Paris, France, February 2025.
-  *Model-data consistent closure models in large-eddy simulation*
-- Meetup of the NL-RSE Community, Amsterdam, the Netherlands, November 2024.
-  *Discrete closure models for turbulent flows: Exploiting differentiable programming*
-- ECCOMAS, Lisbon, Portugal, June 2024.
-  *Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation*
-- ERCOFTAC ML4FLUIDS, Paris, France, March 2024.
-  *Learning neural closure models for discretely filtered turbulence*
-- CFC, Cannes, France, April 2023.
-  *Closure models for discretely filtered differential equations*
-- Seminar, Bernoulli Institute for Mathematics, Groningen University, Groningen, the Netherlands, February 2023.
-  *Closure models for discretely filtered differential equations*
-- SIAM CSE, Amsterdam, the Netherlands, February 2023.
-  *Closure models for discretely filtered differential equations*
-- ECCOMAS, Oslo, Norway, June 2022.
-  *Data-driven filtering of differential equations*
+<TalkList />

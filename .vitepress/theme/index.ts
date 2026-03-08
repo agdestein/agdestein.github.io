@@ -3,6 +3,7 @@ import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import Figure from './components/Figure.vue';
 import PublicationList from './components/PublicationList.vue';
+import TalkList from './components/TalkList.vue';
 
 import { 
   NolebaseEnhancedReadabilitiesMenu, 
@@ -27,5 +28,6 @@ export default {
     enhanceApp({ app, router, siteData }) {
         app.component( 'Figure', Figure );
         app.component( 'PublicationList', PublicationList );
+        app.component( 'TalkList', TalkList );
     }
 } satisfies Theme
