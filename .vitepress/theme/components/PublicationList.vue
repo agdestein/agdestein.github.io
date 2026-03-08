@@ -10,7 +10,7 @@
       <div class="pub-content">
         <div class="pub-title">{{ pub.title }}</div>
         <div class="pub-meta">
-          <span class="pub-authors" v-html="highlightAuthor(pub.authors)" />
+          <span class="pub-authors">{{ pub.authors }}</span>
           &middot;
           <span class="pub-venue">{{ pub.venue }}</span>
           &middot;
@@ -56,9 +56,6 @@ const displayed = computed(() =>
   props.limit ? publications.slice(0, props.limit) : publications
 )
 
-function highlightAuthor(authors: string): string {
-  return authors.replace(/(Syver[^,]+?)(?=[,\s]|$)/g, '<strong>$1</strong>')
-}
 </script>
 
 <style scoped>
