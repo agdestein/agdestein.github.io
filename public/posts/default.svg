@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="6" fill="#f6f6f7"/>
+  <!-- Pen nib -->
+  <path d="M38 14 L50 26 L28 48 L16 50 L18 38 Z" fill="none" stroke="#c0c0c8" stroke-width="2" stroke-linejoin="round"/>
+  <line x1="26" y1="20" x2="44" y2="38" stroke="#c0c0c8" stroke-width="2"/>
+  <line x1="18" y1="38" x2="26" y2="46" stroke="#c0c0c8" stroke-width="1.5"/>
+</svg>

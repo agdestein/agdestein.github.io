@@ -2,8 +2,7 @@
   <div class="publication-list">
     <div v-for="(pub, i) in displayed" :key="i" class="publication-entry">
       <img
-        v-if="pub.image"
-        :src="`/publications/${pub.image}`"
+        :src="pub.image ? `/publications/${pub.image}` : '/publications/default.svg'"
         :alt="pub.title"
         class="pub-image"
       />

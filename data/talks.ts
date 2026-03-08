@@ -3,6 +3,7 @@ export interface Talk {
   venue: string
   location: string
   date: string
+  image?: string
   slidesUrl?: string
   abstractUrl?: string
   webpageUrl?: string

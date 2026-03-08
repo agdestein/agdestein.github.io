@@ -1,6 +1,11 @@
 <template>
   <div class="talk-list">
     <div v-for="(talk, i) in displayed" :key="i" class="talk-entry">
+      <img
+        :src="talk.image ? `/talks/${talk.image}` : '/talks/default.svg'"
+        :alt="talk.title"
+        class="talk-image"
+      />
       <div class="talk-content">
         <div class="talk-title">{{ talk.title }}</div>
         <div class="talk-meta">
@@ -57,12 +62,28 @@ const displayed = computed(() =>
 }
 
 .talk-entry {
+  display: flex;
+  gap: 1rem;
   padding: 1rem 0;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
+.talk-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
 .talk-entry:last-child {
   border-bottom: none;
+}
+
+.talk-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .talk-title {
