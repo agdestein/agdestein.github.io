@@ -14,8 +14,14 @@ hero:
       text: GitHub
       link: https://github.com/agdestein
     - theme: alt
-      text: Curriculum Vitae
+      text: CV
       link: /about
+    - theme: alt
+      text: Publications
+      link: /publications
+    - theme: alt
+      text: Talks
+      link: /talks
     - theme: alt
       text: Blog posts
       link: /posts/
@@ -35,12 +41,12 @@ features:
 
 ## Recent publications
 
-<PublicationList :limit="3" />
+<PublicationList :limit="2" />
 
 ## Recent talks
 
-<TalkList :limit="3" />
+<TalkList :limit="2" />
 
 ## Recent blog posts
 
-<PostList :limit="3" />
+<PostList :limit="2" />
