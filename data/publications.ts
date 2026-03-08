@@ -64,7 +64,7 @@ export const publications: Publication[] = [
   },
   {
     title: "Artery.FE: An Implementation of the 1D Blood Flow Equations in FEniCS",
-    authors: "Syver Agdestein, Kristian Valen-Sendstad, and Alexandra Diem",
+    authors: "Syver Døving Agdestein, Kristian Valen-Sendstad, and Alexandra Diem",
     venue: "Journal of Open Source Software 3.32",
     year: 2018,
     doi: "10.21105/joss.01107",
