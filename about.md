@@ -23,6 +23,10 @@
 
 ## Publications
 
+- Syver Døving Agdestein and Benjamin Sanderse.
+    "Comparison of Data-Driven Symmetry-Preserving Closure Models for Large-Eddy Simulation".
+    Mar. 2026.
+    doi: [10.48550/arXiv.2603.05325](https://doi.org/10.48550/arXiv.2603.05325)
 - Syver Døving Agdestein, Roel Verstappen, and Benjamin Sanderse.
     "Exact Expressions for the Unresolved Stress in a Finite-Volume Based Large-Eddy Simulation".
     In: Journal of Computational Physics 556 (July 2026), p. 114810.
@@ -50,6 +54,8 @@
 
 ## Contributed talks
 
+- ERCOFTAC ML4FLUIDS, Amsterdam, the Netherlands, March 2026.
+  *Symmetry-preserving LES: Comparison of data-driven closure models*
 - INRIA SPADES associate team meeting, Rome, Italy, December 2025.
   *Data-driven closure modeling: From deterministic to probabilistic models*
 - SCS Spring Meeting, Hasselt, Belgium, June 2025.
