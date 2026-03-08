@@ -5,6 +5,7 @@ export interface Talk {
   date: string
   slidesUrl?: string
   abstractUrl?: string
+  webpageUrl?: string
 }
 
 export const talks: Talk[] = [
@@ -14,6 +15,7 @@ export const talks: Talk[] = [
     location: "Amsterdam, the Netherlands",
     date: "March 2026",
     slidesUrl: "/slides/20260304-ML4FLUIDS.pdf",
+    webpageUrl: "https://ml4fluids2026.github.io/",
   },
   {
     title: "Data-driven closure modeling: From deterministic to probabilistic models",
@@ -27,12 +29,15 @@ export const talks: Talk[] = [
     venue: "SCS Spring Meeting",
     location: "Hasselt, Belgium",
     date: "June 2025",
+    webpageUrl: "https://wsc.project.cwi.nl/spring-symposium/2025-meeting/2025-meeting",
   },
   {
     title: "Model-data consistent closure models in large-eddy simulation",
     venue: "SIAM CSE",
     location: "Fort Worth, USA",
     date: "February 2025",
+    abstractUrl: "https://meetings.siam.org/sess/dsp_talk.cfm?p=143335",
+    webpageUrl: "https://www.siam.org/conferences-events/past-event-archive/cse25/",
   },
   {
     title: "Model-data consistent closure models in large-eddy simulation",

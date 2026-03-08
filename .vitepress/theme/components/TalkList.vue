@@ -10,7 +10,7 @@
           &middot;
           <span class="talk-date">{{ talk.date }}</span>
         </div>
-        <div v-if="talk.slidesUrl || talk.abstractUrl" class="talk-badges">
+        <div v-if="talk.slidesUrl || talk.abstractUrl || talk.webpageUrl" class="talk-badges">
           <a
             v-if="talk.slidesUrl"
             :href="talk.slidesUrl"
@@ -23,8 +23,15 @@
             :href="talk.abstractUrl"
             target="_blank"
             rel="noopener"
-            class="badge"
+            class="badge badge-muted"
           >abstract</a>
+          <a
+            v-if="talk.webpageUrl"
+            :href="talk.webpageUrl"
+            target="_blank"
+            rel="noopener"
+            class="badge badge-muted"
+          >webpage</a>
         </div>
       </div>
     </div>
@@ -90,5 +97,11 @@ const displayed = computed(() =>
 
 .badge:hover {
   opacity: 0.8;
+}
+
+.badge-muted {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
 }
 </style>
