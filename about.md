@@ -56,8 +56,10 @@
 
 - ERCOFTAC ML4FLUIDS, Amsterdam, the Netherlands, March 2026.
   *Symmetry-preserving LES: Comparison of data-driven closure models*
+  \[[slides](/slides/20260304-ML4FLUIDS.pdf)\]
 - INRIA SPADES associate team meeting, Rome, Italy, December 2025.
   *Data-driven closure modeling: From deterministic to probabilistic models*
+  \[[slides](/slides/20251216-SPADES.pdf)\]
 - SCS Spring Meeting, Hasselt, Belgium, June 2025.
   *Should structural turbulence closures be non-symmetric?*
 - SIAM CSE, Fort Worth, USA, February 2025.
