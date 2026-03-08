@@ -10,13 +10,21 @@
           &middot;
           <span class="talk-date">{{ talk.date }}</span>
         </div>
-        <div v-if="talk.slidesUrl" class="talk-badges">
+        <div v-if="talk.slidesUrl || talk.abstractUrl" class="talk-badges">
           <a
+            v-if="talk.slidesUrl"
             :href="talk.slidesUrl"
             target="_blank"
             rel="noopener"
             class="badge"
           >slides</a>
+          <a
+            v-if="talk.abstractUrl"
+            :href="talk.abstractUrl"
+            target="_blank"
+            rel="noopener"
+            class="badge"
+          >abstract</a>
         </div>
       </div>
     </div>

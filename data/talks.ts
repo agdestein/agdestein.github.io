@@ -4,6 +4,7 @@ export interface Talk {
   location: string
   date: string
   slidesUrl?: string
+  abstractUrl?: string
 }
 
 export const talks: Talk[] = [
