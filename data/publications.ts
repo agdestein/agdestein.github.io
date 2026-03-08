@@ -16,7 +16,8 @@ export const publications: Publication[] = [
     venue: "arXiv preprint",
     year: 2026,
     preprintDoi: "10.48550/arXiv.2603.05325",
-    image: "agdesteinComparisonDatadrivenSymmetrypreserving2026.png"
+    codeUrl: "https://github.com/agdestein/SymmetryCode.jl",
+    image: "agdesteinComparisonDatadrivenSymmetrypreserving2026.png",
   },
   {
     title: "Exact Expressions for the Unresolved Stress in a Finite-Volume Based Large-Eddy Simulation",
@@ -24,6 +25,8 @@ export const publications: Publication[] = [
     venue: "Journal of Computational Physics 556",
     year: 2026,
     doi: "10.1016/j.jcp.2026.114810",
+    preprintDoi: "10.48550/arXiv.2507.17051",
+    codeUrl: "https://github.com/agdestein/ExactClosure.jl",
   },
   {
     title: "A New Data-Driven Energy-Stable Evolve-Filter-Relax Model for Turbulent Flow Simulation",
@@ -31,6 +34,7 @@ export const publications: Publication[] = [
     venue: "Computer Methods in Applied Mechanics and Engineering 450",
     year: 2026,
     doi: "10.1016/j.cma.2025.118654",
+    preprintDoi: "10.48550/arXiv.2507.17423",
   },
   {
     title: "Discretize First, Filter next: Learning Divergence-Consistent Closure Models for Large-Eddy Simulation",
@@ -38,6 +42,8 @@ export const publications: Publication[] = [
     venue: "Journal of Computational Physics 522",
     year: 2025,
     doi: "10.1016/j.jcp.2024.113577",
+    preprintDoi: "10.48550/arXiv.2403.18088",
+    codeUrl: "https://github.com/agdestein/DivergenceConsistency",
   },
   {
     title: "Discretize First, Filter next – a New Closure Model Approach",
@@ -45,6 +51,8 @@ export const publications: Publication[] = [
     venue: "8th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS)",
     year: 2022,
     doi: "10.23967/eccomas.2022.094",
+    preprintDoi: "10.48550/arXiv.2208.09363",
+    codeUrl: "https://github.com/agdestein/DiscreteFiltering.jl",
   },
   {
     title: "Practical Computation of the Diffusion MRI Signal Based on Laplace Eigenfunctions: Permeable Interfaces",
@@ -52,6 +60,7 @@ export const publications: Publication[] = [
     venue: "NMR in Biomedicine 35.3",
     year: 2022,
     doi: "10.1002/nbm.4646",
+    codeUrl: "https://github.com/SpinDoctorMRI/SpinDoctor",
   },
   {
     title: "Artery.FE: An Implementation of the 1D Blood Flow Equations in FEniCS",
@@ -59,5 +68,6 @@ export const publications: Publication[] = [
     venue: "Journal of Open Source Software 3.32",
     year: 2018,
     doi: "10.21105/joss.01107",
+    codeUrl: "https://github.com/KVSlab/bloodflow",
   },
 ]
