@@ -27,6 +27,7 @@ export const publications: Publication[] = [
     doi: "10.1016/j.jcp.2026.114810",
     preprintDoi: "10.48550/arXiv.2507.17051",
     codeUrl: "https://github.com/agdestein/ExactClosure.jl",
+    image: "agdesteinExactExpressionsUnresolved2026.svg",
   },
   {
     title: "A New Data-Driven Energy-Stable Evolve-Filter-Relax Model for Turbulent Flow Simulation",
@@ -35,6 +36,7 @@ export const publications: Publication[] = [
     year: 2026,
     doi: "10.1016/j.cma.2025.118654",
     preprintDoi: "10.48550/arXiv.2507.17423",
+    image: "ivagnesNewDatadrivenEnergystable2026.png",
   },
   {
     title: "Discretize First, Filter next: Learning Divergence-Consistent Closure Models for Large-Eddy Simulation",
@@ -44,6 +46,7 @@ export const publications: Publication[] = [
     doi: "10.1016/j.jcp.2024.113577",
     preprintDoi: "10.48550/arXiv.2403.18088",
     codeUrl: "https://github.com/agdestein/DivergenceConsistency",
+    image: "agdesteinDiscretizeFirstFilter2025.svg",
   },
   {
     title: "Discretize First, Filter next – a New Closure Model Approach",
@@ -53,6 +56,7 @@ export const publications: Publication[] = [
     doi: "10.23967/eccomas.2022.094",
     preprintDoi: "10.48550/arXiv.2208.09363",
     codeUrl: "https://github.com/agdestein/DiscreteFiltering.jl",
+    image: "agdesteinDiscretizeFirstFilter2022.png",
   },
   {
     title: "Practical Computation of the Diffusion MRI Signal Based on Laplace Eigenfunctions: Permeable Interfaces",
@@ -61,6 +65,7 @@ export const publications: Publication[] = [
     year: 2022,
     doi: "10.1002/nbm.4646",
     codeUrl: "https://github.com/SpinDoctorMRI/SpinDoctor",
+    image: "agdesteinPracticalComputationDiffusion2022.png",
   },
   {
     title: "Artery.FE: An Implementation of the 1D Blood Flow Equations in FEniCS",
