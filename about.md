@@ -28,3 +28,16 @@
 ## Contributed talks
 
 <TalkList />
+
+## Peer review
+
+- Journal of Computational Physics (1 article)
+
+## Supervised Master's students
+
+- Lucas Ronckers
+- Viviane Desgrange
+
+## Other activities
+
+- CWI works council (2023-2025)
