@@ -11,6 +11,15 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: "A differentiable software suite for accelerated simulation of turbulent flows",
+    authors: "Syver Døving Agdestein and Benjamin Sanderse",
+    venue: "arXiv preprint",
+    year: 2026,
+    preprintDoi: "10.48550/arXiv.2604.18536",
+    codeUrl: "https://github.com/agdestein/IncompressibleNavierStokes.jl",
+    image: "agdesteinDifferentiableSoftwareSuite2026.png",
+  },
+  {
     title: "Comparison of Data-Driven Symmetry-Preserving Closure Models for Large-Eddy Simulation",
     authors: "Syver Døving Agdestein and Benjamin Sanderse",
     venue: "arXiv preprint",
