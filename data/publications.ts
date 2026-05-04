@@ -11,6 +11,15 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
+    authors: "Syver Døving Agdestein",
+    venue: "PhD thesis",
+    year: 2026,
+    // isbn: "978-90-386-6703-4",
+    // url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/",
+    image: "agdesteinDatadrivenDiscreteClosure2026.png",
+  },
+  {
     title: "A differentiable software suite for accelerated simulation of turbulent flows",
     authors: "Syver Døving Agdestein and Benjamin Sanderse",
     venue: "arXiv preprint",
