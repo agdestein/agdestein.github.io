@@ -17,26 +17,13 @@
         </div>
         <div class="pub-badges">
           <a
-            v-if="pub.doi"
-            :href="`https://doi.org/${pub.doi}`"
+            v-for="badge in pub.badges"
+            :key="badge.label"
+            :href="badge.url"
             target="_blank"
             rel="noopener"
-            class="badge badge-paper"
-          >paper</a>
-          <a
-            v-if="pub.preprintDoi"
-            :href="`https://doi.org/${pub.preprintDoi}`"
-            target="_blank"
-            rel="noopener"
-            class="badge badge-preprint"
-          >preprint</a>
-          <a
-            v-if="pub.codeUrl"
-            :href="pub.codeUrl"
-            target="_blank"
-            rel="noopener"
-            class="badge badge-code"
-          >code</a>
+            :class="['badge', badge.emphasized ? 'badge-emphasized' : 'badge-default']"
+          >{{ badge.label }}</a>
         </div>
       </div>
     </div>
@@ -119,18 +106,12 @@ const displayed = computed(() =>
   opacity: 0.8;
 }
 
-.badge-paper {
+.badge-emphasized {
   background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
 }
 
-.badge-preprint {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
-  border: 1px solid var(--vp-c-divider);
-}
-
-.badge-code {
+.badge-default {
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
   border: 1px solid var(--vp-c-divider);
