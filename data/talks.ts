@@ -11,6 +11,15 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
+    title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
+    venue: "KWG afternoon session",
+    location: "Amsterdam, the Netherlands",
+    date: "May 8, 2026",
+    slidesUrl: "/slides/20260508-KWG.pdf",
+    webpageUrl: "https://kwg.nl/en/kwg-event/kwg-middag/",
+    image: "../publications/agdesteinDatadrivenDiscreteClosure2026.png",
+  },
+  {
     title: "Symmetry-preserving LES: Comparison of data-driven closure models",
     venue: "ERCOFTAC ML4FLUIDS",
     location: "Amsterdam, the Netherlands",
