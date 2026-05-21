@@ -11,6 +11,14 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
+    title: "Are we modeling the wrong stress in LES?",
+    venue: "ERCOFTAC DLES",
+    location: "Delft, the Netherlands",
+    date: "May 21, 2026",
+    slidesUrl: "/slides/20260521-DLES.pdf",
+    webpageUrl: "https://dles.ercoftac.org/dles15/",
+  },
+  {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
     venue: "KWG afternoon session",
     location: "Amsterdam, the Netherlands",
