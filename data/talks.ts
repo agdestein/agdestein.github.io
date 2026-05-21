@@ -11,7 +11,7 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
-    title: "Are we modeling the wrong stress in LES?",
+    title: "Are we modeling the wrong stress tensor in LES?",
     venue: "ERCOFTAC DLES",
     location: "Delft, the Netherlands",
     date: "May 21, 2026",
