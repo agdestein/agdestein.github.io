@@ -4,8 +4,7 @@ layout: home
 
 hero:
   name: "Syver Døving Agdestein"
-  text: "Personal website"
-  tagline: PhD student in applied mathematics
+  tagline: PhD candidate in applied mathematics · closure models · turbulence · differentiable programming
   image:
     src: /logo.png
     alt: Syver Døving Agdestein
@@ -16,26 +15,17 @@ hero:
     - theme: alt
       text: CV
       link: /about
-    - theme: alt
-      text: Publications
-      link: /publications
-    - theme: alt
-      text: Talks
-      link: /talks
-    - theme: alt
-      text: Blog posts
-      link: /posts/
 
 features:
-  - title: PhD project 📖
+  - title: PhD project
     details:
         I am currently working on a PhD on discrete closure models for turbulent fluid
         flows at CWI in Amsterdam, the Netherlands.
-  - title: Software 💻
+  - title: Software
     details:
         I enjoy developing software for scientific computing using Julia,
         differentiable programming, and GPUs.
-  - title: Other interests 🎨
+  - title: Other interests
     details: History, languages, bouldering, piano sonatas.
 ---
 

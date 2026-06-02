@@ -5,6 +5,10 @@ import { defineConfig } from "vitepress"
 export default defineConfig({
   title: "Syver Døving Agdestein",
   description: "Personal website",
+  head: [
+    ['meta', { name: 'theme-color', content: '#0d9488', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#0f172a', media: '(prefers-color-scheme: dark)' }],
+  ],
   markdown: {
     math: true,
     config: (md) => {
