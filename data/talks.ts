@@ -25,7 +25,7 @@ export const talks: Talk[] = [
     date: "May 8, 2026",
     slidesUrl: "/slides/20260508-KWG.pdf",
     webpageUrl: "https://kwg.nl/en/kwg-event/kwg-middag/",
-    image: "../publications/agdesteinDatadrivenDiscreteClosure2026.png",
+    image: "/publications/agdesteinDatadrivenDiscreteClosure2026.png",
   },
   {
     title: "Symmetry-preserving LES: Comparison of data-driven closure models",

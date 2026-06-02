@@ -1,6 +1,6 @@
 <template>
   <div class="post-list">
-    <div v-for="(post, i) in displayed" :key="i" class="post-entry">
+    <div v-for="post in displayed" :key="post.url" class="post-entry">
       <img
         :src="post.frontmatter.image ? `/posts/${post.frontmatter.image}` : '/posts/default.svg'"
         :alt="post.frontmatter.title"

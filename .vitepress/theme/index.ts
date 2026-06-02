@@ -26,7 +26,7 @@ export default {
             'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
         })
     },
-    enhanceApp({ app, router, siteData }) {
+    enhanceApp({ app }) {
         app.component( 'Figure', Figure );
         app.component( 'PublicationList', PublicationList );
         app.component( 'TalkList', TalkList );

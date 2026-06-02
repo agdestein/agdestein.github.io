@@ -1,8 +1,8 @@
 <template>
   <div class="talk-list">
-    <div v-for="(talk, i) in displayed" :key="i" class="talk-entry">
+    <div v-for="talk in displayed" :key="talk.title" class="talk-entry">
       <img
-        :src="talk.image ? `/talks/${talk.image}` : '/talks/default.svg'"
+        :src="talk.image ? (talk.image.startsWith('/') ? talk.image : `/talks/${talk.image}`) : '/talks/default.svg'"
         :alt="talk.title"
         class="talk-image"
       />
@@ -20,21 +20,21 @@
             v-if="talk.slidesUrl"
             :href="talk.slidesUrl"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             class="badge"
           >slides</a>
           <a
             v-if="talk.abstractUrl"
             :href="talk.abstractUrl"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             class="badge badge-muted"
           >abstract</a>
           <a
             v-if="talk.webpageUrl"
             :href="talk.webpageUrl"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             class="badge badge-muted"
           >webpage</a>
         </div>

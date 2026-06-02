@@ -54,7 +54,7 @@ Registered globally in `.vitepress/theme/index.ts` and usable directly in any `.
 ---
 title: Post title here
 date: YYYY-MM-DD
-image: /path/to/optional-thumbnail.png  # optional
+image: filename.png  # optional; bare filename, placed in public/posts/
 ---
 ```
 

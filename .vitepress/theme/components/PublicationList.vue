@@ -1,6 +1,6 @@
 <template>
   <div class="publication-list">
-    <div v-for="(pub, i) in displayed" :key="i" class="publication-entry">
+    <div v-for="pub in displayed" :key="pub.title" class="publication-entry">
       <img
         :src="pub.image ? `/publications/${pub.image}` : '/publications/default.svg'"
         :alt="pub.title"
@@ -21,7 +21,7 @@
             :key="badge.label"
             :href="badge.url"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             :class="['badge', badge.emphasized ? 'badge-emphasized' : 'badge-default']"
           >{{ badge.label }}</a>
         </div>
