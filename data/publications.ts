@@ -15,6 +15,16 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: "Time integration as filtering: a space-time discretization-aware LES formulation",
+    authors: "Syver Døving Agdestein",
+    venue: "arXiv preprint",
+    year: 2026,
+    badges: [
+      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2606.17759", emphasized: true },
+      { label: "code", url: "https://github.com/agdestein/DLES15CompanionCode" },
+    ],
+  },
+  {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
     authors: "Syver Døving Agdestein",
     venue: "PhD thesis",

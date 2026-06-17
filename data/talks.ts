@@ -11,6 +11,12 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
+    title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
+    venue: "Bernoulli Institute Seminar",
+    location: "Groningen, the Netherlands",
+    date: "July 2, 2026",
+  },
+  {
     title: "Are we modeling the wrong stress tensor in LES?",
     venue: "ERCOFTAC DLES",
     location: "Delft, the Netherlands",
