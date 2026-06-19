@@ -2,24 +2,28 @@
 
 ## Employment
 
-- 2021-Present: PhD candidate, Scientific Computing group,
-    [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl/),
-    Amsterdam, the Netherlands
-- 2020-2021 (6 months): Software Engineer, 
-    [INRIA](https://www.inria.fr/)/[Ecole Polytechnique](https://cmap.ip-paris.fr/),
-    Palaiseau, France
-- 2020 (6 months): Research intern,  multi-disciplinary optimization,
-    [IRT Saint Exupéry](https://www.irt-saintexupery.com/),
-    Toulouse, France
+<Timeline section="employment" />
 
 ## Education
 
-- 2015-2020: Master of Applied Sciences and Technology, applied mathematics,
-    [INSA Toulouse](https://www.insa-toulouse.fr/), France
-- 2018-2019: Exchange year, theoretical mechanics and applied mathematics,
-    [Peter the Great Saint Petersburg Polytechnic University](https://english.spbstu.ru/),
-    Saint Petersburg, Russia
-- 2012-2015: Asker Upper Secondary School, Norway
+<Timeline section="education" />
+
+## Software
+
+- [**IncompressibleNavierStokes.jl**](https://github.com/agdestein/IncompressibleNavierStokes.jl)
+    — differentiable, GPU-accelerated incompressible Navier–Stokes solver in
+    Julia for large-eddy simulation and data-driven closure modeling
+- Research codes accompanying my papers, including
+    [SymmetryCode.jl](https://github.com/agdestein/SymmetryCode.jl),
+    [ExactClosure.jl](https://github.com/agdestein/ExactClosure.jl),
+    [DivergenceConsistency](https://github.com/agdestein/DivergenceConsistency), and
+    [DiscreteFiltering.jl](https://github.com/agdestein/DiscreteFiltering.jl)
+- [NeuralClosureTutorials](https://github.com/agdestein/NeuralClosureTutorials)
+    — tutorials on learning neural closure models for fluid flows
+- Contributor to [GEMSEO](https://gemseo.org) (multidisciplinary design
+    optimization), [SpinDoctor](https://github.com/SpinDoctorMRI/SpinDoctor)
+    (diffusion-MRI simulation), and
+    [Artery.FE](https://github.com/KVSlab/bloodflow) (1D blood-flow in FEniCS)
 
 ## Publications
 
@@ -29,15 +33,19 @@
 
 <TalkList />
 
-## Peer review
+## Teaching & supervision
 
-- Journal of Computational Physics (1 article)
+- Supervised Master's theses:
+    - Lucas Ronckers, *Probabilistic turbulence modeling with ideal large eddy
+        simulation: Bayesian inverse filtering and flow matching* (2026)
+    - Viviane Desgrange, *An inverse problem approach for closure modelling* (2023)
+- Lectures at schools and masterclasses:
+    - *Learning neural closure models for fluid flows* —
+        Autumn School on Scientific Machine Learning, CWI (October 2023)
+    - *Learning physics from data* — Masterclass on Machine Learning for Inverse
+        Problems: A Bayesian Perspective, CWI (May 2022)
 
-## Supervised Master's students
+## Service & outreach
 
-- Lucas Ronckers
-- Viviane Desgrange
-
-## Other activities
-
-- CWI works council (2023-2025)
+- Peer review: Journal of Computational Physics
+- CWI works council (2023–2025)

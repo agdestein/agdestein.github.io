@@ -2,6 +2,7 @@ import { h } from 'vue'
 import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import Figure from './components/Figure.vue';
+import Timeline from './components/Timeline.vue';
 import PublicationList from './components/PublicationList.vue';
 import TalkList from './components/TalkList.vue';
 import PostList from './components/PostList.vue';
@@ -29,6 +30,7 @@ export default {
     },
     enhanceApp({ app }) {
         app.component( 'Figure', Figure );
+        app.component( 'Timeline', Timeline );
         app.component( 'PublicationList', PublicationList );
         app.component( 'TalkList', TalkList );
         app.component( 'PostList', PostList );
