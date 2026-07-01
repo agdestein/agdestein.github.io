@@ -15,6 +15,7 @@ export const talks: Talk[] = [
     venue: "Bernoulli Institute Seminar",
     location: "Groningen, the Netherlands",
     date: "July 2, 2026",
+    slidesUrl: "/slides/20260702-Bernoulli.pdf",
   },
   {
     title: "Are we modeling the wrong stress tensor in LES?",
