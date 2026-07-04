@@ -39,14 +39,8 @@ features:
 
 I'm a postdoctoral researcher in the Scientific Computing group at [CWI](https://www.cwi.nl/) in Amsterdam. I recently completed my PhD at Eindhoven University of Technology on data-driven closure models for the large-eddy simulation of turbulent flows, and I now work on probabilistic approaches to simulating turbulence. My work sits where numerical analysis, fluid dynamics, and machine learning meet — and I enjoy building the software that makes those ideas runnable, fast, and differentiable.
 
-## Recent publications
+## Recent news
 
-<PublicationList :limit="2" />
+<NewsList :limit="5" />
 
-## Recent talks
-
-<TalkList :limit="2" />
-
-## Recent blog posts
-
-<PostList :limit="2" />
+More: [publications](/publications) · [talks](/talks) · [blog posts](/posts/)

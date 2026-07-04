@@ -2,7 +2,7 @@
   <div class="talk-list">
     <div v-for="talk in displayed" :key="talk.title" class="talk-entry">
       <img
-        :src="talk.image ? (talk.image.startsWith('/') ? talk.image : `/talks/${talk.image}`) : '/talks/default.svg'"
+        :src="thumbnail(talk.image, talk.work, 'talks')"
         :alt="talk.title"
         class="talk-image"
       />
@@ -15,7 +15,7 @@
           &middot;
           <span class="talk-date">{{ talk.date }}</span>
         </div>
-        <div v-if="talk.slidesUrl || talk.abstractUrl || talk.webpageUrl" class="talk-badges">
+        <div v-if="talk.slidesUrl || talk.abstractUrl || talk.webpageUrl || talk.badges?.length" class="talk-badges">
           <a
             v-if="talk.slidesUrl"
             :href="talk.slidesUrl"
@@ -37,6 +37,14 @@
             rel="noopener noreferrer"
             class="badge badge-muted"
           >webpage</a>
+          <a
+            v-for="badge in talk.badges"
+            :key="badge.label"
+            :href="badge.url"
+            :target="badge.url.startsWith('/') ? undefined : '_blank'"
+            rel="noopener noreferrer"
+            :class="['badge', badge.emphasized ? '' : 'badge-muted']"
+          >{{ badge.label }}</a>
         </div>
       </div>
     </div>
@@ -46,6 +54,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { talks } from '../../../data/talks'
+import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number

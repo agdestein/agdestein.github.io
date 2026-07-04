@@ -2,7 +2,7 @@
   <div class="publication-list">
     <div v-for="pub in displayed" :key="pub.title" class="publication-entry">
       <img
-        :src="pub.image ? `/publications/${pub.image}` : '/publications/default.svg'"
+        :src="thumbnail(pub.image, pub.work, 'publications')"
         :alt="pub.title"
         class="pub-image"
       />
@@ -20,7 +20,7 @@
             v-for="badge in pub.badges"
             :key="badge.label"
             :href="badge.url"
-            target="_blank"
+            :target="badge.url.startsWith('/') ? undefined : '_blank'"
             rel="noopener noreferrer"
             :class="['badge', badge.emphasized ? 'badge-emphasized' : 'badge-default']"
           >{{ badge.label }}</a>
@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { publications } from '../../../data/publications'
+import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number

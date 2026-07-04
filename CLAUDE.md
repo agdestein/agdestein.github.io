@@ -26,9 +26,10 @@ This is a personal academic website built with [VitePress](https://vitepress.dev
 
 Static data for publications and talks lives in TypeScript files (not markdown):
 
-- `data/publications.ts` — Exports `publications: Publication[]` with fields: `title`, `authors`, `venue`, `year`, and optional `doi`, `preprintDoi`, `codeUrl`, `image`
-- `data/talks.ts` — Exports `talks: Talk[]` with fields: `title`, `venue`, `location`, `date`, and optional `slidesUrl`, `abstractUrl`, `webpageUrl`
+- `data/publications.ts` — Exports `publications: Publication[]` with fields: `title`, `authors`, `venue`, `year`, and optional `date` (ISO, news-feed ordering only), `work`, `badges` (label + url chips), `image`
+- `data/talks.ts` — Exports `talks: Talk[]` with fields: `title`, `venue`, `location`, `date`, and optional `work`, `slidesUrl`, `abstractUrl`, `webpageUrl`, `badges` (extra cross-reference chips)
 - `data/posts.data.ts` — VitePress content loader that globs `posts/20*.md`
+- `data/works.ts` — Registry of "works": a work groups the entries (paper, talks, blog posts) that stem from the same research, so they share one thumbnail file. Entries opt in with `work: "<id>"` (data files or post frontmatter); an explicit `image` still overrides. Shared thumbnails live in `public/works/`. Cross-reference badges between related entries (paper ↔ talk ↔ post) are added manually per entry.
 
 ### Custom Vue components
 
@@ -37,6 +38,7 @@ Registered globally in `.vitepress/theme/index.ts` and usable directly in any `.
 - `<PublicationList :limit="N" />` — Renders publications from `data/publications.ts`; order is determined by array order in the data file
 - `<TalkList :limit="N" />` — Renders talks from `data/talks.ts`; order is determined by array order in the data file
 - `<PostList :limit="N" />` — Renders blog posts sorted by `date` frontmatter (newest first)
+- `<NewsList :limit="N" />` — Merged feed of publications, talks, and posts sorted by date (used on the home page); publication dates come from the optional `date` field, talk dates are parsed from the `date` string
 - `<Figure />` — Custom figure component
 
 ### Theme
@@ -55,6 +57,7 @@ Registered globally in `.vitepress/theme/index.ts` and usable directly in any `.
 title: Post title here
 date: YYYY-MM-DD
 image: filename.png  # optional; bare filename, placed in public/posts/
+work: workId         # optional; thumbnail from data/works.ts (image overrides)
 ---
 ```
 

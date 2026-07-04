@@ -2,7 +2,7 @@
   <div class="post-list">
     <div v-for="post in displayed" :key="post.url" class="post-entry">
       <img
-        :src="post.frontmatter.image ? `/posts/${post.frontmatter.image}` : '/posts/default.svg'"
+        :src="thumbnail(post.frontmatter.image, post.frontmatter.work, 'posts')"
         :alt="post.frontmatter.title"
         class="post-image"
       />
@@ -19,6 +19,7 @@ import { computed } from 'vue'
 import { data as posts } from '../../../data/posts.data'
 import formatDate from '../utils/formatDate'
 import getSorted from '../utils/getSorted'
+import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number

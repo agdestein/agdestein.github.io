@@ -1,12 +1,20 @@
+import type { Badge } from './publications'
+import type { WorkId } from './works'
+
 export interface Talk {
   title: string
   venue: string
   location: string
   date: string
+  // Shared work id (see data/works.ts) for the thumbnail; `image` overrides.
+  work?: WorkId
   image?: string
   slidesUrl?: string
   abstractUrl?: string
   webpageUrl?: string
+  // Extra cross-reference badges (paper, blog post, code, ...), rendered
+  // after the slides/abstract/webpage badges.
+  badges?: Badge[]
 }
 
 export const talks: Talk[] = [
@@ -15,32 +23,48 @@ export const talks: Talk[] = [
     venue: "Bernoulli Institute Seminar",
     location: "Groningen, the Netherlands",
     date: "July 2, 2026",
+    work: "thesis",
     slidesUrl: "/slides/20260702-Bernoulli.pdf",
+    badges: [
+      { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
+    ],
   },
   {
     title: "Are we modeling the wrong stress tensor in LES?",
     venue: "ERCOFTAC DLES",
     location: "Delft, the Netherlands",
     date: "May 21, 2026",
+    work: "dles15",
     slidesUrl: "/slides/20260521-DLES.pdf",
     webpageUrl: "https://dles.ercoftac.org/dles15/",
+    badges: [
+      { label: "paper", url: "https://doi.org/10.48550/arXiv.2606.17759" },
+      { label: "blog post", url: "/posts/2026-07-04" },
+    ],
   },
   {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
     venue: "KWG afternoon session",
     location: "Amsterdam, the Netherlands",
     date: "May 8, 2026",
+    work: "thesis",
     slidesUrl: "/slides/20260508-KWG.pdf",
     webpageUrl: "https://kwg.nl/en/kwg-event/kwg-middag/",
-    image: "/publications/agdesteinDatadrivenDiscreteClosure2026.png",
+    badges: [
+      { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
+    ],
   },
   {
     title: "Symmetry-preserving LES: Comparison of data-driven closure models",
     venue: "ERCOFTAC ML4FLUIDS",
     location: "Amsterdam, the Netherlands",
     date: "March 2026",
+    work: "symmetry",
     slidesUrl: "/slides/20260304-ML4FLUIDS.pdf",
     webpageUrl: "https://ml4fluids2026.github.io/",
+    badges: [
+      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
+    ],
   },
   {
     title: "Data-driven closure modeling: From deterministic to probabilistic models",
@@ -75,12 +99,21 @@ export const talks: Talk[] = [
     venue: "Meetup of the NL-RSE Community",
     location: "Amsterdam, the Netherlands",
     date: "November 2024",
+    work: "suite",
+    badges: [
+      { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
+      { label: "blog post", url: "/posts/2024-10-06" },
+    ],
   },
   {
     title: "Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation",
     venue: "ECCOMAS",
     location: "Lisbon, Portugal",
     date: "June 2024",
+    work: "divConsistency",
+    badges: [
+      { label: "paper", url: "https://doi.org/10.1016/j.jcp.2024.113577" },
+    ],
   },
   {
     title: "Learning neural closure models for discretely filtered turbulence",
@@ -111,5 +144,9 @@ export const talks: Talk[] = [
     venue: "ECCOMAS",
     location: "Oslo, Norway",
     date: "June 2022",
+    work: "eccomas2022",
+    badges: [
+      { label: "paper", url: "https://doi.org/10.23967/eccomas.2022.094" },
+    ],
   },
 ]
