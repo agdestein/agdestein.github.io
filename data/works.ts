@@ -20,6 +20,8 @@ export const works = {
   suite: { image: "/publications/agdesteinDifferentiableSoftwareSuite2026.png" },
   // Symmetry-preserving closure comparison
   symmetry: { image: "/publications/agdesteinComparisonDatadrivenSymmetrypreserving2026.png" },
+  // Exact unresolved stress expressions (JCP 556)
+  exactClosure: { image: "/publications/agdesteinExactExpressionsUnresolved2026.svg" },
   // Divergence-consistent closures (JCP 522)
   divConsistency: { image: "/publications/agdesteinDiscretizeFirstFilter2025.svg" },
   // "Discretize first, filter next" (ECCOMAS 2022)

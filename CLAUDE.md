@@ -19,7 +19,7 @@ This is a personal academic website built with [VitePress](https://vitepress.dev
 - `index.md` — Home page (VitePress home layout with hero + feature cards)
 - `about.md` — CV page
 - `publications.md`, `talks.md` — Standalone list pages
-- `posts/` — Blog posts, each named `YYYY-MM-DD.md` with frontmatter `title` and `date`
+- `posts/` — Blog posts, each named `YYYY-MM-DD.md` or `YYYY-MM-DD-slug.md` (slug required when several posts share a date), with frontmatter `title` and `date`. Lists sort by the `date` frontmatter (newest first), with the filename as tie-breaker for same-day posts.
 - `public/` — Static assets (images, PDFs for slides, SVG icons)
 
 ### Data layer

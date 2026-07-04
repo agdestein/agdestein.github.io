@@ -79,12 +79,13 @@ export const publications: Publication[] = [
     venue: "Journal of Computational Physics 556",
     year: 2026,
     date: "2026-01", // TODO(syver): set the publication date
+    work: "exactClosure",
     badges: [
       { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810", emphasized: true },
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2507.17051" },
       { label: "code", url: "https://github.com/agdestein/ExactClosure.jl" },
+      { label: "blog post", url: "/posts/2026-01-27-exact-closure" },
     ],
-    image: "agdesteinExactExpressionsUnresolved2026.svg",
   },
   {
     title: "A New Data-Driven Energy-Stable Evolve-Filter-Relax Model for Turbulent Flow Simulation",

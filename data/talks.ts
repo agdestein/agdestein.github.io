@@ -78,7 +78,12 @@ export const talks: Talk[] = [
     venue: "SCS Spring Meeting",
     location: "Hasselt, Belgium",
     date: "June 2025",
+    work: "exactClosure",
     webpageUrl: "https://wsc.project.cwi.nl/spring-symposium/2025-meeting/2025-meeting",
+    badges: [
+      { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
+      { label: "blog post", url: "/posts/2026-01-27-exact-closure" },
+    ],
   },
   {
     title: "Model-data consistent closure models in large-eddy simulation",
