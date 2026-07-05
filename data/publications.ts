@@ -68,6 +68,7 @@ export const publications: Publication[] = [
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },
+      { label: "blog post", url: "/posts/2026-07-05-symmetry" },
     ],
   },
   {
