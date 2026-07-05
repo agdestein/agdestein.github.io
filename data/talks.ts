@@ -34,12 +34,12 @@ export const talks: Talk[] = [
     venue: "ERCOFTAC DLES",
     location: "Delft, the Netherlands",
     date: "May 21, 2026",
-    work: "dles15",
+    work: "exactClosure",
     slidesUrl: "/slides/20260521-DLES.pdf",
     webpageUrl: "https://dles.ercoftac.org/dles15/",
     badges: [
-      { label: "paper", url: "https://doi.org/10.48550/arXiv.2606.17759" },
-      { label: "blog post", url: "/posts/2026-07-04" },
+      { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
+      { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
     ],
   },
   {
@@ -82,7 +82,7 @@ export const talks: Talk[] = [
     webpageUrl: "https://wsc.project.cwi.nl/spring-symposium/2025-meeting/2025-meeting",
     badges: [
       { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
-      { label: "blog post", url: "/posts/2026-01-27-exact-closure" },
+      { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
     ],
   },
   {

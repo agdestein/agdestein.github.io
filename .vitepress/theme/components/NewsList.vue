@@ -10,7 +10,7 @@
           class="news-title"
         >{{ item.title }}</component>
         <div class="news-meta">
-          <span class="news-type" :class="`news-type-${item.type}`">{{ item.type }}</span>
+          <span class="news-type" :class="`news-type-${item.type}`">{{ typeLabel(item.type) }}</span>
           {{ item.meta }}
         </div>
       </div>
@@ -37,6 +37,10 @@ interface NewsItem {
   time: number
   image: string
   url?: string
+}
+
+function typeLabel(type: NewsItem['type']): string {
+  return { paper: 'publication', talk: 'talk', post: 'blog post' }[type]
 }
 
 function parseTime(date: string | undefined, fallback = 0): number {

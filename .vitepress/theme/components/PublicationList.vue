@@ -37,11 +37,15 @@ import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number
+  work?: string
 }>()
 
-const displayed = computed(() =>
-  props.limit ? publications.slice(0, props.limit) : publications
-)
+const displayed = computed(() => {
+  if (props.work) {
+    return publications.filter((pub) => pub.work === props.work)
+  }
+  return props.limit ? publications.slice(0, props.limit) : publications
+})
 
 </script>
 

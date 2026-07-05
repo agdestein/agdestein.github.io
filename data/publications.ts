@@ -26,13 +26,12 @@ export const publications: Publication[] = [
     authors: "Syver Døving Agdestein",
     venue: "arXiv preprint",
     year: 2026,
-    date: "2026-06",
+    date: "2026-06-16",
     work: "dles15",
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2606.17759", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/DLES15CompanionCode" },
-      { label: "blog post", url: "/posts/2026-07-04" },
-      { label: "slides", url: "/slides/20260521-DLES.pdf" },
+      { label: "blog post", url: "/posts/2026-07-05" },
     ],
   },
   {
@@ -40,11 +39,10 @@ export const publications: Publication[] = [
     authors: "Syver Døving Agdestein",
     venue: "PhD thesis",
     year: 2026,
-    date: "2026-06", // TODO(syver): set the defense date
+    date: "2026-05-28",
     work: "thesis",
     badges: [
       { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/", emphasized: true },
-      { label: "slides", url: "/slides/20260702-Bernoulli.pdf" },
     ],
   },
   {
@@ -70,7 +68,6 @@ export const publications: Publication[] = [
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },
-      { label: "slides", url: "/slides/20260304-ML4FLUIDS.pdf" },
     ],
   },
   {
@@ -78,13 +75,13 @@ export const publications: Publication[] = [
     authors: "Syver Døving Agdestein, Roel Verstappen, and Benjamin Sanderse",
     venue: "Journal of Computational Physics 556",
     year: 2026,
-    date: "2026-01", // TODO(syver): set the publication date
+    date: "2026-07-01",
     work: "exactClosure",
     badges: [
       { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810", emphasized: true },
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2507.17051" },
       { label: "code", url: "https://github.com/agdestein/ExactClosure.jl" },
-      { label: "blog post", url: "/posts/2026-01-27-exact-closure" },
+      { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
     ],
   },
   {
@@ -92,7 +89,7 @@ export const publications: Publication[] = [
     authors: "Anna Ivagnes et al.",
     venue: "Computer Methods in Applied Mechanics and Engineering 450",
     year: 2026,
-    date: "2025-12", // TODO(syver): set the publication date
+    date: "2026-03-01",
     badges: [
       { label: "paper", url: "https://doi.org/10.1016/j.cma.2025.118654", emphasized: true },
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2507.17423" },

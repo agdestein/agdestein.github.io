@@ -41,6 +41,6 @@ I'm a postdoctoral researcher in the Scientific Computing group at [CWI](https:/
 
 ## Recent news
 
-<NewsList :limit="5" />
+<NewsList :limit="3" />
 
 More: [publications](/publications) · [talks](/talks) · [blog posts](/posts/)

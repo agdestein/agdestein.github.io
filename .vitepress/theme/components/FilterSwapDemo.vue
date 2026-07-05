@@ -39,9 +39,9 @@
 
     <div class="tifd-legend">
       <span class="tifd-key"><span class="tifd-swatch tifd-swatch-signal"></span>signal <em>u</em></span>
-      <span class="tifd-key"><span class="tifd-swatch tifd-swatch-filtered"></span>one-sided average <em>ū</em><sup>τ</sup></span>
+      <span class="tifd-key"><span class="tifd-swatch tifd-swatch-filtered"></span>one-sided average <em>ū</em></span>
       <span class="tifd-key"><span class="tifd-swatch tifd-swatch-chord"></span>forward-Euler chord on <em>u</em></span>
-      <span class="tifd-key"><span class="tifd-swatch tifd-swatch-tangent"></span>tangent of <em>ū</em><sup>τ</sup></span>
+      <span class="tifd-key"><span class="tifd-swatch tifd-swatch-tangent"></span>tangent of <em>ū</em></span>
     </div>
 
     <p class="tifd-readout">

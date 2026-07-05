@@ -1,6 +1,6 @@
 ---
 title: Your grid is a filter
-date: 2026-01-27
+date: 2026-07-04
 work: exactClosure
 ---
 
@@ -12,10 +12,9 @@ import RstLadder from '../.vitepress/theme/components/RstLadder.vue'
 
 # Your grid is a filter
 
-**An interactive companion to our paper
-[_Exact expressions for the unresolved stress in a finite-volume based large-eddy simulation_](https://doi.org/10.1016/j.jcp.2026.114810)
-(with Roel Verstappen and Benjamin Sanderse, Journal of Computational Physics,
-[code here](https://github.com/agdestein/ExactClosure.jl)).**
+**An interactive companion to our paper:**
+
+<PublicationList work="exactClosure" />
 
 The subgrid stress
 
@@ -40,7 +39,7 @@ top-hat filter of width $h$, $\bar{u}^h(x) = \frac{1}{h} \int_{x-h/2}^{x+h/2}
 u(y) \, \mathrm{d}y$, and a finite difference over the same $h$:
 
 $$
-\frac{u(x + h/2) - u(x - h/2)}{h} = \partial_x \bar{u}^h(x).
+\partial^h_x u(x) = \frac{u(x + h/2) - u(x - h/2)}{h} = \partial_x \bar{u}^h(x).
 $$
 
 This is not an approximation — both sides are the *same number*, exactly (it
