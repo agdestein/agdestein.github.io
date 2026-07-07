@@ -25,11 +25,11 @@ export const talks: Talk[] = [
     date: "July 22, 2026",
     work: "symmetry",
     // Interactive HTML deck (self-contained single file); the PDF badge is a static fallback.
-    slidesUrl: "/slides/20260719-ECCOMAS.html",
+    slidesUrl: "/slides/20260722-ECCOMAS.html",
     webpageUrl: "https://wccm-eccomas2026.org/",
     abstractUrl: "https://wccm-eccomas2026.org/event/contribution/8fa4db60-f2c8-11f0-9f27-000c29ddfc0c",
     badges: [
-      { label: "pdf", url: "/slides/20260719-ECCOMAS.pdf" },
+      { label: "pdf", url: "/slides/20260722-ECCOMAS.pdf" },
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
       { label: "blog post", url: "/posts/2026-07-06-symmetry" },
     ],
