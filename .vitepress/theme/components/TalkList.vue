@@ -58,11 +58,13 @@ import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number
+  work?: string
 }>()
 
-const displayed = computed(() =>
-  props.limit ? talks.slice(0, props.limit) : talks
-)
+const displayed = computed(() => {
+  const pool = props.work ? talks.filter((talk) => talk.work === props.work) : talks
+  return props.limit ? pool.slice(0, props.limit) : pool
+})
 </script>
 
 <style scoped>
