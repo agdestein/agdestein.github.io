@@ -22,6 +22,19 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: "Approaching the optimal closure: equivariance, inductive bias, and Reynolds-number generalization in data-driven LES",
+    authors: "Syver Døving Agdestein and Benjamin Sanderse",
+    venue: "arXiv preprint",
+    year: 2026,
+    date: "2026-07-09",
+    work: "symmetry",
+    badges: [
+      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
+      { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },
+      { label: "blog post", url: "/posts/2026-07-06-symmetry" },
+    ],
+  },
+  {
     title: "Time integration as filtering: a space-time discretization-aware LES formulation",
     authors: "Syver Døving Agdestein",
     venue: "arXiv preprint",
@@ -56,19 +69,6 @@ export const publications: Publication[] = [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2604.18536", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
       { label: "blog post", url: "/posts/2024-10-06" },
-    ],
-  },
-  {
-    title: "Comparison of Data-Driven Symmetry-Preserving Closure Models for Large-Eddy Simulation",
-    authors: "Syver Døving Agdestein and Benjamin Sanderse",
-    venue: "arXiv preprint",
-    year: 2026,
-    date: "2026-03",
-    work: "symmetry",
-    badges: [
-      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
-      { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },
-      { label: "blog post", url: "/posts/2026-07-05-symmetry" },
     ],
   },
   {
