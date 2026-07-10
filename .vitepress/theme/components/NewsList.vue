@@ -6,7 +6,8 @@
         <component
           :is="item.url ? 'a' : 'div'"
           :href="item.url"
-          :target="item.url && !item.url.startsWith('/') ? '_blank' : undefined"
+          :target="item.newTab ? '_blank' : undefined"
+          :rel="item.newTab ? 'noopener noreferrer' : undefined"
           class="news-title"
         >{{ item.title }}</component>
         <div class="news-meta">
@@ -37,6 +38,9 @@ interface NewsItem {
   time: number
   image: string
   url?: string
+  // Bypass the VitePress router: needed for anything that is not a page route
+  // (external links, and static assets under public/ such as slide decks).
+  newTab?: boolean
 }
 
 function typeLabel(type: NewsItem['type']): string {
@@ -50,14 +54,18 @@ function parseTime(date: string | undefined, fallback = 0): number {
 }
 
 const items = computed<NewsItem[]>(() => {
-  const pubItems = publications.map((p) => ({
-    type: 'paper' as const,
-    title: p.title,
-    meta: `${p.venue} · ${p.year}`,
-    time: parseTime(p.date, parseTime(`${p.year}-01-01`)),
-    image: thumbnail(p.image, p.work, 'publications'),
-    url: p.badges?.find((b) => b.emphasized)?.url ?? p.badges?.[0]?.url,
-  }))
+  const pubItems = publications.map((p) => {
+    const url = p.badges?.find((b) => b.emphasized)?.url ?? p.badges?.[0]?.url
+    return {
+      type: 'paper' as const,
+      title: p.title,
+      meta: `${p.venue} · ${p.year}`,
+      time: parseTime(p.date, parseTime(`${p.year}-01-01`)),
+      image: thumbnail(p.image, p.work, 'publications'),
+      url,
+      newTab: !!url && !url.startsWith('/'),
+    }
+  })
   const talkItems = talks.map((t) => ({
     type: 'talk' as const,
     title: t.title,
@@ -65,6 +73,9 @@ const items = computed<NewsItem[]>(() => {
     time: parseTime(t.date),
     image: thumbnail(t.image, t.work, 'talks'),
     url: t.slidesUrl ?? t.webpageUrl ?? t.abstractUrl,
+    // Matches TalkList: slides (a public/ asset) and conference links both
+    // open in a new tab.
+    newTab: true,
   }))
   const postItems = posts.map((p) => ({
     type: 'post' as const,
@@ -73,6 +84,7 @@ const items = computed<NewsItem[]>(() => {
     time: parseTime(p.frontmatter.date),
     image: thumbnail(p.frontmatter.image, p.frontmatter.work, 'posts'),
     url: p.url,
+    newTab: false,
   }))
   return [...pubItems, ...talkItems, ...postItems]
     .sort((a, b) => b.time - a.time)
