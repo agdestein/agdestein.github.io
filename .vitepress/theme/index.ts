@@ -7,26 +7,28 @@ import PublicationList from './components/PublicationList.vue';
 import TalkList from './components/TalkList.vue';
 import PostList from './components/PostList.vue';
 import NewsList from './components/NewsList.vue';
+import FilterCut from './components/FilterCut.vue';
+import PostMeta from './components/PostMeta.vue';
+import SiteFooter from './components/SiteFooter.vue';
 
-import { 
-  NolebaseEnhancedReadabilitiesMenu, 
-  NolebaseEnhancedReadabilitiesScreenMenu, 
-} from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
+// Self-hosted fonts: STIX Two Text (display + body, pairs with MathJax math)
+// and IBM Plex Mono (nav, metadata, badges, code).
+import '@fontsource/stix-two-text/400.css'
+import '@fontsource/stix-two-text/400-italic.css'
+import '@fontsource/stix-two-text/600.css'
+import '@fontsource/stix-two-text/700.css'
+import '@fontsource/ibm-plex-mono/400.css'
+import '@fontsource/ibm-plex-mono/500.css'
 
-// import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
-
-import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
 import './custom.css'
 
 export default {
     extends: DefaultTheme,
     Layout() {
         return h(DefaultTheme.Layout, null, {
-            'nav-bar-content-after': () => [
-                h(NolebaseEnhancedReadabilitiesMenu), // Enhanced Readabilities menu
-            ],
-            // A enhanced readabilities menu for narrower screens (usually smaller than iPad Mini)
-            'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
+            // Date + reading time above blog post titles.
+            'doc-before': () => h(PostMeta),
+            'layout-bottom': () => h(SiteFooter),
         })
     },
     enhanceApp({ app }) {
@@ -36,5 +38,6 @@ export default {
         app.component( 'TalkList', TalkList );
         app.component( 'PostList', PostList );
         app.component( 'NewsList', NewsList );
+        app.component( 'FilterCut', FilterCut );
     }
 } satisfies Theme

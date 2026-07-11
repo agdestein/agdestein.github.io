@@ -1,46 +1,260 @@
-/* Brand: teal replacing the default indigo-blue */
+/*
+ * Design system: "the paper and the repo".
+ * Everything you read is set in STIX Two Text (the scientific-publishing
+ * face, at home next to MathJax output); everything that is machinery —
+ * nav, dates, badges, section labels — is IBM Plex Mono. Color is
+ * reserved for the data (the red/blue simulation fields) and for
+ * interaction (teal). Orange is semantic only: "what the filter erased".
+ */
+
 :root {
-  --vp-c-brand-1: #0d9488;
+  /* Faces */
+  --vp-font-family-base: 'STIX Two Text', 'STIX Two Text Fallback', Georgia,
+    'Times New Roman', serif;
+  --vp-font-family-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular,
+    Menlo, monospace;
+
+  /* Ink on paper (cool white, not cream) */
+  --vp-c-bg: #fcfcfa;
+  --vp-c-bg-alt: #f4f4f0;
+  --vp-c-bg-soft: #f4f4f0;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-text-1: #1c2733;
+  --vp-c-text-2: #5a6672;
+  --vp-c-text-3: #8b959e;
+  --vp-c-divider: #e4e4de;
+  --vp-c-gutter: #e4e4de;
+
+  /* Interaction: teal (kept from the old identity, demoted to links) */
+  --vp-c-brand-1: #0e7c72;
   --vp-c-brand-2: #14b8a6;
-  --vp-c-brand-3: #0a7a6f;
-  --vp-c-brand-soft: rgba(13, 148, 136, 0.14);
+  --vp-c-brand-3: #0a6058;
+  --vp-c-brand-soft: rgba(13, 148, 136, 0.12);
 
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(120deg, #0d9488 10%, #06b6d4 90%);
+  /* Semantic accent: sub-filter scales, "what the filter erased" */
+  --sda-erased: #c05621;
 
-  --vp-home-hero-image-background-image: radial-gradient(
-    ellipse,
-    rgba(13, 148, 136, 0.35) 0%,
-    rgba(6, 182, 212, 0.15) 55%,
-    transparent 75%
-  );
-  --vp-home-hero-image-filter: blur(40px);
+  /* Body rhythm */
+  --vp-font-size-base: 17px;
 }
 
 .dark {
+  /* Deep blue-slate, not black */
+  --vp-c-bg: #0f172a;
+  --vp-c-bg-alt: #0b1120;
+  --vp-c-bg-soft: #1e293b;
+  --vp-c-bg-elv: #1e293b;
+  --vp-c-bg-mute: #293548;
+  --vp-c-text-1: #e2e8f0;
+  --vp-c-text-2: #94a3b8;
+  --vp-c-text-3: #64748b;
+  --vp-c-divider: #26334a;
+  --vp-c-gutter: #26334a;
+
   --vp-c-brand-1: #2dd4bf;
   --vp-c-brand-2: #14b8a6;
-  --vp-c-brand-3: #0d9488;
-  --vp-c-brand-soft: rgba(45, 212, 191, 0.16);
+  --vp-c-brand-3: #5eead4;
+  --vp-c-brand-soft: rgba(45, 212, 191, 0.14);
 
-  --vp-home-hero-name-background: linear-gradient(120deg, #14b8a6 10%, #22d3ee 90%);
-
-  --vp-home-hero-image-background-image: radial-gradient(
-    ellipse,
-    rgba(45, 212, 191, 0.3) 0%,
-    rgba(34, 211, 238, 0.12) 55%,
-    transparent 75%
-  );
-
-  /* Richer dark background — deep blue-grey instead of near-black */
-  --vp-c-bg: #0f172a;
-  --vp-c-bg-soft: #1e293b;
-  --vp-c-bg-mute: #293548;
-  --vp-c-bg-elv: #1e293b;
-  --vp-c-bg-alt: #0b1120;
+  --sda-erased: #e58a4e;
 }
 
-/* Heavier weight for the hero name */
-.VPHero .name {
-  font-weight: 800;
+html {
+  font-size: var(--vp-font-size-base);
+}
+
+/* ---------------------------------------------------------------- *
+ * Chrome: the machinery speaks mono
+ * ---------------------------------------------------------------- */
+
+.VPNavBarTitle .title {
+  font-family: var(--vp-font-family-base);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.VPNavBarMenuLink,
+.VPNavScreenMenuLink {
+  font-family: var(--vp-font-family-mono);
+  font-size: 13px !important;
+  letter-spacing: 0.01em;
+}
+
+.VPNavBar:not(.home) {
+  background-color: var(--vp-c-bg);
+}
+
+/* Serif reading column */
+.vp-doc {
+  line-height: 1.75;
+}
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.vp-doc h1 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+}
+
+.vp-doc h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 3rem;
+}
+
+/* Restore a quiet hairline above h2 as a reading landmark */
+.vp-doc h2::before {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  background: var(--vp-c-divider);
+  margin-bottom: 1.4rem;
+}
+
+/* ---------------------------------------------------------------- *
+ * Home page (layout: page)
+ * ---------------------------------------------------------------- */
+
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.home-masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2.25rem;
+}
+
+.home-eyebrow {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  margin: 0 0 0.75rem;
+}
+
+.home-name {
+  font-size: clamp(2.1rem, 6vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.home-thesis {
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--vp-c-text-2);
+  margin: 0.9rem 0 0;
+}
+
+.home-portrait {
+  width: 108px;
+  height: 108px;
+  /* logo.png is not square (2250x2572); crop instead of squashing */
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 540px) {
+  .home-masthead {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .home-portrait {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+/* Prose on the home page (no .vp-doc wrapper under layout: page) */
+.home p {
+  line-height: 1.75;
+  margin: 1rem 0;
+}
+
+.home a {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.home a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration-color: var(--vp-c-brand-2);
+}
+
+/* Section labels: mono machinery, content stays serif */
+.home h2 {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 1.4rem;
+  margin: 3rem 0 1.25rem;
+}
+
+/* No anchor pilcrows outside .vp-doc */
+.home .header-anchor {
+  display: none;
+}
+
+.home ul {
+  padding-left: 1.2rem;
+  line-height: 1.75;
+}
+
+.home li {
+  margin: 0.4rem 0;
+}
+
+/* ---------------------------------------------------------------- *
+ * List components: badges and chips are machinery
+ * ---------------------------------------------------------------- */
+
+.pub-badges .badge,
+.talk-badges .badge,
+.news-meta .news-type {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.publication-list .bibtex-copy {
+  font-family: var(--vp-font-family-mono);
+}
+
+/* The quiet index line under the bio */
+.home-links {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.82rem;
+  margin: 1.5rem 0 0;
+}
+
+.home-links a {
+  text-decoration: none;
+  margin-right: 1.4rem;
+}
+
+.home-links a::after {
+  content: ' →';
+  color: var(--vp-c-text-3);
 }

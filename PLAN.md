@@ -14,7 +14,7 @@ custom identity built around works as the central object.
 This file is excluded from the built site (`srcExclude` in
 `.vitepress/config.ts`).
 
-## Phase 1 — Findability & plumbing (in progress)
+## Phase 1 — Findability & plumbing (done July 2026, two items pending)
 
 Make the site work well for people looking up my research, without touching
 the design.
@@ -38,20 +38,24 @@ the design.
 - [ ] Downloadable CV PDF on the CV page (Syver regenerates it later)
 - [ ] Decide fate of the "(Draft)" fluid-solver post (Syver addresses later)
 
-## Phase 2 — Custom identity on VitePress
+## Phase 2 — Custom identity on VitePress (done July 2026)
 
-Stop looking like documentation. Keep the engine, data layer, and markdown
-workflow; replace the default-theme look.
+Design system: "the paper and the repo" — see CLAUDE.md for the rules.
+STIX Two Text for reading, IBM Plex Mono for machinery, color reserved for
+the simulation imagery and teal interaction; orange only for "what the
+filter erased".
 
-- Custom VitePress theme (own `Layout.vue` wrapping or replacing
-  `DefaultTheme`): typography, spacing, color palette chosen deliberately
-  (load the frontend-design skill when doing this)
-- Redesigned home page: who I am, a featured work/explainer above the fold,
-  recent news below — no product-style hero/feature cards
-- Drop or restyle docs chrome (nolebase readability menu, docs footer)
-- Post pages: proper header (title, date, reading time), larger measure for
-  interactive figures
-- Keep dark/light support and mobile layout first-class
+- [x] Deliberate typography/palette in `custom.css` (self-hosted fonts)
+- [x] Redesigned home page: masthead ("I study what the filter erases"),
+      the `<FilterCut />` DNS-vs-filtered slider as signature element, bio,
+      explainer index, recent news
+- [x] Docs chrome removed: nolebase plugin, edit link, last-updated display,
+      product-style hero/feature cards
+- [x] Post pages: date + reading time above the title (`PostMeta` via
+      `doc-before` slot)
+- [x] Quiet mono site footer (© · rss · source)
+- [x] Dark/light verified by screenshot; mobile masthead stacks
+- [ ] Possible later: restyle the local-search modal and 404 page to match
 
 ## Phase 3 — Works-centric research hubs
 

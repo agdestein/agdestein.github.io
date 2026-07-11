@@ -19,7 +19,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: '/logo.png' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: `${siteTitle} — blog`, href: '/feed.xml' }],
-    ['meta', { name: 'theme-color', content: '#0d9488', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#fcfcfa', media: '(prefers-color-scheme: light)' }],
     ['meta', { name: 'theme-color', content: '#0f172a', media: '(prefers-color-scheme: dark)' }],
   ],
   // GitHub Pages resolves /foo to foo.html, so extensionless URLs are safe.
@@ -113,30 +113,13 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
-    editLink: {
-      pattern: 'https://github.com/agdestein/agdestein.github.io/tree/main/:path',
-    },
-    lastUpdated: {
-      // text: 'Updated at',
-      formatOptions: {
-        dateStyle: 'long',
-        // timeStyle: 'short',
-        hour12: false, // Use 24-hour clock
-      },
-    },
-
-    // footer: {
-    //   message: 'Released under the MIT License.',
-    //   copyright: 'Copyright © 2024-present Syver Døving Agdestein',
-    // },
 
     nav: [
-      { text: "Home", link: "/" },
-      { text: "CV", link: "/about" },
       { text: "Publications", link: "/publications" },
       { text: "Talks", link: "/talks" },
       { text: "Software", link: "/software" },
-      { text: "Blog posts", link: "/posts", activeMatch: "/posts/.*" },
+      { text: "Blog", link: "/posts", activeMatch: "/posts/.*" },
+      { text: "CV", link: "/about" },
     ],
 
     socialLinks: [
@@ -157,22 +140,5 @@ export default defineConfig({
     ],
   },
 
-
-  vite: {
-    optimizeDeps: {
-      exclude: [
-        '@nolebase/vitepress-plugin-enhanced-readabilities/client',
-        'vitepress',
-        '@nolebase/ui',
-      ],
-    },
-    ssr: {
-      noExternal: [
-        // If there are other packages that need to be processed by Vite, you can add them here.
-        '@nolebase/vitepress-plugin-enhanced-readabilities',
-        '@nolebase/ui',
-      ],
-    },
-  },
 
 })

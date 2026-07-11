@@ -2,9 +2,10 @@ export default function (date: string | undefined): string {
     if (!date) return ''
     const d = new Date(date)
     if (isNaN(d.getTime())) return ''
-    return d.toLocaleString('nl-NL', {
+    return d.toLocaleString('en-US', {
         year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'UTC',
     })
 }
