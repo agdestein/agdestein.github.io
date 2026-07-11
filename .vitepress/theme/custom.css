@@ -163,7 +163,6 @@ html {
 .home-portrait {
   width: 108px;
   height: 108px;
-  /* logo.png is not square (2250x2572); crop instead of squashing */
   object-fit: cover;
   border-radius: 50%;
   flex-shrink: 0;
