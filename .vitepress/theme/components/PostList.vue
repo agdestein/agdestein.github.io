@@ -23,12 +23,16 @@ import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
   limit?: number
+  work?: string
 }>()
 
 const sorted = getSorted(posts)
-const displayed = computed(() =>
-  props.limit ? sorted.slice(0, props.limit) : sorted
-)
+const displayed = computed(() => {
+  const pool = props.work
+    ? sorted.filter((post) => post.frontmatter.work === props.work)
+    : sorted
+  return props.limit ? pool.slice(0, props.limit) : pool
+})
 </script>
 
 <style scoped>

@@ -19,6 +19,7 @@ This is a personal academic website built with [VitePress](https://vitepress.dev
 - `index.md` — Home page (`layout: page` with a custom masthead, the `<FilterCut />` DNS-vs-filtered slider, bio prose, and `<NewsList />`; styled by the `.home` rules in `custom.css`)
 - `about.md` — CV page
 - `publications.md`, `talks.md`, `software.md` — Standalone list pages
+- `works/index.md` — Research index (`<WorkList />` cards); `works/[id].md` + `works/[id].paths.ts` — one hub page per work (dynamic route over `data/works.ts`, rendered by `<WorkHub />`; title/description/og:image filled by `transformPageData`)
 - `posts/` — Blog posts, each named `YYYY-MM-DD-slug.md`, with frontmatter `title`, `date`, and `description` (used for the meta description and Open Graph tags). Lists sort by the `date` frontmatter (newest first), with the filename as tie-breaker for same-day posts. Date-only filenames (`YYYY-MM-DD.md`) are legacy redirect stubs: frontmatter `redirectTo: /posts/<new-slug>` produces a meta refresh (via `transformHead`), and such stubs are excluded from the posts loader and RSS feed. Never delete a stub (old URLs must keep working); when renaming a post, leave one behind.
 - `public/` — Static assets (images, PDFs for slides, SVG icons)
 - `PLAN.md` — Roadmap for the website redesign (excluded from the build via `srcExclude`)
@@ -30,15 +31,17 @@ Static data for publications and talks lives in TypeScript files (not markdown):
 - `data/publications.ts` — Exports `publications: Publication[]` with fields: `title`, `authors`, `venue`, `year`, and optional `date` (ISO, news-feed ordering only), `work`, `badges` (label + url chips), `image`, `bibtex` (shown by the "cite" toggle in `PublicationList`)
 - `data/talks.ts` — Exports `talks: Talk[]` with fields: `title`, `venue`, `location`, `date`, and optional `work`, `slidesUrl`, `abstractUrl`, `webpageUrl`, `badges` (extra cross-reference chips)
 - `data/posts.data.ts` — VitePress content loader that globs `posts/20*.md`; filters out redirect stubs and computes `readingMinutes` per post (raw source is not shipped to the client)
-- `data/works.ts` — Registry of "works": a work groups the entries (paper, talks, blog posts) that stem from the same research, so they share one thumbnail file. Entries opt in with `work: "<id>"` (data files or post frontmatter); an explicit `image` still overrides. Shared thumbnails live in `public/works/`. Cross-reference badges between related entries (paper ↔ talk ↔ post) are added manually per entry.
+- `data/works.ts` — Registry of "works": a work groups the entries (paper, talks, blog posts) that stem from the same research. Each work has a plain-language `title`, one-paragraph `summary`, and shared thumbnail `image`, and gets a hub page at `/works/<id>`. Entries opt in with `work: "<id>"` (data files or post frontmatter); an explicit `image` still overrides the thumbnail. Shared thumbnails live in `public/works/`. Cross-reference badges (paper ↔ talk ↔ post) are manual per entry, but a "project" badge linking to the hub is added automatically in the unfiltered lists.
 
 ### Custom Vue components
 
 Registered globally in `.vitepress/theme/index.ts` and usable directly in any `.md` file:
 
-- `<PublicationList :limit="N" />` — Renders publications from `data/publications.ts`; order is determined by array order in the data file
-- `<TalkList :limit="N" />` — Renders talks from `data/talks.ts`; order is determined by array order in the data file
-- `<PostList :limit="N" />` — Renders blog posts sorted by `date` frontmatter (newest first)
+- `<PublicationList :limit="N" work="id" />` — Renders publications from `data/publications.ts`; order is determined by array order in the data file
+- `<TalkList :limit="N" work="id" />` — Renders talks from `data/talks.ts`; order is determined by array order in the data file
+- `<PostList :limit="N" work="id" />` — Renders blog posts sorted by `date` frontmatter (newest first)
+- `<WorkList />` — Research-project cards for `/works/` (computes paper/talk/explainer counts)
+- `<WorkHub />` — Body of a work hub page; reads the work id from route params
 - `<NewsList :limit="N" />` — Merged feed of publications, talks, and posts sorted by date (used on the home page); publication dates come from the optional `date` field, talk dates are parsed from the `date` string
 - `<Figure />` — Custom figure component
 - `<FilterCut />` — Home-page signature: draggable divider between a DNS field and its filtered version (images from `public/posts/symmetry/`)

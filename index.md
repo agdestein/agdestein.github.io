@@ -35,6 +35,7 @@ history, languages, and the piano — I've lived in Asker, Gembloux, Toulouse,
 Saint Petersburg, Paris, and now Amsterdam.
 
 <p class="home-links">
+<a href="/works/">research</a>
 <a href="/publications">publications</a>
 <a href="/talks">talks</a>
 <a href="/software">software</a>

@@ -15,7 +15,7 @@
           &middot;
           <span class="talk-date">{{ talk.date }}</span>
         </div>
-        <div v-if="talk.slidesUrl || talk.abstractUrl || talk.webpageUrl || talk.badges?.length" class="talk-badges">
+        <div v-if="talk.slidesUrl || talk.abstractUrl || talk.webpageUrl || talk.badges?.length || (talk.work && !work)" class="talk-badges">
           <a
             v-if="talk.slidesUrl"
             :href="talk.slidesUrl"
@@ -45,6 +45,11 @@
             rel="noopener noreferrer"
             :class="['badge', badge.emphasized ? '' : 'badge-muted']"
           >{{ badge.label }}</a>
+          <a
+            v-if="talk.work && !work"
+            :href="`/works/${talk.work}`"
+            class="badge badge-muted"
+          >project</a>
         </div>
       </div>
     </div>

@@ -42,6 +42,18 @@ export default defineConfig({
     },
   },
 
+  // Work hub pages (works/[id].md) get their title, description, and
+  // og:image (via `work`) from the works registry.
+  transformPageData(pageData) {
+    const id = pageData.params?.id
+    if (id && id in works) {
+      const work = works[id as keyof typeof works]
+      pageData.title = work.title
+      pageData.frontmatter.description = work.summary
+      pageData.frontmatter.work = id
+    }
+  },
+
   // Canonical URL + Open Graph/Twitter cards for every page. Redirect stubs
   // (frontmatter `redirectTo`) instead get a meta refresh to the new URL.
   transformHead({ pageData }) {
@@ -115,6 +127,7 @@ export default defineConfig({
     },
 
     nav: [
+      { text: "Research", link: "/works/", activeMatch: "/works/.*" },
       { text: "Publications", link: "/publications" },
       { text: "Talks", link: "/talks" },
       { text: "Software", link: "/software" },

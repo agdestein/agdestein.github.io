@@ -10,6 +10,8 @@ import NewsList from './components/NewsList.vue';
 import FilterCut from './components/FilterCut.vue';
 import PostMeta from './components/PostMeta.vue';
 import SiteFooter from './components/SiteFooter.vue';
+import WorkHub from './components/WorkHub.vue';
+import WorkList from './components/WorkList.vue';
 
 // Self-hosted fonts: STIX Two Text (display + body, pairs with MathJax math)
 // and IBM Plex Mono (nav, metadata, badges, code).
@@ -39,5 +41,7 @@ export default {
         app.component( 'PostList', PostList );
         app.component( 'NewsList', NewsList );
         app.component( 'FilterCut', FilterCut );
+        app.component( 'WorkHub', WorkHub );
+        app.component( 'WorkList', WorkList );
     }
 } satisfies Theme

@@ -57,17 +57,21 @@ filter erased".
 - [x] Dark/light verified by screenshot; mobile masthead stacks
 - [ ] Possible later: restyle the local-search modal and 404 page to match
 
-## Phase 3 — Works-centric research hubs
+## Phase 3 — Works-centric research hubs (done July 2026)
 
-Promote the "work" to a first-class page: `/works/<id>` with a plain-language
-summary, hero figure/video, and the paper, talks, posts, and code hanging off
-it.
-
-- Extend `data/works.ts`: title, summary, hero media, status
-- One page per work (dynamic routes or generated md), reusing
-  `PublicationList work=` / `TalkList work=` filters
-- Publications/talks pages stay as chronological indexes, linking into hubs
-- Home page and news feed link to hubs where one exists
+- [x] `data/works.ts` extended with plain-language `title` + `summary` per
+      work (object order = index order, newest first)
+- [x] `/works/<id>` hub pages via dynamic route (`works/[id].md` +
+      `[id].paths.ts`, rendered by `WorkHub`; metadata via
+      `transformPageData`)
+- [x] `/works/` Research index (`WorkList` cards with paper/talk/explainer
+      counts); "Research" first in the nav
+- [x] Publications/talks stay chronological; entries with a work get an
+      automatic "project" badge linking to the hub (suppressed in
+      work-filtered lists)
+- [x] `PostList` gained a `work` filter for hub pages
+- [ ] Possible later: per-work hero figure/video instead of the thumbnail;
+      link news-feed items to hubs
 
 ## Phase 4 — Personal & non-academic content
 

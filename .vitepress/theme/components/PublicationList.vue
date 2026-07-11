@@ -24,6 +24,11 @@
             rel="noopener noreferrer"
             :class="['badge', badge.emphasized ? 'badge-emphasized' : 'badge-default']"
           >{{ badge.label }}</a>
+          <a
+            v-if="pub.work && !work"
+            :href="`/works/${pub.work}`"
+            class="badge badge-default"
+          >project</a>
           <button
             v-if="pub.bibtex"
             class="badge badge-default badge-cite"
