@@ -123,7 +123,7 @@ export const talks: Talk[] = [
     work: "suite",
     badges: [
       { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
-      { label: "blog post", url: "/posts/2024-10-06" },
+      { label: "blog post", url: "/posts/2024-10-06-differentiable-fluid-solver" },
     ],
   },
   {

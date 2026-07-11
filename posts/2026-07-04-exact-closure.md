@@ -1,6 +1,10 @@
 ---
 title: Your grid is a filter
 date: 2026-07-04
+description: >-
+  An interactive tour of exact expressions for the unresolved stress in
+  finite-volume LES: the grid is a filter, and the classic subgrid stress is
+  the wrong modeling target.
 work: exactClosure
 ---
 

@@ -24,6 +24,18 @@
             rel="noopener noreferrer"
             :class="['badge', badge.emphasized ? 'badge-emphasized' : 'badge-default']"
           >{{ badge.label }}</a>
+          <button
+            v-if="pub.bibtex"
+            class="badge badge-default badge-cite"
+            :aria-expanded="openCite === pub.title"
+            @click="openCite = openCite === pub.title ? null : pub.title"
+          >cite</button>
+        </div>
+        <div v-if="pub.bibtex && openCite === pub.title" class="pub-bibtex">
+          <button class="bibtex-copy" @click="copyBibtex(pub)">
+            {{ copied === pub.title ? 'copied!' : 'copy' }}
+          </button>
+          <pre><code>{{ pub.bibtex }}</code></pre>
         </div>
       </div>
     </div>
@@ -31,8 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { publications } from '../../../data/publications'
+import { computed, ref } from 'vue'
+import { publications, type Publication } from '../../../data/publications'
 import thumbnail from '../utils/thumbnail'
 
 const props = defineProps<{
@@ -47,6 +59,17 @@ const displayed = computed(() => {
   return props.limit ? publications.slice(0, props.limit) : publications
 })
 
+const openCite = ref<string | null>(null)
+const copied = ref<string | null>(null)
+
+async function copyBibtex(pub: Publication) {
+  if (!pub.bibtex) return
+  await navigator.clipboard.writeText(pub.bibtex)
+  copied.value = pub.title
+  setTimeout(() => {
+    if (copied.value === pub.title) copied.value = null
+  }, 2000)
+}
 </script>
 
 <style scoped>
@@ -120,5 +143,49 @@ const displayed = computed(() => {
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
   border: 1px solid var(--vp-c-divider);
+}
+
+.badge-cite {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pub-bibtex {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.pub-bibtex pre {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  overflow-x: auto;
+}
+
+.pub-bibtex code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75em;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+}
+
+.bibtex-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75em;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.bibtex-copy:hover {
+  color: var(--vp-c-brand-1);
 }
 </style>

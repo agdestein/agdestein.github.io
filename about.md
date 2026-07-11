@@ -1,3 +1,10 @@
+---
+title: Curriculum Vitae
+description: >-
+  CV of Syver Døving Agdestein: employment, education, software,
+  publications, talks, teaching, and service.
+---
+
 # Curriculum Vitae
 
 ## Employment

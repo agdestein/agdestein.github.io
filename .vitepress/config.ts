@@ -1,25 +1,117 @@
+import { writeFileSync } from 'node:fs'
+import path from 'node:path'
 import footnote from 'markdown-it-footnote'
-import { defineConfig } from "vitepress"
+import { createContentLoader, defineConfig, type HeadConfig } from "vitepress"
+import { Feed } from 'feed'
+import { works } from '../data/works'
+
+const hostname = 'https://agdestein.github.io'
+const siteTitle = 'Syver Døving Agdestein'
+const siteDescription =
+  'Postdoctoral researcher in scientific computing at CWI Amsterdam: ' +
+  'turbulence closure models, probabilistic simulation of turbulence, and ' +
+  'differentiable programming in Julia.'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Syver Døving Agdestein",
-  description: "Personal website",
+  title: siteTitle,
+  description: siteDescription,
   head: [
+    ['link', { rel: 'icon', type: 'image/png', href: '/logo.png' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: `${siteTitle} — blog`, href: '/feed.xml' }],
     ['meta', { name: 'theme-color', content: '#0d9488', media: '(prefers-color-scheme: light)' }],
     ['meta', { name: 'theme-color', content: '#0f172a', media: '(prefers-color-scheme: dark)' }],
   ],
+  // GitHub Pages resolves /foo to foo.html, so extensionless URLs are safe.
+  // Keeps internal links, canonical URLs, sitemap, and RSS consistent.
+  cleanUrls: true,
+  sitemap: {
+    hostname,
+    // Drop the date-only redirect stubs (posts/YYYY-MM-DD); their slugged
+    // targets are already listed.
+    transformItems: (items) =>
+      items.filter((item) => !/^posts\/\d{4}-\d{2}-\d{2}$/.test(item.url)),
+  },
+  // Repo docs, not site content.
+  srcExclude: ['README.md', 'PLAN.md', 'CLAUDE.md'],
+  lastUpdated: true,
   markdown: {
     math: true,
     config: (md) => {
       md.use(footnote)
     },
   },
+
+  // Canonical URL + Open Graph/Twitter cards for every page. Redirect stubs
+  // (frontmatter `redirectTo`) instead get a meta refresh to the new URL.
+  transformHead({ pageData }) {
+    const fm = pageData.frontmatter
+    if (fm.redirectTo) {
+      return [
+        ['meta', { 'http-equiv': 'refresh', content: `0; url=${fm.redirectTo}` }],
+        ['link', { rel: 'canonical', href: hostname + fm.redirectTo }],
+        ['meta', { name: 'robots', content: 'noindex' }],
+      ]
+    }
+    const pagePath = pageData.relativePath
+      .replace(/(^|\/)index\.md$/, '$1')
+      .replace(/\.md$/, '')
+    const url = `${hostname}/${pagePath}`
+    const title = pageData.title ? `${pageData.title} | ${siteTitle}` : siteTitle
+    const description = fm.description ?? siteDescription
+    // og:image: explicit post image (bare filename in public/posts/), else the
+    // shared work thumbnail, else the site logo.
+    let image = '/logo.png'
+    if (fm.image) image = `/posts/${fm.image}`
+    else if (fm.work && fm.work in works) image = works[fm.work as keyof typeof works].image
+    const head: HeadConfig[] = [
+      ['link', { rel: 'canonical', href: url }],
+      ['meta', { property: 'og:site_name', content: siteTitle }],
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { property: 'og:type', content: pageData.relativePath.startsWith('posts/2') ? 'article' : 'website' }],
+      ['meta', { property: 'og:image', content: hostname + image }],
+      ['meta', { name: 'twitter:card', content: 'summary' }],
+    ]
+    return head
+  },
+
+  // RSS feed for blog posts at /feed.xml.
+  buildEnd: async (config) => {
+    const feed = new Feed({
+      title: `${siteTitle} — blog`,
+      description: 'Blog posts on turbulence, closure models, and scientific computing in Julia.',
+      id: `${hostname}/posts/`,
+      link: `${hostname}/posts/`,
+      language: 'en',
+      favicon: `${hostname}/logo.png`,
+      copyright: siteTitle,
+    })
+    const posts = await createContentLoader('posts/20*.md').load()
+    posts
+      .filter((post) => !post.frontmatter.redirectTo)
+      .sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date))
+      .forEach((post) => {
+        feed.addItem({
+          title: post.frontmatter.title,
+          id: hostname + post.url,
+          link: hostname + post.url,
+          description: post.frontmatter.description,
+          date: new Date(post.frontmatter.date),
+        })
+      })
+    writeFileSync(path.join(config.outDir, 'feed.xml'), feed.rss2())
+  },
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: {
       "light": "/logo.png",
       "dark": "/logo.png"
+    },
+    search: {
+      provider: 'local',
     },
     editLink: {
       pattern: 'https://github.com/agdestein/agdestein.github.io/tree/main/:path',
@@ -43,18 +135,9 @@ export default defineConfig({
       { text: "CV", link: "/about" },
       { text: "Publications", link: "/publications" },
       { text: "Talks", link: "/talks" },
+      { text: "Software", link: "/software" },
       { text: "Blog posts", link: "/posts", activeMatch: "/posts/.*" },
     ],
-
-    // sidebar: {
-    //   "/posts/": {
-    //     items: [
-    //       { text: "Overview", link: "/posts/" },
-    //       { text: "Writing a differentiable fluid solver in Julia", link: "/posts/2024-10-06" },
-    //       { text: "What is the difference between forward and reverse mode automatic differentiation?", link: "/posts/2024-10-05" },
-    //     ],
-    //   },
-    // },
 
     socialLinks: [
       { icon: "github", link: "https://github.com/agdestein" },
@@ -76,24 +159,19 @@ export default defineConfig({
 
 
   vite: {
-    // resolve: {
-    //   alias: {
-    //     '@': path.resolve(__dirname, '../components')
-    //   }
-    // },
     optimizeDeps: {
-      exclude: [ 
+      exclude: [
         '@nolebase/vitepress-plugin-enhanced-readabilities/client',
         'vitepress',
         '@nolebase/ui',
-      ], 
-    }, 
-    ssr: { 
-      noExternal: [ 
+      ],
+    },
+    ssr: {
+      noExternal: [
         // If there are other packages that need to be processed by Vite, you can add them here.
         '@nolebase/vitepress-plugin-enhanced-readabilities',
         '@nolebase/ui',
-      ], 
+      ],
     },
   },
 

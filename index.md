@@ -1,6 +1,10 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+description: >-
+  Syver Døving Agdestein is a postdoctoral researcher in scientific computing
+  at CWI Amsterdam, working on probabilistic simulation of turbulence,
+  closure models, and differentiable programming in Julia.
 
 hero:
   name: "Syver Døving Agdestein"
@@ -43,4 +47,4 @@ I'm a postdoctoral researcher in the Scientific Computing group at [CWI](https:/
 
 <NewsList :limit="3" />
 
-More: [publications](/publications) · [talks](/talks) · [blog posts](/posts/)
+More: [publications](/publications) · [talks](/talks) · [software](/software) · [blog posts](/posts/)

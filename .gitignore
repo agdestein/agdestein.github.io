@@ -3,3 +3,4 @@ node_modules
 .vitepress/dist
 bun.lock
 scratch.md
+MyPapers.bib
