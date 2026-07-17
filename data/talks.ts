@@ -29,9 +29,9 @@ export const talks: Talk[] = [
     webpageUrl: "https://wccm-eccomas2026.org/",
     abstractUrl: "https://wccm-eccomas2026.org/event/contribution/8fa4db60-f2c8-11f0-9f27-000c29ddfc0c",
     badges: [
-      { label: "pdf", url: "/slides/20260722-ECCOMAS.pdf" },
-      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
-      { label: "blog post", url: "/posts/2026-07-06-symmetry" },
+      { label: "pdf (static)", url: "/slides/20260722-ECCOMAS.pdf" },
+      // { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
+      // { label: "blog post", url: "/posts/2026-07-06-symmetry" },
     ],
   },
   {
@@ -41,9 +41,9 @@ export const talks: Talk[] = [
     date: "July 2, 2026",
     work: "thesis",
     slidesUrl: "/slides/20260702-Bernoulli.pdf",
-    badges: [
-      { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
-    ],
+    // badges: [
+    //   { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
+    // ],
   },
   {
     title: "Are we modeling the wrong stress tensor in LES?",
@@ -53,10 +53,10 @@ export const talks: Talk[] = [
     work: "exactClosure",
     slidesUrl: "/slides/20260521-DLES.pdf",
     webpageUrl: "https://dles.ercoftac.org/dles15/",
-    badges: [
-      { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
-      { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
-    ],
+    // badges: [
+    //   { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
+    //   { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
+    // ],
   },
   {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
@@ -66,9 +66,9 @@ export const talks: Talk[] = [
     work: "thesis",
     slidesUrl: "/slides/20260508-KWG.pdf",
     webpageUrl: "https://kwg.nl/en/kwg-event/kwg-middag/",
-    badges: [
-      { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
-    ],
+    // badges: [
+    //   { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
+    // ],
   },
   {
     title: "Symmetry-preserving LES: Comparison of data-driven closure models",
@@ -78,9 +78,9 @@ export const talks: Talk[] = [
     work: "symmetry",
     slidesUrl: "/slides/20260304-ML4FLUIDS.pdf",
     webpageUrl: "https://ml4fluids2026.github.io/",
-    badges: [
-      { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
-    ],
+    // badges: [
+    //   { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
+    // ],
   },
   {
     title: "Data-driven closure modeling: From deterministic to probabilistic models",
@@ -96,10 +96,10 @@ export const talks: Talk[] = [
     date: "June 2025",
     work: "exactClosure",
     webpageUrl: "https://wsc.project.cwi.nl/spring-symposium/2025-meeting/2025-meeting",
-    badges: [
-      { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
-      { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
-    ],
+    // badges: [
+    //   { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
+    //   { label: "blog post", url: "/posts/2026-07-04-exact-closure" },
+    // ],
   },
   {
     title: "Model-data consistent closure models in large-eddy simulation",
@@ -121,10 +121,10 @@ export const talks: Talk[] = [
     location: "Amsterdam, the Netherlands",
     date: "November 2024",
     work: "suite",
-    badges: [
-      { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
-      { label: "blog post", url: "/posts/2024-10-06-differentiable-fluid-solver" },
-    ],
+    // badges: [
+    //   { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
+    //   { label: "blog post", url: "/posts/2024-10-06-differentiable-fluid-solver" },
+    // ],
   },
   {
     title: "Discretize first, filter next: Learning divergence-consistent closure models for large-eddy simulation",
@@ -166,8 +166,8 @@ export const talks: Talk[] = [
     location: "Oslo, Norway",
     date: "June 2022",
     work: "eccomas2022",
-    badges: [
-      { label: "paper", url: "https://doi.org/10.23967/eccomas.2022.094" },
-    ],
+    // badges: [
+    //   { label: "paper", url: "https://doi.org/10.23967/eccomas.2022.094" },
+    // ],
   },
 ]
