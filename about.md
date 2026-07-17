@@ -1,11 +1,13 @@
 ---
 title: Curriculum Vitae
 description: >-
-  CV of Syver Døving Agdestein: employment, education, software,
-  publications, talks, teaching, and service.
+  CV of Syver Døving Agdestein: employment, education, teaching, and service.
 ---
 
 # Curriculum Vitae
+
+See also the dedicated
+[publications](/publications), [talks](/talks), and [software](/software) pages.
 
 ## Employment
 
@@ -15,6 +17,7 @@ description: >-
 
 <Timeline section="education" />
 
+<!--
 ## Software
 
 - [**IncompressibleNavierStokes.jl**](https://github.com/agdestein/IncompressibleNavierStokes.jl)
@@ -39,6 +42,7 @@ description: >-
 ## Contributed talks
 
 <TalkList />
+-->
 
 ## Teaching & supervision
 
