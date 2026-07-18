@@ -87,20 +87,22 @@ function py(y: number): number {
 }
 
 // A smooth analytic 2D velocity field (vortex + weak shear) and its exact
-// velocity-gradient tensor A = ∇u.
+// velocity-gradient tensor A = ∇u. The cos perturbations are even in x/y so
+// the field is not odd under p → −p — otherwise a 180° rotation would map it
+// onto itself and the 180°/270° buttons would look identical to 0°/90°.
 const K = 0.9
 function vel(x: number, y: number): { u: number; v: number } {
   return {
-    u: Math.sin(K * x) * Math.cos(K * y) + 0.25 * Math.sin(1.7 * y),
-    v: -Math.cos(K * x) * Math.sin(K * y) + 0.15 * Math.sin(1.3 * x),
+    u: Math.sin(K * x) * Math.cos(K * y) + 0.25 * Math.cos(1.7 * y),
+    v: -Math.cos(K * x) * Math.sin(K * y) + 0.15 * Math.cos(1.3 * x),
   }
 }
 function grad(x: number, y: number): number[] {
   // [a11, a12, a21, a22]
   return [
     K * Math.cos(K * x) * Math.cos(K * y),
-    -K * Math.sin(K * x) * Math.sin(K * y) + 0.25 * 1.7 * Math.cos(1.7 * y),
-    K * Math.sin(K * x) * Math.sin(K * y) + 0.15 * 1.3 * Math.cos(1.3 * x),
+    -K * Math.sin(K * x) * Math.sin(K * y) - 0.25 * 1.7 * Math.sin(1.7 * y),
+    K * Math.sin(K * x) * Math.sin(K * y) - 0.15 * 1.3 * Math.sin(1.3 * x),
     -K * Math.cos(K * x) * Math.cos(K * y),
   ]
 }

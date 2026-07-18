@@ -24,10 +24,10 @@
       aria-label="A square grid of points and a rotated copy. The rotated points land back on grid points only when the angle is a multiple of 90 degrees.">
       <!-- original lattice -->
       <circle v-for="(p, i) in basePoints" :key="'b' + i" :cx="cx + p.x * cell" :cy="cy + p.y * cell"
-        r="3.5" class="symrg-base" />
+        :r="dotR(p)" class="symrg-base" />
       <!-- rotated lattice -->
       <circle v-for="(p, i) in rotatedPoints" :key="'r' + i" :cx="cx + p.x * cell"
-        :cy="cy + p.y * cell" r="3.5" :class="aligned ? 'symrg-rot-ok' : 'symrg-rot'" />
+        :cy="cy + p.y * cell" :r="dotR(basePoints[i])" :class="aligned ? 'symrg-rot-ok' : 'symrg-rot'" />
       <!-- rotation guide -->
       <circle :cx="cx" :cy="cy" :r="4.5 * cell" class="symrg-guide" />
       <line :x1="cx" :y1="cy" :x2="cx + 4.5 * cell * Math.cos((-angle * Math.PI) / 180)"
@@ -93,6 +93,13 @@ const missPercent = computed(() => {
 })
 
 const aligned = computed(() => missPercent.value === 0)
+
+// Dot radius encodes the point's original x-position. The lattice maps onto
+// itself under mirroring and 90° rotations, so identical dots would make
+// those transforms invisible — the size gradient reveals the permutation.
+function dotR(p: { x: number; y: number }): number {
+  return 2 + 2.5 * ((p.x + 5) / 10)
+}
 </script>
 
 <style>
