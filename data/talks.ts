@@ -20,6 +20,7 @@ export interface Talk {
 export const talks: Talk[] = [
   {
     title: "Agents for research",
+    image: "agents-for-research.webp",
     venue: "CWI Scientific Meeting",
     location: "Amsterdam, the Netherlands",
     date: "September 8, 2026",
