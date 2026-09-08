@@ -19,6 +19,19 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
+    title: "Agents for research",
+    venue: "CWI Scientific Meeting",
+    location: "Amsterdam, the Netherlands",
+    date: "September 8, 2026",
+    // Interactive HTML deck (self-contained single file); the PDF badge is a static fallback.
+    slidesUrl: "/slides/20260908-AgentsForResearch.html",
+    webpageUrl: "https://www.cwi.nl/en/intranet/events/cwi-scientific-meeting-2026/",
+    badges: [
+      { label: "Xinyuan's sketch-to-figure tool", url: "https://github.com/XinyuanWang283/sketch-to-scientific-figure" },
+      { label: "CWI open day arcade", url: "https://agdestein.github.io/OpenDay/" },
+    ],
+  },
+  {
     title: "Approaching the optimal closure: Equivariance, inductive bias, and Reynolds-number generalization in data-driven LES",
     venue: "WCCM–ECCOMAS",
     location: "Munich, Germany",
