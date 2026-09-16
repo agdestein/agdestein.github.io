@@ -79,7 +79,7 @@ export const talks: Talk[] = [
     date: "May 8, 2026",
     work: "thesis",
     slidesUrl: "/slides/20260508-KWG.pdf",
-    webpageUrl: "https://kwg.nl/en/kwg-event/kwg-middag/",
+    webpageUrl: "https://kwg.nl/en/kwg-middag/",
     // badges: [
     //   { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
     // ],
