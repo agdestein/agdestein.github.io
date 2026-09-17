@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 150" fill="none">
+<!-- Dendrites taper away from the soma into smaller, curved branches. -->
+<g stroke="var(--art-1)" stroke-linecap="round" stroke-linejoin="round">
+<path d="M48 51C37 44 38 33 28 26M56 45C58 31 51 27 54 17M68 50C77 39 82 39 87 29M42 65C27 64 24 56 15 58M46 77C34 82 34 94 23 99M59 81C61 94 53 102 56 113" stroke-width="3.5"/>
+<path d="M34 33C25 34 19 29 15 23M28 26l-1-12M55 28C65 25 68 19 68 13M78 39C77 29 81 23 78 17M83 35l15-1M28 62C25 51 20 46 12 45M23 61l-12 11M36 87C27 84 22 86 15 83M29 94l-2 16M58 99C68 102 72 108 71 117M55 106l-13 6" stroke-width="2"/>
+</g>
+<!-- Organic cell body and nucleus. -->
+<path d="M47 48C52 52 55 49 57 43C59 52 65 52 71 47C67 57 72 60 81 65C71 66 69 71 69 77C63 76 59 79 59 86C54 78 50 77 43 81C48 71 43 68 36 65C46 61 46 56 47 48Z" fill="var(--art-1)" fill-opacity=".25" stroke="var(--art-1)" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="57" cy="65" rx="7" ry="8" fill="var(--art-2)"/>
+<!-- A long axon with separated myelin sheaths and a terminal arbor. -->
+<path d="M78 65C94 65 97 84 112 93S133 97 143 111" stroke="var(--art-3)" stroke-width="3" stroke-linecap="round"/>
+<g fill="var(--art-2)" fill-opacity=".25" stroke="var(--art-2)" stroke-width="2.5">
+<rect x="83" y="66" width="17" height="9" rx="4.5" transform="rotate(45 91.5 70.5)"/>
+<rect x="100" y="82" width="18" height="9" rx="4.5" transform="rotate(35 109 86.5)"/>
+<rect x="120" y="95" width="17" height="9" rx="4.5" transform="rotate(26 128.5 99.5)"/>
+</g>
+<g stroke="var(--art-3)" stroke-width="2" stroke-linecap="round">
+<path d="M142 110C145 100 151 98 158 96M142 110C151 112 155 117 164 117M142 110C143 122 138 128 143 136M153 98l1-10M154 114l9-7M142 127l13 3"/>
+</g>
+<g fill="var(--art-3)"><circle cx="158" cy="96" r="2.8"/><circle cx="154" cy="88" r="2.5"/><circle cx="164" cy="117" r="2.8"/><circle cx="163" cy="107" r="2.5"/><circle cx="143" cy="136" r="2.8"/><circle cx="155" cy="130" r="2.5"/></g>
+</svg>

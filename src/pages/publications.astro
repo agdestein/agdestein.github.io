@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryArt from '../components/EntryArt.astro';
+import { publications, localLink } from '../lib/catalog';
+---
+<Base title="Publications" active="Publications">
+  <div class="shell page-body">
+    <header class="page-heading"><p class="eyebrow">The research, in print</p><h1>Publications</h1><p class="lede">Papers, preprints, my PhD thesis, and an internship report. Follow an idea into the full text, the code, or an interactive companion.</p></header>
+    {publications.map(p => <article class="entry entry--publication">
+      <div class="entry-margin"><EntryArt artwork={p.artwork} kind="publication" size="large"/><span class="entry-year">{p.year}</span></div>
+      <div class="entry-copy">
+        <h2 lang={p.titleLanguage}>{p.title}</h2>
+        {p.titleTranslation && <p class="entry-meta" lang="en">{p.titleTranslation}</p>}<p class="entry-meta">{p.authors}<br/><em>{p.venue}</em></p>
+        {p.note && <p class="entry-meta">{p.note}</p>}
+        {p.badges?.length && <div class="badges">{p.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}</div>}
+        {p.bibtex && <details class="citation"><summary>Cite this work · BibTeX</summary><pre>{p.bibtex}</pre></details>}
+      </div>
+    </article>)}
+  </div>
+</Base>

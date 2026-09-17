@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 150" fill="none">
+<g stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M27 23v104h129" stroke="var(--art-4)" opacity=".6"/>
+<path d="M39 38C54 59 63 105 91 105S132 63 147 30" stroke="var(--art-1)" stroke-width="4"/>
+<path d="M91 105v22" stroke="var(--art-2)" stroke-dasharray="3 5"/>
+<path d="M66 105h50" stroke="var(--art-3)"/>
+<path d="m65 65 10 15m-10-3 10 3 1-10M121 57l-12 24m0-10v10l10-4" stroke="var(--art-2)"/>
+<circle cx="91" cy="105" r="6" fill="var(--art-paper)" stroke="var(--art-3)"/>
+</g></svg>

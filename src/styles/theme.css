@@ -1,0 +1,75 @@
+:root, :root[data-theme='aurora'] {
+  color-scheme: dark;
+  --bg: #0b181c; --surface: #122429; --surface-raised: #193037;
+  --ink: #eef3e9; --muted: #a4b9b9; --faint: #7e999b; --line: #31464a;
+  --accent: #b4e4be; --accent-ink: #122a23; --secondary: #c6b5e5;
+  --series-1: #b4e4be; --series-2: #bcb4f0; --series-3: #e9b776; --series-4: #82cddd; --series-5: #e7a2bf;
+  --sky-top: #061119; --sky-bottom: #183b40; --ridge-back: #426369;
+  --ridge-mid: #203e47; --ridge-front: #102830; --snow: #9bb5b5;
+  --glow: #71dbb2; --glow-alt: #9c81d9; --scene-text: #c0d5cd;
+  --shadow: 0 22px 80px #0003;
+}
+:root[data-theme='desert'] {
+  color-scheme: light;
+  --bg: #f3eadb; --surface: #eadcc7; --surface-raised: #fcf4e7;
+  --ink: #3d3028; --muted: #6b5747; --faint: #705b49; --line: #cfbba1;
+  --accent: #954923; --accent-ink: #fff4e5; --secondary: #326e70;
+  --series-1: #994723; --series-2: #266d70; --series-3: #755797; --series-4: #576c24; --series-5: #a03667;
+  --sky-top: #e7cfac; --sky-bottom: #f6e7ce; --ridge-back: #d4aa79;
+  --ridge-mid: #bf895a; --ridge-front: #986642; --snow: #efd5ac;
+  --glow: #b9713c; --glow-alt: #e5ae75; --scene-text: #705036;
+  --shadow: 0 22px 80px #6c421211;
+}
+:root[data-theme='coffee'] {
+  color-scheme: light;
+  --bg: #eee6da; --surface: #e2d6c5; --surface-raised: #f8f1e7;
+  --ink: #382a26; --muted: #665246; --faint: #6b574a; --line: #cbbbA6;
+  --accent: #82462e; --accent-ink: #fff6e9; --secondary: #4b6e78;
+  --series-1: #82462e; --series-2: #336878; --series-3: #80601d; --series-4: #745383; --series-5: #a03956;
+  --sky-top: #d9c7b0; --sky-bottom: #f1e5d5; --ridge-back: #b29576;
+  --ridge-mid: #947259; --ridge-front: #654936; --snow: #eee1ce;
+  --glow: #c99861; --glow-alt: #947158; --scene-text: #76583e;
+  --shadow: 0 22px 80px #382a2614;
+}
+/* Alpine is a bright reading surface; Rainforest and Ocean are dark. */
+:root[data-theme='alpine'] {
+  color-scheme: light;
+  --bg: #e9f0f4; --surface: #dce7ee; --surface-raised: #f6fafc;
+  --ink: #223546; --muted: #4c6070; --faint: #4f6575; --line: #b8cad6;
+  --accent: #25647f; --accent-ink: #f6fafc; --secondary: #786095;
+  --series-1: #25647f; --series-2: #715399; --series-3: #9a4f25; --series-4: #2e705b; --series-5: #a23868;
+  --sky-top: #a7c6d9; --sky-bottom: #edf5f8; --ridge-back: #8faebe;
+  --ridge-mid: #527b96; --ridge-front: #294b67; --snow: #f5fbff;
+  --glow: #ffffff; --glow-alt: #a6d6ea; --scene-text: #405f74;
+  --shadow: 0 22px 80px #294b6714;
+}
+:root[data-theme='rainforest'] {
+  color-scheme: dark;
+  --bg: #101e19; --surface: #192d24; --surface-raised: #243a2e;
+  --ink: #edf0db; --muted: #b0c3ad; --faint: #9caf9d; --line: #3c5344;
+  --accent: #c3d98d; --accent-ink: #20331d; --secondary: #dbb389;
+  --series-1: #c3d98d; --series-2: #8dc9c3; --series-3: #e8ae81; --series-4: #bab0e4; --series-5: #e6a4b8;
+  --sky-top: #122b28; --sky-bottom: #688c77; --ridge-back: #476e59;
+  --ridge-mid: #294c3a; --ridge-front: #152f25; --snow: #b7cebd;
+  --glow: #b0cfc3; --glow-alt: #91bda1; --scene-text: #b7cebd;
+  --shadow: 0 22px 80px #0003;
+}
+:root[data-theme='ocean'] {
+  color-scheme: dark;
+  --bg: #091f30; --surface: #102e42; --surface-raised: #193d50;
+  --ink: #e5f3f2; --muted: #b0cbd3; --faint: #9abac7; --line: #315567;
+  --accent: #87ded9; --accent-ink: #123735; --secondary: #e6b09a;
+  --series-1: #87ded9; --series-2: #b7b5ed; --series-3: #f0ba84; --series-4: #afcf91; --series-5: #eda6c0;
+  --sky-top: #307c93; --sky-bottom: #0a253f; --ridge-back: #205877;
+  --ridge-mid: #16415d; --ridge-front: #102d43; --snow: #a5e5df;
+  --glow: #7bd9d5; --glow-alt: #84badf; --scene-text: #a7d8df;
+  --shadow: 0 22px 80px #0003;
+}
+:root {
+  --vp-c-bg: var(--bg); --vp-c-bg-soft: var(--surface); --vp-c-bg-alt: var(--surface);
+  --vp-c-bg-elv: var(--surface-raised); --vp-c-text-1: var(--ink);
+  --vp-c-text-2: var(--muted); --vp-c-text-3: var(--faint);
+  --vp-c-divider: var(--line); --vp-c-brand-1: var(--accent);
+  --vp-c-brand-2: var(--accent); --vp-c-brand-soft: var(--surface-raised);
+  --sda-erased: var(--series-3);
+}

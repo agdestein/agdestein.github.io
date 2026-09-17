@@ -8,6 +8,9 @@ export interface Badge {
 
 export interface Publication {
   title: string
+  titleTranslation?: string
+  titleLanguage?: string
+  note?: string
   authors: string
   venue: string
   year: number
@@ -18,6 +21,8 @@ export interface Publication {
   work?: WorkId
   badges?: Badge[]
   image?: string
+  // Optional decorative SVG name in src/artwork (without .svg).
+  artwork?: string
   // BibTeX entry shown by the "cite" toggle in PublicationList.
   // Entries follow the Zotero export (MyPapers.bib, not committed), minus
   // abstract/file/keywords fields.
@@ -32,6 +37,7 @@ export const publications: Publication[] = [
     year: 2026,
     date: "2026-07-09",
     work: "symmetry",
+    artwork: "symmetry",
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },
@@ -57,6 +63,7 @@ export const publications: Publication[] = [
     year: 2026,
     date: "2026-06-16",
     work: "dles15",
+    artwork: "time-filter",
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2606.17759", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/DLES15CompanionCode" },
@@ -81,6 +88,7 @@ export const publications: Publication[] = [
     year: 2026,
     date: "2026-05-28",
     work: "thesis",
+    artwork: "thesis",
     badges: [
       { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/", emphasized: true },
     ],
@@ -102,6 +110,7 @@ export const publications: Publication[] = [
     year: 2026,
     date: "2026-04",
     work: "suite",
+    artwork: "ins",
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2604.18536", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
@@ -127,6 +136,7 @@ export const publications: Publication[] = [
     year: 2026,
     date: "2026-07-01",
     work: "exactClosure",
+    artwork: "filter-grid",
     badges: [
       { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810", emphasized: true },
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2507.17051" },
@@ -216,6 +226,7 @@ export const publications: Publication[] = [
     venue: "NMR in Biomedicine 35.3",
     year: 2022,
     date: "2022-03",
+    artwork: "neuron",
     badges: [
       { label: "paper", url: "https://doi.org/10.1002/nbm.4646", emphasized: true },
       { label: "code", url: "https://github.com/SpinDoctorMRI/SpinDoctor" },
@@ -234,11 +245,23 @@ export const publications: Publication[] = [
 }`,
   },
   {
+    title: "Développement de mélanges d'experts par apprentissage machine pour la conception avion",
+    titleTranslation: "Development of mixtures of experts using machine learning for aircraft design",
+    titleLanguage: "fr",
+    authors: "Syver Døving Agdestein",
+    venue: "Master’s internship report · INSA Toulouse / IRT Saint Exupéry · August 2020",
+    year: 2020,
+    date: "2020-08",
+    artwork: "optimization",
+    note: "Report in French · not publicly available",
+  },
+  {
     title: "Artery.FE: An Implementation of the 1D Blood Flow Equations in FEniCS",
     authors: "Syver Døving Agdestein, Kristian Valen-Sendstad, and Alexandra Diem",
     venue: "Journal of Open Source Software 3.32",
     year: 2018,
     date: "2018-12",
+    artwork: "artery",
     badges: [
       { label: "paper", url: "https://doi.org/10.21105/joss.01107", emphasized: true },
       { label: "code", url: "https://github.com/KVSlab/bloodflow" },

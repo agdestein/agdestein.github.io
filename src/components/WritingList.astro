@@ -1,0 +1,16 @@
+---
+import { posts, dateLabel } from '../lib/catalog';
+import EntryArt from './EntryArt.astro';
+const { limit=posts.length } = Astro.props;
+---
+<div class="writing-list">
+  {posts.slice(0,limit).map(post => <a class="writing-row" href={post.href}>
+    <EntryArt artwork={post.artwork} kind="writing"/>
+    <div class="writing-copy">
+      <span class="date">{dateLabel(post.date)}</span>
+      <h3>{post.title}</h3><p>{post.description}</p>
+      <span class="category">{post.draft?'Draft':post.interactive?'Interactive essay':'Note'}</span>
+    </div>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </a>)}
+</div>

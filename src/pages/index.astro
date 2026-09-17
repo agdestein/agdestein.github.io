@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Scene from '../components/Scene.astro';
+import EntryArt from '../components/EntryArt.astro';
+import FilterField from '../components/FilterField.vue';
+import WritingList from '../components/WritingList.astro';
+import { featuredSlug, talks, publications } from '../lib/catalog';
+const recent = [...talks.map(t=>({title:t.title,date:new Date(t.date),kind:'Talk',artwork:t.artwork,href:t.slidesUrl||'/talks'})),...publications.filter(p=>p.date).map(p=>({title:p.title,date:new Date(p.date!),kind:'Publication',artwork:p.artwork,href:'/publications'}))].sort((a,b)=>+b.date-+a.date).slice(0,3);
+---
+<Base>
+  <section class="hero" aria-labelledby="intro-title">
+    <Scene />
+    <div class="shell">
+      <p class="eyebrow"><span class="status-dot"></span>Scientific computing · CWI, Amsterdam</p>
+      <h1 id="intro-title">Small scales<br/><em>Big questions</em></h1>
+      <p class="hero-description">I’m Syver. I study turbulent flows, the details our simulations cannot see, and how to model what’s missing.</p>
+      <a class="text-link" href="#explore">Explore the ideas <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="shell hero-foot"><span>Research, code & things worth understanding</span><span class="scene-credit"><span data-scene-label>01 / Aurora · northern light</span><br/>Illustrated atmosphere</span></div>
+  </section>
+  <section class="section shell" id="explore">
+    <div class="feature-grid">
+      <div class="feature-copy"><span class="eyebrow"><span class="number-label">01</span> An idea you can play with</span><h2>Your time integrator<br/>is a filter</h2><p>A simulation smooths the world in space. It does the same in time. What happens when the model accounts for both?</p><div class="feature-tags"><span class="tag">Turbulence</span><span class="tag">Numerical methods</span><span class="tag">Interactive</span></div><a href={`/posts/${featuredSlug}`} class="text-link">Read the interactive essay <span aria-hidden="true">↗</span></a></div>
+      <div class="plot-card"><FilterField client:visible /></div>
+    </div>
+  </section>
+  <section class="section shell">
+    <div class="section-heading"><h2><span class="number-label">02</span> Notes from the work</h2><a href="/posts/" class="small-link">All writing ↗</a></div>
+    <WritingList limit={3}/>
+  </section>
+  <section class="section shell about-strip">
+    <div><p class="eyebrow"><span class="number-label">03</span> A little context</p><h2>Between mathematics<br/>and the moving world</h2><p>I’m a postdoctoral researcher at CWI in Amsterdam. My work connects numerical methods, machine learning, and the physics of turbulence. Away from it: history, languages, and the piano.</p><a href="/about" class="text-link">More about me <span aria-hidden="true">↗</span></a></div>
+    <a href="/software" class="software-tile"><div class="software-tile-top"><span class="eyebrow">Built in the open · Julia</span><EntryArt artwork="ins" kind="software"/></div><h3>IncompressibleNavierStokes.jl</h3><p>Differentiable, GPU-accelerated fluid simulation. The software behind the questions, and a place to start asking your own.</p><span class="text-link">Explore the software <span aria-hidden="true">↗</span></span></a>
+  </section>
+  <section class="section shell" id="recently">
+    <div class="section-heading"><h2><span class="number-label">04</span> Recently</h2><a href="/talks" class="small-link">Talks & appearances ↗</a></div>
+    <div class="recent-list">
+      {recent.map(item => <a class="recent-entry" href={item.href}>
+        <span class="recent-art"><EntryArt artwork={item.artwork} kind={item.kind==='Talk'?'talk':'publication'} size="tiny"/></span>
+        <time class="recent-date">{item.date.toLocaleDateString('en-GB',{month:'short',year:'numeric',timeZone:'UTC'})}</time>
+        <span class="recent-title">{item.title}</span>
+        <small class="recent-kind">{item.kind} ↗</small>
+      </a>)}
+    </div>
+  </section>
+</Base>
+<style>
+.recent-entry {
+  display: grid;
+  grid-template-columns: 44px 85px minmax(0, 1fr) 90px;
+  grid-template-areas: "art date title kind";
+  gap: 20px;
+  align-items: center;
+  padding: 17px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.recent-art { grid-area: art; display: block; }
+.recent-date { grid-area: date; color: var(--muted); font: 10px/1.7 'IBM Plex Mono', monospace; }
+.recent-title { grid-area: title; min-width: 0; }
+.recent-kind { grid-area: kind; text-align: right; color: var(--muted); font-size: 10px; }
+.recent-entry:hover .recent-title { color: var(--accent); }
+@media (max-width: 520px) {
+  .recent-entry {
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-areas: "art date" "art title" "art kind";
+    gap: 4px 14px;
+  }
+  .recent-art { align-self: start; }
+  .recent-kind { text-align: left; }
+}
+</style>

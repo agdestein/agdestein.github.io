@@ -1,0 +1,105 @@
+
+.tif-tldr {
+  --tif-time: var(--series-1);
+  background: var(--vp-c-bg-soft);
+  border-left: 3px solid var(--tif-time);
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.tif-tldr ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.tif-tldr li + li {
+  margin-top: 0.5rem;
+}
+.tif-cards {
+  --tif-les: var(--series-2);
+  --tif-num: var(--series-3);
+  --tif-div: var(--series-4);
+  --tif-time: var(--series-1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.tif-card {
+  background: var(--vp-c-bg-soft);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  border-top: 3px solid var(--vp-c-divider);
+}
+.tif-card-les { border-top-color: var(--tif-les); }
+.tif-card-num { border-top-color: var(--tif-num); }
+.tif-card-div { border-top-color: var(--tif-div); }
+.tif-card-time { border-top-color: var(--tif-time); }
+.tif-card-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-1);
+  margin-bottom: 0.35rem;
+}
+.tif-card-body {
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+.tif-new {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-bg);
+  background: var(--tif-time);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+.illustration-note { display:block; font-size:11px; margin-top:8px; }
+
+/* Reading and figures share the same palette; original raster data stays intact. */
+.prose :is(.symhero,.symcut,.symrg,.symeq,.symsat,.symcm,.symbs,.symre,.symstat,.xclm,.xclp,.xcll) {
+  font-family: 'DM Sans',sans-serif; font-size: 14px; line-height: 1.6; min-width: 0;
+}
+.prose :is(img,video) { max-width:100%; height:auto; }
+.prose > img, .article-figure img { display:block; margin: 1.5rem auto; background:white; border-radius:6px; }
+.article-figure { margin: 1.5rem 0; }
+.article-figure figcaption { font: 13px/1.65 'DM Sans',sans-serif; color:var(--muted); }
+.article-note { border-left:3px solid var(--series-3); background:var(--surface); padding:20px; margin:1.5rem 0; }
+.article-note > :last-child { margin-bottom:0; }
+.draft-label { color:var(--series-3); }
+.prose pre { border:1px solid var(--line); border-radius:8px; line-height:1.6; }
+.prose code { font-family:'IBM Plex Mono',monospace; font-size:.78em; }
+.prose pre code { font-size:inherit; }
+.prose p code { overflow-wrap:anywhere; }
+.prose .astro-code { background-color:var(--surface); color:var(--ink); }
+.prose :is(.symsat-table,.symre-table,.symp-verdict) { overflow-x:auto; }
+.prose :is(.symcut-plot,.symsat-plot,.symbs-plot,.symre-plot,.symcm-plot,.xclp-plot) { overflow-x:auto; }
+.prose :is(.symcut-svg,.symsat-svg,.symbs-svg,.symre-svg,.symcm-svg,.xclp-svg) { min-width:520px; }
+.prose .symsat-l-mlp, .prose .symre-l-mlp { stroke-dasharray:7 3; }
+.prose .symsat-l-tbnn, .prose .symre-l-tbnn { stroke-dasharray:2 3; }
+.prose .symbs-l-smag { stroke-dasharray:7 3; }
+.prose .symbs-l-clark { stroke-dasharray:2 3; }
+.prose .symbs-l-tbnn { stroke-dasharray:9 3 2 3; }
+@media (max-width:520px) {
+  .prose .symp-cards { grid-template-columns:minmax(0,1fr); }
+  .prose .article-note { padding:14px; }
+  .prose .symcm-sliderrow { flex-wrap:wrap; }
+}
+
+@media (max-width: 680px) {
+  .prose :is(.symcut-svg,.symsat-svg,.symbs-svg,.symre-svg,.symcm-svg) { min-width:680px; }
+  .prose :is(.symcut-plot,.symsat-plot,.symbs-plot,.symre-plot,.symcm-plot)::before {
+    content:'Scroll sideways to explore the full plot →'; display:block; position:sticky; left:0;
+    width:100%; margin-bottom:10px; color:var(--muted); font-size:11px;
+  }
+  .prose .xclp-svg { min-width:0; }
+  .prose :is(.xclp-plane-label,.xclp-line-label,.xclp-raw-label,.xclp-proj-label) { font-size:17px; }
+  .prose .xclp-removed-label { display:none; }
+  .prose .mobile-projection-key { display:block; font-size:12px; color:var(--muted); padding-inline:8px; }
+}
+@media (min-width:681px) { .mobile-projection-key { display:none; } }

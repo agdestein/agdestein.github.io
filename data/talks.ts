@@ -6,9 +6,12 @@ export interface Talk {
   venue: string
   location: string
   date: string
+  invited?: boolean
   // Shared work id (see data/works.ts) for the thumbnail; `image` overrides.
   work?: WorkId
   image?: string
+  // Optional decorative SVG name in src/artwork (without .svg).
+  artwork?: string
   slidesUrl?: string
   abstractUrl?: string
   webpageUrl?: string
@@ -20,6 +23,7 @@ export interface Talk {
 export const talks: Talk[] = [
   {
     title: "Agents for research",
+    artwork: "agents",
     image: "agents-for-research.webp",
     venue: "CWI Scientific Meeting",
     location: "Amsterdam, the Netherlands",
@@ -38,6 +42,7 @@ export const talks: Talk[] = [
     location: "Munich, Germany",
     date: "July 22, 2026",
     work: "symmetry",
+    artwork: "symmetry",
     // Interactive HTML deck (self-contained single file); the PDF badge is a static fallback.
     slidesUrl: "/slides/20260722-ECCOMAS.html",
     webpageUrl: "https://wccm-eccomas2026.org/",
@@ -51,9 +56,11 @@ export const talks: Talk[] = [
   {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
     venue: "Bernoulli Institute Seminar",
+    invited: true,
     location: "Groningen, the Netherlands",
     date: "July 2, 2026",
     work: "thesis",
+    artwork: "thesis",
     slidesUrl: "/slides/20260702-Bernoulli.pdf",
     // badges: [
     //   { label: "thesis", url: "https://research.tue.nl/en/publications/data-driven-discrete-closure-models-for-large-eddy-simulation-of-/" },
@@ -65,6 +72,7 @@ export const talks: Talk[] = [
     location: "Delft, the Netherlands",
     date: "May 21, 2026",
     work: "exactClosure",
+    artwork: "filter-grid",
     slidesUrl: "/slides/20260521-DLES.pdf",
     webpageUrl: "https://dles.ercoftac.org/dles15/",
     // badges: [
@@ -75,9 +83,11 @@ export const talks: Talk[] = [
   {
     title: "Data-driven discrete closure models for large-eddy simulation of incompressible turbulence",
     venue: "KWG afternoon session",
+    invited: true,
     location: "Amsterdam, the Netherlands",
     date: "May 8, 2026",
     work: "thesis",
+    artwork: "thesis",
     slidesUrl: "/slides/20260508-KWG.pdf",
     webpageUrl: "https://kwg.nl/en/kwg-middag/",
     // badges: [
@@ -90,6 +100,7 @@ export const talks: Talk[] = [
     location: "Amsterdam, the Netherlands",
     date: "March 2026",
     work: "symmetry",
+    artwork: "symmetry",
     slidesUrl: "/slides/20260304-ML4FLUIDS.pdf",
     webpageUrl: "https://ml4fluids2026.github.io/",
     // badges: [
@@ -99,6 +110,7 @@ export const talks: Talk[] = [
   {
     title: "Data-driven closure modeling: From deterministic to probabilistic models",
     venue: "INRIA SPADES associate team meeting",
+    invited: true,
     location: "Rome, Italy",
     date: "December 2025",
     slidesUrl: "/slides/20251216-SPADES.pdf",
@@ -106,9 +118,11 @@ export const talks: Talk[] = [
   {
     title: "Should structural turbulence closures be non-symmetric?",
     venue: "SCS Spring Meeting",
+    invited: true,
     location: "Hasselt, Belgium",
     date: "June 2025",
     work: "exactClosure",
+    artwork: "filter-grid",
     webpageUrl: "https://wsc.project.cwi.nl/spring-symposium/2025-meeting/2025-meeting",
     // badges: [
     //   { label: "paper", url: "https://doi.org/10.1016/j.jcp.2026.114810" },
@@ -132,9 +146,11 @@ export const talks: Talk[] = [
   {
     title: "Discrete closure models for turbulent flows: Exploiting differentiable programming",
     venue: "Meetup of the NL-RSE Community",
+    invited: true,
     location: "Amsterdam, the Netherlands",
     date: "November 2024",
     work: "suite",
+    artwork: "code",
     // badges: [
     //   { label: "code", url: "https://github.com/agdestein/IncompressibleNavierStokes.jl" },
     //   { label: "blog post", url: "/posts/2024-10-06-differentiable-fluid-solver" },
@@ -165,6 +181,7 @@ export const talks: Talk[] = [
   {
     title: "Closure models for discretely filtered differential equations",
     venue: "Seminar, Bernoulli Institute for Mathematics, Groningen University",
+    invited: true,
     location: "Groningen, the Netherlands",
     date: "February 2023",
   },

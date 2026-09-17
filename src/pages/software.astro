@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryArt from '../components/EntryArt.astro';
+interface SoftwareEntry { name: string; url: string; description: string; artwork: string; contribution?: string; }
+const sections: { id: string; title: string; intro: string; entries: SoftwareEntry[] }[] = [
+  {
+    id: 'research-codes', title: 'Reproduce the papers',
+    intro: 'Research codes for reproducing the results in my papers: the numerical experiments, comparisons, and analyses behind the published work.',
+    entries: [
+      {name:'SymmetryCode.jl', url:'https://github.com/agdestein/SymmetryCode.jl', description:'Experiments comparing equivariant and unconstrained turbulence closures, with the analysis behind the symmetry paper.', artwork:'symmetry'},
+      {name:'ExactClosure.jl', url:'https://github.com/agdestein/ExactClosure.jl', description:'Reproduce the finite-volume LES experiments on exact expressions for the unresolved stress.', artwork:'filter-grid'},
+      {name:'DLES15CompanionCode', url:'https://github.com/agdestein/DLES15CompanionCode', description:'Space-time filtering experiments and comparisons from the time-integration paper.', artwork:'time-filter'},
+      {name:'DivergenceConsistency', url:'https://github.com/agdestein/DivergenceConsistency', description:'Experiments on divergence-consistent filters and learned closure models for large-eddy simulation.', artwork:'code'},
+      {name:'DiscreteFiltering.jl', url:'https://github.com/agdestein/DiscreteFiltering.jl', description:'One-dimensional filtering and closure-model experiments behind “Discretize first, filter next”.', artwork:'filter-grid'},
+      {name:'Artery.FE', url:'https://github.com/KVSlab/bloodflow', description:'One-dimensional blood-flow simulation in FEniCS, with the implementation and examples accompanying the Artery.FE paper.', artwork:'artery'},
+    ],
+  },
+  {
+    id: 'contributions', title: 'Projects I contribute to',
+    intro: 'Software developed and maintained by others, to which I have contributed.',
+    entries: [
+      {name:'GEMSEO', contribution:"Added machine-learning surrogate modules, including a mixture-of-experts model, and helped migrate the codebase from Python 2 to Python 3.", url:'https://github.com/gemseo/gemseo', description:'Multidisciplinary design optimization, bringing together models, disciplines, and optimization methods.', artwork:'optimization'},
+      {name:'SpinDoctor', contribution:"Added Laplace-eigenfunction-based reduced-order models and permeable interface conditions. Developed synthetic geometry and triangulation tools for axons, including algorithms that wrap extracellular space around realistic neuron geometries.", url:'https://github.com/SpinDoctorMRI/SpinDoctor', description:'A finite-element solver for the Bloch–Torrey equation, for diffusion-MRI simulation in tissue microstructure.', artwork:'neuron'},
+      {name:'Mosaic', contribution:"Contributing to the integration of IncompressibleNavierStokes.jl into the benchmark suite.", url:'https://github.com/pasteurlabs/mosaic', description:'A benchmark suite for differentiable physics solvers, comparing their predictions, gradients, and computational cost.', artwork:'mosaic'},
+      {name:'Bubbles.jl', contribution:"Added 2D front tracking in IncompressibleNavierStokes.jl and interfaced a reduced-order surface representation with the flow solver.", url:'https://github.com/agdestein/Bubbles.jl', description:'Three-dimensional flows with immersed bubbles and droplets, using reduced-order interface tracking.', artwork:'bubbles'},
+    ],
+  },
+  {
+    id: 'agent-assisted', title: 'Agent-assisted projects',
+    intro: 'Newer software developed with substantial help from coding agents, from parallel fluid solvers to playable science.',
+    entries: [
+      {name:'DistributedNavierStokes', url:'https://github.com/agdestein/DistributedNavierStokes', description:'MPI-parallel, GPU-capable flow simulation with pseudo-spectral methods and finite-volume methods for channel flow, designed to reach beyond a single GPU.', artwork:'distributed-flow'},
+      {name:'OpenDay · CWI Science Arcade', url:'https://github.com/agdestein/OpenDay', description:'Playable simulation games for CWI Science Day: an interactive introduction to scientific computing.', artwork:'arcade'},
+    ],
+  },
+];
+---
+<Base title="Software" active="Software">
+  <div class="shell page-body">
+    <header class="page-heading"><p class="eyebrow">Built in the open</p><h1>Ideas you can run</h1><p class="lede">Scientific software is where the mathematics meets the experiment. My solvers, the code behind my papers, and projects I contribute to.</p></header>
+    <section class="software-feature"><div class="software-feature-art"><EntryArt artwork="ins" kind="software" size="large"/></div><p class="eyebrow">Julia · GPU computing · Automatic differentiation</p><h2>IncompressibleNavierStokes.jl</h2><p>A differentiable, GPU-accelerated incompressible Navier–Stokes solver for large-eddy simulation and data-driven closure modeling. Train neural closure models through the solver while they are embedded in a running simulation.</p><div class="badges"><a class="badge" href="https://github.com/agdestein/IncompressibleNavierStokes.jl">Repository ↗</a><a class="badge" href="https://doi.org/10.48550/arXiv.2604.18536">Software paper ↗</a><a class="badge" href="/posts/2024-10-06-differentiable-fluid-solver">Development notes ↗</a></div></section>
+    {sections.map(({id,title,intro,entries})=><section aria-labelledby={id}>
+      <h2 class="group-heading" id={id}>{title}</h2>
+      <p class="section-intro">{intro}</p>
+      {entries.map(({name,url,description,artwork,contribution})=><article class="entry entry--software">
+        <EntryArt artwork={artwork} kind="software" size="small"/>
+        <div><h3><a href={url}>{name} ↗</a></h3><p class="entry-meta">{description}</p>{contribution && <p class="entry-meta contribution"><strong>My contribution:</strong> {contribution}</p>}</div>
+      </article>)}
+    </section>)}
+    <section aria-labelledby="teaching"><h2 class="group-heading" id="teaching">Teaching</h2><div class="prose"><p><a href="https://github.com/agdestein/NeuralClosureTutorials">NeuralClosureTutorials</a> contains pedagogical notebooks on learning neural closure models for fluid flows.</p></div></section>
+  </div>
+</Base>
+<style>.software-feature { padding:20px 0 35px; display:flow-root; } .software-feature-art { float:right; margin:0 15px 20px 40px; }.software-feature h2 { font-size:clamp(25px,4vw,45px); overflow-wrap:anywhere; }.software-feature p:not(.eyebrow) { max-width:720px; color:var(--muted); font-size:15px; line-height:1.8; }.group-heading { font-size:35px; margin:55px 0 30px; }.section-intro { max-width:760px; color:var(--muted); line-height:1.8; margin:-12px 0 24px; } .entry--software h3 { font-size:clamp(22px,3vw,28px); margin:0 0 10px; overflow-wrap:anywhere; } .contribution { max-width:760px; margin-top:10px; } .contribution strong { color:var(--ink); font-weight:500; } .prose { max-width:760px; } @media(max-width:520px) { .software-feature { padding:12px 0 22px; } .software-feature-art { float:none; margin:0 0 20px; } }</style>

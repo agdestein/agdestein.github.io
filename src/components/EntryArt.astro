@@ -1,0 +1,51 @@
+---
+/** Decorative, authored SVGs are inlined so they inherit the selected theme. */
+interface Props {
+  artwork?: string;
+  kind?: 'publication' | 'talk' | 'writing' | 'employment' | 'education' | 'software';
+  size?: 'large' | 'medium' | 'small' | 'tiny';
+}
+const { artwork, kind = 'publication', size = 'medium' } = Astro.props;
+const sources = import.meta.glob<string>('../artwork/*.svg', {
+  query: '?raw', import: 'default', eager: true,
+});
+const defaults = {
+  publication: 'publication', talk: 'talk', writing: 'publication',
+  employment: 'research', education: 'education', software: 'code',
+};
+const requested = artwork?.replace(/\.svg$/i, '');
+const custom = requested && sources[`../artwork/${requested}.svg`];
+const resolved = custom ? requested : defaults[kind];
+const svg = sources[`../artwork/${resolved}.svg`];
+if (artwork && !custom) console.warn(`[artwork] Missing "${artwork}"; using ${defaults[kind]}.svg`);
+---
+<div
+  class:list={['entry-art', `entry-art--${size}`]}
+  aria-hidden="true"
+  data-artwork={resolved}
+  data-artwork-fallback={!custom ? kind : undefined}
+  set:html={svg}
+/>
+<style>
+  .entry-art {
+    --art-1: var(--series-1);
+    --art-2: var(--series-2);
+    --art-3: var(--series-3);
+    --art-4: var(--series-4);
+    --art-paper: var(--bg);
+    flex: none;
+    width: 108px;
+    max-width: 100%;
+    line-height: 0;
+    pointer-events: none;
+  }
+  .entry-art :global(svg) { width: 100%; height: auto; display: block; }
+  .entry-art--large { width: 180px; }
+  .entry-art--small { width: 76px; }
+  .entry-art--tiny { width: 44px; }
+  @media (max-width: 520px) {
+    .entry-art--large { width: 95px; }
+    .entry-art--medium { width: 76px; }
+    .entry-art--small { width: 58px; }
+  }
+</style>

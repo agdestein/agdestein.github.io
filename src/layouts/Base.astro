@@ -1,0 +1,77 @@
+---
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
+import '@fontsource/stix-two-text/400.css';
+import '@fontsource/stix-two-text/400-italic.css';
+import '@fontsource/stix-two-text/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/theme.css';
+import '../styles/global.css';
+import { themes } from '../lib/themes';
+import { searchItems } from '../lib/catalog';
+interface Props { title?: string; description?: string; active?: string; image?: string; }
+const { title, description='Syver Døving Agdestein — scientific computing, turbulent flows, and the models in between. Research, interactive essays, and open-source software.', active='', image='/logo.png' } = Astro.props;
+const fullTitle = title ? `${title} — Syver Døving Agdestein` : 'Syver Døving Agdestein — Scientific computing';
+const pagePath=Astro.url.pathname.replace(/\/index(?:\.html)?$/,'/').replace(/\.html$/,'').replace(/\/$/,'') || '/';
+const canonicalPath=pagePath==='/404' ? '/404.html' : pagePath==='/posts' ? '/posts/' : pagePath;
+const canonicalURL=new URL(canonicalPath,Astro.site);
+const nav = [['Writing','/posts/'],['Publications','/publications'],['Talks','/talks'],['Software','/software'],['About','/about']];
+---
+<!doctype html>
+<html lang="en" data-theme="aurora">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content={description}/><title>{fullTitle}</title>
+  <link rel="icon" type="image/png" href="/logo.png"/>
+  <link rel="canonical" href={canonicalURL}/>
+  <link rel="alternate" type="application/rss+xml" title="Syver's writing" href="/feed.xml"/>
+  <meta property="og:title" content={fullTitle}/><meta property="og:description" content={description}/>
+  <meta property="og:type" content={active==='Writing' && canonicalPath!=='/posts/'?'article':'website'}/>
+  <meta property="og:url" content={canonicalURL}/>
+  <meta property="og:image" content={new URL(image,Astro.site)}/>
+  <meta name="twitter:card" content="summary"/>
+  <style is:inline set:html={themes.map(({id})=>`html[data-theme="${id}"] [data-theme-label="${id}"] { visibility: visible; }`).join("\n")} />
+  <meta name="theme-color" content="#0b181c"/>
+  <script is:inline define:vars={{themeChoices:themes}}>
+    (()=>{let theme='aurora',motion=matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on';try{const saved=localStorage.getItem('sda-theme');if(themeChoices.some(t=>t.id===saved))theme=saved;const m=localStorage.getItem('sda-motion');if(['on','off'].includes(m))motion=m;}catch{}document.documentElement.dataset.theme=theme;document.documentElement.dataset.motion=motion;document.querySelector('meta[name="theme-color"]').content=themeChoices.find(t=>t.id===theme).background;})();
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="/" class="wordmark" aria-label="Syver Døving Agdestein — home">Syver D. Agdestein<span>↗</span></a>
+      <nav class="desktop-nav" aria-label="Main">{nav.map(([label,href])=><a href={href} aria-current={active===label?'page':undefined}>{label}</a>)}</nav>
+      <div class="header-tools">
+        <button class="icon-button" data-search-open aria-label="Search the site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>
+        <div class="theme-control">
+          <button class="theme-trigger" data-theme-toggle aria-label="Choose atmosphere" aria-expanded="false" aria-controls="theme-panel"><span class="theme-dot"></span><span data-theme-name>{themes.map(({id,label})=><span data-theme-label={id}>{label}</span>)}</span><span class="chevron" aria-hidden="true">⌄</span></button>
+          <div id="theme-panel" class="theme-panel" hidden>
+            <p class="eyebrow">Choose your atmosphere</p>
+            <div role="radiogroup" aria-label="Atmosphere">
+              {themes.map(({id,label,detail})=><button class="theme-option" data-theme-option={id} role="radio" aria-checked={id==='aurora'} tabindex={id==='aurora'?0:-1}><span class={`theme-preview preview-${id}`} aria-hidden="true"></span><span><strong>{label}</strong><small>{detail}</small></span><span aria-hidden="true">✓</span></button>)}
+            </div>
+            <div class="motion-control"><span>Ambient motion</span><button data-motion-toggle aria-pressed="true">On</button></div>
+          </div>
+        </div>
+        <button class="icon-button mobile-menu-button" data-menu-toggle aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>{nav.map(([label,href])=><a href={href} aria-current={active===label?'page':undefined}>{label}</a>)}</nav>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>© {new Date().getFullYear()} Syver Døving Agdestein</span><div class="footer-links"><a href="https://github.com/agdestein">GitHub ↗</a><a href="https://www.linkedin.com/in/sdagdestein">LinkedIn ↗</a><a href="https://scholar.google.com/citations?user=GDQC4HIAAAAJ">Scholar ↗</a><a href="https://orcid.org/0000-0002-1589-2916">ORCID ↗</a><a href="/feed.xml">RSS ↗</a><a href="https://github.com/agdestein/agdestein.github.io">Source ↗</a></div></div></footer>
+  <dialog class="search-dialog" aria-labelledby="search-heading">
+    <div class="search-top"><span class="eyebrow" id="search-heading">Find something interesting</span><button class="icon-button" data-search-close aria-label="Close search">✕</button></div>
+    <label for="site-search" class="eyebrow">Search writing, publications, and talks</label>
+    <input id="site-search" type="search" placeholder="Try turbulence, Julia, or symmetry…" autocomplete="off"/>
+    <p class="search-status" aria-live="polite"></p><ul class="search-results"></ul>
+  </dialog>
+  <script type="application/json" id="search-data" set:html={JSON.stringify(searchItems).replace(/</g,'\\u003c')}></script>
+  <script>
+    import { setupSite } from '../lib/site';
+    setupSite();
+  </script>
+</body>
+</html>

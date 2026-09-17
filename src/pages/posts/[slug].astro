@@ -1,0 +1,21 @@
+---
+import type { MDXInstance } from 'astro';
+import Base from '../../layouts/Base.astro';
+import { posts, dateLabel, featuredSlug } from '../../lib/catalog';
+import '../../styles/article.css';
+import 'katex/dist/katex.min.css';
+export function getStaticPaths() {
+  const articles=import.meta.glob<MDXInstance<{draft?:boolean}>>('../../content/20*.mdx',{eager:true});
+  return Object.entries(articles).filter(([path])=>!path.endsWith(`${featuredSlug}.mdx`)).map(([path,article])=>({params:{slug:path.split('/').pop()!.replace(/\.mdx$/,'')},props:{article}}));
+}
+const { article }=Astro.props;
+const { default: Content, frontmatter, getHeadings }=article;
+const post=posts.find(p=>p.slug===Astro.params.slug)!;
+const headings=getHeadings().filter((h:{depth:number})=>h.depth===2);
+---
+<Base title={post.title} active="Writing" description={post.description} image={post.image}>
+  <div class="shell">
+    <header class="article-header"><a href="/posts/" class="eyebrow">← Back to writing</a><h1>{post.title}</h1>{post.description && <p class="lede">{post.description}</p>}<div class="article-meta"><time datetime={post.date}>{dateLabel(post.date)}</time><span>Syver Døving Agdestein</span><span>{post.readingMinutes} min read</span>{frontmatter.draft && <span class="draft-label">Draft · work in progress</span>}</div></header>
+    <div class="article-layout"><aside class="article-toc" aria-label="On this page">{headings.length > 0 && <div><span class="eyebrow">On this page</span>{headings.map((h:{slug:string,text:string})=><a href={`#${h.slug}`}>{h.text}</a>)}</div>}</aside><article class="prose"><Content /></article></div>
+  </div>
+</Base>

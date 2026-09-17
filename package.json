@@ -1,16 +1,37 @@
 {
-  "devDependencies": {
-    "@fontsource/ibm-plex-mono": "^5.2.7",
-    "@fontsource/stix-two-text": "^5.2.8",
-    "feed": "^6.0.0",
-    "markdown-it-footnote": "^4.0.0",
-    "markdown-it-mathjax3": "^4.3.2",
-    "vitepress": "^1.6.3"
-  },
+  "name": "syver-website",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build && node scripts/legacy-redirects.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "astro check",
+    "test": "node tests/scientific.mjs && python3 tests/site_integrity.py",
+    "test:browser": "node tests/compatibility.mjs && node tests/smoke.mjs && node tests/migration.mjs"
   },
-  "type": "module"
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/mdx": "^8.0.1",
+    "@astrojs/vue": "^7.0.3",
+    "@fontsource/dm-sans": "^5.2.0",
+    "@fontsource/ibm-plex-mono": "^5.2.0",
+    "@fontsource/stix-two-text": "^5.2.0",
+    "astro": "^7.3.3",
+    "katex": "^0.16.22",
+    "rehype-katex": "^7.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0",
+    "vue": "^3.5.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.55.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
 }

@@ -1,16 +1,6 @@
-// A "work" groups the entries that stem from the same piece of research —
-// a paper, the talks presenting it, and companion blog posts. Each work gets
-// a hub page at /works/<id> (dynamic route in works/[id].md) with the title
-// and summary below; the entries share the work's thumbnail image.
-//
-// Entries opt in by setting `work: "<id>"` (in data/publications.ts,
-// data/talks.ts, or post frontmatter); an explicit `image` on the entry
-// still wins over the work thumbnail.
-//
-// New shared thumbnails go in `public/works/`; thumbnails that started life
-// as publication images are referenced where they already live.
-//
-// Object order = display order on the /works/ index (newest first).
+// Legacy research associations retained for related-paper links and social images.
+// The old hub URLs redirect to the matching essay or publications page.
+// New entry illustrations are independent and live in src/artwork/.
 
 export interface Work {
   // Plain-language project title (not the paper title).

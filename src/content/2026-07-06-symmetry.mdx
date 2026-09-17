@@ -1,0 +1,302 @@
+---
+artwork: symmetry
+title: What symmetry buys a learned turbulence model
+date: 2026-07-06
+description: >-
+  What do symmetry constraints buy a neural turbulence closure? Same accuracy
+  floor, 25× fewer parameters, and one missing input for Reynolds-number
+  generalization. An interactive companion to the paper.
+work: symmetry
+---
+
+import SymFilterHero from '../components/SymFilterHero.vue';
+import SymSpectrumCut from '../components/SymSpectrumCut.vue';
+import SymRotationGrid from '../components/SymRotationGrid.vue';
+import SymEquivariance from '../components/SymEquivariance.vue';
+import SymSaturationChart from '../components/SymSaturationChart.vue';
+import SymCondMean from '../components/SymCondMean.vue';
+import SymBackscatter from '../components/SymBackscatter.vue';
+import SymRedeltaTrend from '../components/SymRedeltaTrend.vue';
+import SymStat from '../components/SymStat.vue';
+import '../styles/2026-07-06-symmetry.css';
+import RelatedPublications from '../components/RelatedPublications.astro';
+
+**One piece of work, two tellings** — the paper in full, and this post to
+play with:
+
+<RelatedPublications work="symmetry" />
+
+Everyone building neural closures for turbulence has heard the advice: *bake
+the symmetries of the Navier–Stokes equations into your network, and it will
+be more accurate and generalize better.* It sounds so reasonable that it is
+rarely tested. So we tested it — three networks, same inputs, same outputs,
+same training data, from "no constraints at all" to "exactly equivariant by
+construction". This post is the paper with the knobs exposed.
+
+<SymFilterHero client:visible />
+
+If you only remember three things:
+
+<div class="symp-tldr">
+  <ol>
+    <li>All three architectures — constrained or not — converge to the <em>same</em> accuracy, and that shared floor is the <em>optimal</em> one-point closure, measurable directly from data with a histogram.</li>
+    <li>Symmetry constraints don't lower the floor. They buy the trip to it with <strong>25× fewer parameters</strong>, reproducibly, where the unconstrained network is a lottery.</li>
+    <li>Generalizing across Reynolds numbers was less about architecture than about <em>one missing input</em>: a filter-scale Reynolds number.</li>
+  </ol>
+</div>
+
+## <span class="symp-act">Act I</span> The world below the cut
+
+Simulating every eddy (direct numerical simulation, DNS) is gloriously
+accurate and hopelessly expensive. Large-eddy simulation (LES) evolves a
+*filtered* flow on an affordable grid, and pays with an unclosed term: the
+**sub-filter stress** $\tau(u)$, the effect of everything the filter erased.
+A *closure model* $m(\bar{u})$ must predict that stress from the resolved
+field alone. Here is the bargain, on our actual data — drag the cut:
+
+<SymSpectrumCut client:visible />
+
+Classical closures (Smagorinsky, Clark, …) are physics-derived guesses at
+that erased activity. The modern alternative is to train a neural network on
+filtered DNS. This paper is about what happens when you do that with — and
+without — symmetry constraints.
+
+## <span class="symp-act">Act II</span> What a closure can promise
+
+<div class="symp-stats">
+  <SymStat value="48" label="rotations + reflections survive the grid" detail="of the infinitely many in the continuum — the octahedral group" tone="blue" />
+  <SymStat value="≈ 7%" label="equivariance violation of our trained, unconstrained MLP" tone="orange" />
+  <SymStat value="0" label="accuracy cost of enforcing the surviving symmetries" tone="green" />
+</div>
+
+The Navier–Stokes equations don't care how you orient your axes: rotate the
+flow, and the physics — including the exact sub-filter stress — rotates with
+it. A closure respects this if **predicting then rotating** equals **rotating
+then predicting**: *equivariance*. Try to break it (the mismatch is computed
+honestly from the two paths, not scripted):
+
+<SymEquivariance client:visible />
+
+The second toggle is what an unconstrained network is free to learn:
+perfectly fine on the training data, but reading tensor components off a
+fixed coordinate frame — a preferred direction the physics doesn't have. The
+toy exaggerates; our actual trained MLP violates equivariance by a subtler
+but very measurable ≈ 7%.
+
+### The grid breaks the circle
+
+The *continuous* equations are symmetric under **every** rotation — but your
+simulation lives on a grid. Drag the slider and watch which rotations map the
+grid onto itself:
+
+<SymRotationGrid client:visible />
+
+Only multiples of 90° and mirror flips survive: in 3D, the 48-element
+**octahedral group**. A closure acting on grid data can be *exactly*
+equivariant to those 48 — and to no more. Remember 48; it returns below as
+the width of a network layer. The same audit, for every symmetry of the
+equations:
+
+<div class="symp-cards">
+  <div class="symp-card symp-card-ok">
+    <div class="symp-card-title">Survive the grid ✓</div>
+    <div class="symp-card-body">Translations, time shifts, Galilean frame changes, and the 48 octahedral roto-reflections. Exact symmetries of the discrete equations — enforcing them costs nothing.</div>
+  </div>
+  <div class="symp-card symp-card-mid">
+    <div class="symp-card-title">Survive partially ~</div>
+    <div class="symp-card-body">Scaling: no fixed grid maps to itself under rescaling, but a closure can still <em>transform correctly</em> across rescaled systems. The viscous part of this returns in Act IV.</div>
+  </div>
+  <div class="symp-card symp-card-bad">
+    <div class="symp-card-title">Broken ✗</div>
+    <div class="symp-card-body">Continuous rotations (reduced to the 48) and accelerating frames (broken by the fixed forcing). A closure can still enforce them as a <em>continuum</em> ideal — should it?</div>
+  </div>
+</div>
+
+### Three networks, one contract
+
+All three data-driven closures sign the same contract — local, normalized
+gradient in, dimensionally consistent stress out:
+
+$$
+m(\bar{A}) \;=\; \Delta^2 |\bar{A}|^2 \; f\!\left(\bar{A} / |\bar{A}|\right),
+$$
+
+with filter width $\Delta$ and velocity-gradient tensor $\bar{A}$. Gradients
+as inputs make every model Galilean-invariant for free; the prefactor gives
+the output the units and scaling of a stress. The three differ *only* in how
+they treat rotations:
+
+<div class="symp-cards">
+  <div class="symp-card symp-card-mlp">
+    <div class="symp-card-title">MLP — enforce nothing</div>
+    <div class="symp-card-body">A plain multi-layer perceptron, 9 gradient components in, 6 stress components out. Whatever equivariance it has, it learned from data. The control group.</div>
+  </div>
+  <div class="symp-card symp-card-gcnn">
+    <div class="symp-card-title">G-CNN — constrain the weights</div>
+    <div class="symp-card-body">Each hidden layer carries 48 copies of its channels, one per octahedral element, weights tied so that rotating the input provably permutes the copies. Exactly equivariant in floating point.</div>
+  </div>
+  <div class="symp-card symp-card-tbnn">
+    <div class="symp-card-title">TBNN — constrain the features</div>
+    <div class="symp-card-body">The stress is expanded in 7 tensors that rotate correctly no matter what; the network only predicts their 7 scalar coefficients from 5 rotation-invariant inputs.</div>
+  </div>
+</div>
+
+Constrain the architecture, constrain the representation, or constrain
+nothing: the two constrained routes reach exact equivariance from opposite
+directions — and, it turns out, the same destination.
+
+## <span class="symp-act">Act III</span> Same floor, very different price
+
+<div class="symp-stats">
+  <SymStat value="0.439" label="the error floor nobody gets below" detail="measured from data with a histogram — no network, no training" />
+  <SymStat value="25×" label="more parameters before the MLP catches up" detail="≈ 3000 vs ≈ 120 — and a seed lottery on the way" tone="orange" />
+  <SymStat value="0.6–2.3%" label="how close all three saturate to the floor" tone="green" />
+</div>
+
+Train all three at a range of sizes; plot error against parameter count:
+
+<SymSaturationChart client:visible />
+
+Two things to see. The constrained models are *already saturated at ~120
+parameters* — their built-in structure leaves that little to learn — while
+the MLP starts worse than the 50-year-old Clark model and needs ~3000 to
+catch up, with an order-of-magnitude wider seed-to-seed spread on the way.
+And the more interesting one: *nobody gets below the dashed line.*
+
+### Build the best possible closure yourself
+
+That dashed line is not a fit to the networks — it is measured independently.
+The best possible one-point predictor is a conditional average: over all flow
+states sharing this local gradient, the *mean* stress (the **optimal
+closure** of Langford & Moser). Averages need no training. Sort the data
+into bins and watch it appear:
+
+<SymCondMean client:visible />
+
+The paper's version bins all five invariant inputs instead of one: 65 536
+bins land at an error of **0.439** — and a *single* bin, i.e. seven constant
+coefficients, already lands at 0.442. The saturated networks sit within
+0.6–2.3% of that floor. The remaining 44% error is not a failure of the
+networks: filtering destroys information, and no function of a single-point
+gradient — neural or otherwise — can recover it.
+
+<details class="symp-fold">
+<summary>Footnote we enjoyed: equivariance for free, after the fact</summary>
+
+Averaging the trained MLP's predictions over the 48 octahedral elements makes
+it *exactly* equivariant at zero accuracy cost. Its 7% symmetry violation was
+wasted degrees of freedom, not useful ones — the unconstrained optimum was
+already statistically equivariant, because the training data was.
+
+</details>
+
+### Energy flows both ways
+
+A-priori stress error is a laboratory metric. Plugged into an actual LES (the
+*a posteriori* toggle above), the learned closures tie at a solution error of
+≈ 0.35, ahead of Clark (0.36), dynamic Smagorinsky (0.39), and no model
+(0.43). But the aggregate number hides the most physical difference — what
+each closure does with *energy*:
+
+<SymBackscatter client:visible />
+
+The exact stress mostly drains energy from the resolved scales, but at 22% of
+grid points it pushes energy *backwards* — **backscatter**, the shaded
+region. Eddy-viscosity models stop dead at zero, by construction. The learned
+closure reproduces both tails, yet covers only about half the reference
+backscatter fraction: the fingerprint of having learned a conditional
+average. Means are milder than samples.
+
+## <span class="symp-act">Act IV</span> One number to rule the Reynolds number
+
+<div class="symp-stats">
+  <SymStat value="1.35× → 0.75×" label="dissipation drift of a Reynolds-blind closure" detail="over- to under-dissipative as the flow leaves the training band" tone="orange" />
+  <SymStat value="1" label="extra input that fixes the calibration" detail="the only scaling-invariant scalar available: a filter-scale Reynolds number" tone="blue" />
+  <SymStat value="2.07× → 1.80×" label="what it recovers on a truly different flow" detail="Taylor–Green vortex, tightest filter — regime ≠ flow kind" tone="pink" />
+</div>
+
+The quiet limitation of the contract in Act II: it contains no viscosity. The
+closures are **Reynolds-blind** — their dissipation calibration is pinned to
+the training regime. The symmetry analysis itself predicts the fix: the full
+scaling symmetry of Navier–Stokes involves the viscosity, and the only
+scaling-invariant scalar you can build from the available quantities is a
+filter-scale Reynolds number,
+
+$$
+\operatorname{Re}_\Delta = \frac{\Delta^2 \| \bar{A} \|}{\nu},
+$$
+
+where $\| \bar{A} \|$ is a global norm of the resolved gradient — one number
+per flow, unlike the pointwise $|\bar{A}|$ in the contract.
+
+Train across viscosities and filter widths, with and without
+$\operatorname{Re}_\Delta$ as one extra input; test on held-out Reynolds
+numbers well outside the training range. Flip the toggle:
+
+<SymRedeltaTrend client:visible />
+
+Blind, the story is a slide from over- to under-dissipative. With the one
+extra input, calibration holds out into extrapolation. Meanwhile the *stress
+error* tab barely moves: the tensor **structure** of the stress is nearly
+Reynolds-independent — what changes is only *how much* energy lives below the
+filter, and one scalar carries exactly that. Notice the three architectures
+never separate: the gain comes from the input, not from equivariance.
+
+### A flow it has never seen
+
+<figure class="symp-video">
+  <video src="/posts/symmetry/tgv.mp4" poster="/posts/symmetry/tgv0.webp" loop muted playsinline controls preload="none"></video>
+  <figcaption>A decaying Taylor–Green vortex: laminar roll-up, transition, turbulent decay — nothing like the forced training soup. Vorticity on a slice, from the paper's out-of-distribution study.</figcaption>
+</figure>
+
+The honest caveat. On this flow the blind closures over-dissipate by ~2×, and
+$\operatorname{Re}_\Delta$ recovers only part of it (2.07× → 1.80× at the
+tightest filter): a single global scalar tells the closure *which Reynolds
+regime* it is in, not *which kind of flow*. The learned closures do stay
+stable and keep the lowest errors through the transition — while Clark
+diverges outright at the wider filters.
+
+## <span class="symp-act">Epilogue</span> The verdict
+
+<div class="symp-verdict">
+  <table>
+    <thead>
+      <tr><th>Equivariance was advertised as…</th><th></th><th>What the controlled test says</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>more accurate</td><td class="symp-no">✗</td><td>all three architectures converge to the same measurable floor</td></tr>
+      <tr><td>better at generalizing</td><td class="symp-no">✗</td><td>crossing Reynolds numbers came from one extra input, not the architecture</td></tr>
+      <tr><td>—</td><td class="symp-yes">✓</td><td><strong>parameter-efficient:</strong> saturated at ~120 parameters, 25× fewer than the MLP</td></tr>
+      <tr><td>—</td><td class="symp-yes">✓</td><td><strong>reliable:</strong> reproducible across seeds where the small MLP is a lottery</td></tr>
+      <tr><td>—</td><td class="symp-yes">✓</td><td><strong>physically consistent:</strong> exact in floating point — no spurious frame-dependent forces</td></tr>
+    </tbody>
+  </table>
+</div>
+
+If you are building a closure, the recipe this leaves behind:
+
+- **Measure your floor first.** The conditional-mean estimate costs nothing
+  and tells you the best any pointwise model can do *before* you design one.
+- **At the floor, capacity is wasted.** The only way down is richer inputs —
+  neighborhoods, history, or scalars like $\operatorname{Re}_\Delta$ that
+  carry genuinely new information (the +Re TBNN measurably dips *below* the
+  one-point floor out of distribution).
+- **Buy symmetry for the right reasons.** Efficiency, reproducibility, and
+  physical consistency are real currencies — just different ones than
+  advertised.
+
+<div class="symp-quote">
+  A closure that knows what it's missing works where it has never been.
+</div>
+
+---
+
+*Every number and curve above is the exact evaluation data of the paper —
+forced isotropic turbulence at $810^3$ DNS resolution, closures trained
+across three viscosities and three filter widths, five training seeds each —
+extracted from the archived result files of the
+[companion code](https://github.com/agdestein/SymmetryCode.jl) by the same
+scripts that drive my ECCOMAS 2026 slides. The
+[paper](https://doi.org/10.48550/arXiv.2603.05325) additionally reports the
+equivariance errors, timing, energy spectra, and the full Taylor–Green
+study.*

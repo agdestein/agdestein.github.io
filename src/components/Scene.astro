@@ -1,0 +1,140 @@
+---
+const stars = Array.from({length: 65}, (_, i) => ({ x: 410 + ((i * 137.51) % 940), y: 15 + ((i * 73.7) % 260), r: i % 7 === 0 ? 1.3 : .65 }));
+---
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="aurora-static"></div>
+  <svg class="landscape aurora-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="mountainFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ridge-back)"/><stop offset="1" stop-color="var(--ridge-mid)"/></linearGradient>
+      <linearGradient id="snowFade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="var(--snow)"/><stop offset="1" stop-color="var(--ridge-back)"/></linearGradient>
+    </defs>
+    <g fill="var(--snow)" opacity=".65">{stars.map(s => <circle cx={s.x} cy={s.y} r={s.r}/>)}</g>
+    <circle cx="1210" cy="113" r="23" fill="var(--snow)" opacity=".5"/>
+    <path d="M0 585 110 536 201 565 330 490 439 532 562 448 677 476 818 315 883 390 945 282 1014 363 1080 245 1190 391 1272 323 1440 466V700H0Z" fill="url(#mountainFade)"/>
+    <path d="m677 476 141-161 65 75 62-108 69 81 66-118 110 146-82-57-28-61-32 84-34-12-31-34-38 43-34 63-45-28-35-39-30 55Z" fill="url(#snowFade)" opacity=".9"/>
+    <path d="m818 315-9 80-85 88 123-61 36-32-34-4Z M945 282l-8 102 77-21-45-13Z M1080 245l-6 116 70 76-36-103Z" fill="var(--ridge-mid)" opacity=".8"/>
+    <path d="M0 624 147 596 287 634 430 558 561 592 719 478 810 507 928 450 1047 516 1129 460 1260 528 1440 442V700H0Z" fill="var(--ridge-mid)"/>
+    <path d="m719 478 91 29 118-57 119 66-117-37-115 49-67-23-55 25Z" fill="var(--snow)" opacity=".38"/>
+    <path d="M0 657Q155 627 317 655T636 632Q795 560 925 597T1149 577Q1300 558 1440 595V700H0Z" fill="var(--ridge-front)"/>
+    <g stroke="var(--snow)" fill="none" opacity=".15"><path d="M775 635Q932 606 1097 640T1440 623"/><path d="M842 658Q998 630 1160 663T1440 647"/></g>
+  </svg>
+  <svg class="landscape desert-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs><linearGradient id="duneLight" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="var(--snow)"/><stop offset="1" stop-color="var(--ridge-back)"/></linearGradient></defs>
+    <circle class="desert-sun" cx="1110" cy="290" r="71" fill="var(--snow)" opacity=".9"/>
+    <path d="M0 520Q235 461 436 510T832 460Q1060 322 1440 407V700H0Z" fill="var(--ridge-back)" opacity=".65"/>
+    <path d="M0 594Q250 465 548 563Q920 587 1123 375Q1057 513 1440 566V700H0Z" fill="url(#duneLight)"/>
+    <path d="M1123 375Q1031 537 847 602Q1154 584 1440 658V566Q1057 513 1123 375Z" fill="var(--ridge-mid)"/>
+    <path d="M0 669Q400 619 646 637Q1055 509 1440 587V700H0Z" fill="var(--ridge-front)"/>
+    <path d="M646 637Q1055 509 1440 587Q1159 554 989 640T646 637Z" fill="var(--ridge-mid)"/>
+    <!-- A small dromedary caravan follows the near dune crest. -->
+    <g class="desert-caravan" fill="var(--ridge-front)" stroke="var(--ridge-front)" stroke-linecap="round" stroke-linejoin="round">
+      {[{x:1005,y:508,s:.57},{x:1080,y:505,s:.65},{x:1164,y:507,s:.7}].map(({x,y,s})=><g transform={`translate(${x} ${y}) scale(${s})`}>
+        <g transform="translate(0 4) scale(.78)" stroke="none">
+          <!-- Far legs are offset in stride; the near legs carry the weight. -->
+          <path d="M28 35C28 47 26 54 22 61L13 72Q11 76 11 83L9 94Q5 94 5 98L8 102Q12 102 14 97L16 82Q16 77 20 74L32 62Q39 51 38 39Z"/>
+          <path d="M78 40Q79 51 74 64L68 77 59 98Q55 99 55 103Q60 105 67 103L67 100 74 80 82 67Q88 51 87 40Z"/>
+          <!-- Rounded rump, broad hump, deep belly, and a low sweeping neck. -->
+          <path d="M22 32C22 23 28 16 39 14C44 12 48 3 56 1C65-2 72 5 78 10C84 13 87 14 90 21C94 29 100 31 105 27C110 23 111 13 115 7Q117 3 121 4L126 6Q133 4 138 8L142 11Q144 14 141 16L134 17Q132 20 125 20C121 29 117 37 111 41Q101 48 92 43Q89 45 85 45C76 51 65 53 54 51Q42 49 35 44Q28 45 24 40Z"/>
+          <!-- Upper thighs taper into slender lower legs and padded feet. -->
+          <path d="M26 31C24 40 26 48 28 55Q30 59 28 64L27 76Q27 79 29 83L34 99Q32 101 33 104Q38 106 45 104Q46 102 41 100L35 79Q34 76 35 72L38 57C41 50 41 41 39 35Z"/>
+          <path d="M80 34Q80 46 83 56L85 72Q84 76 87 80L98 99Q95 101 96 104Q103 105 110 103Q111 101 104 99L92 76Q94 73 91 69L90 51Q91 43 89 38Z"/>
+          <!-- Small rounded ear, muzzle, and hanging tail tuft. -->
+          <path d="M117 8Q112 7 113 2Q117 0 121 6Z"/>
+          <path d="M25 26Q18 32 20 46Q21 53 16 61L15 67Q23 63 24 54Q25 49 23 43Q21 35 27 31Z"/>
+        </g>
+      </g>)}
+    </g>
+    <g fill="none" stroke="var(--snow)" opacity=".2">{Array.from({length: 12},(_,i)=><path d={`M${860+i*10} ${633+i*6}Q1140 ${562+i*10} 1440 ${627+i*6}`}/>)}</g>
+  </svg>
+  <svg class="landscape coffee-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <radialGradient id="coffee" cx="42%" cy="30%"><stop stop-color="#b98752"/><stop offset=".75" stop-color="#5b3624"/><stop offset="1" stop-color="#39261c"/></radialGradient>
+      <linearGradient id="cup" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7efdf"/><stop offset="1" stop-color="#b4a18a"/></linearGradient>
+    </defs>
+    <path d="M770 0H785L1100 700H1070Z M1045 0H1054L1374 700H1355Z" fill="var(--snow)" opacity=".25"/>
+    <ellipse cx="1090" cy="570" rx="270" ry="68" fill="var(--ridge-mid)" opacity=".16"/>
+    <path d="m788 536 269-61 231 113-291 69Z" fill="var(--snow)"/>
+    <path d="m805 552 250-56 201 98-262 44Z" fill="none" stroke="var(--ridge-back)" opacity=".5"/>
+    <ellipse cx="1080" cy="524" rx="167" ry="61" fill="url(#cup)"/>
+    <ellipse cx="1080" cy="517" rx="142" ry="48" fill="none" stroke="#b7a28a" stroke-width="2"/>
+    <path d="M1202 390C1320 347 1319 475 1192 475" fill="none" stroke="#c6b59e" stroke-width="25"/>
+    <path d="M950 371Q955 503 992 519Q1080 559 1168 519Q1205 496 1210 371Z" fill="url(#cup)"/>
+    <ellipse cx="1080" cy="371" rx="130" ry="48" fill="#f6eddd"/>
+    <ellipse cx="1080" cy="374" rx="115" ry="36" fill="url(#coffee)"/>
+    <g fill="none" stroke="#e6bc84" opacity=".85" stroke-width="3"><ellipse cx="1080" cy="374" rx="62" ry="19"/><path d="M1020 375Q1070 346 1138 375Q1081 398 1050 369Q1075 353 1110 374Q1087 389 1076 371"/></g>
+    <g class="steam" fill="none" stroke="var(--snow)" stroke-width="2.5" stroke-linecap="round" opacity=".65"><path d="M1039 315C992 261 1100 234 1045 156"/><path d="M1085 328C1138 270 1033 241 1101 139"/><path d="M1130 307C1097 260 1181 222 1135 173"/></g>
+    <g fill="var(--ridge-front)"><ellipse cx="900" cy="576" rx="14" ry="9" transform="rotate(-25 900 576)"/><ellipse cx="870" cy="557" rx="14" ry="9" transform="rotate(30 870 557)"/></g>
+    <g stroke="var(--ridge-back)" fill="none"><path d="m890 583 19-15M859 551l21 12"/></g>
+  </svg>
+  <svg class="landscape alpine-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs><linearGradient id="alpineSnow" x2=".4" y2="1"><stop stop-color="var(--snow)"/><stop offset="1" stop-color="var(--ridge-back)"/></linearGradient></defs>
+    <circle cx="1150" cy="117" r="47" fill="var(--snow)" opacity=".75"/>
+    <path d="M490 525 682 369 755 419 899 194 968 281 1062 136 1201 350 1270 258 1440 442V700H490Z" fill="var(--ridge-back)"/>
+    <path d="m755 419 144-225 69 87 94-145 139 214-86-56-56-113-36 111-64-36-51-16-57 126-42-5Z" fill="var(--snow)"/>
+    <path d="m1062 136-2 203 70 132 71-121-86-56Z M899 194l7 148 62-61-60-41Z" fill="var(--ridge-mid)" opacity=".7"/>
+    <path d="M0 610 257 549 411 574 631 456 743 497 909 357 1025 508 1146 415 1321 487 1440 456V700H0Z" fill="url(#alpineSnow)"/>
+    <path d="m909 357 116 151 121-93-81 153-109-42-47-135-93 141-73-35 75-39Z" fill="var(--ridge-mid)"/>
+    <path d="M0 671Q411 565 670 637T1050 598Q1267 556 1440 590V700H0Z" fill="var(--snow)"/>
+    <path d="M824 672Q1100 584 1440 630V700H824Z" fill="var(--ridge-back)" opacity=".45"/>
+    <g fill="var(--ridge-front)">{Array.from({length:12},(_,i)=>{const x=1100+i*29,y=586+Math.sin(i*.7)*25,h=32+(i%3)*12;return <path d={`M${x} ${y-h}l${-h*.25} ${h*.57}h${h*.13}l${-h*.23} ${h*.43}h${h*.7}l${-h*.23} ${-h*.43}h${h*.13}Z`}/>;})}</g>
+    <g stroke="var(--snow)" stroke-linecap="round" opacity=".6">{Array.from({length:32},(_,i)=><path d={`m${730+i*23%690} ${120+i*71%420} -${9+i%12} 5`}/>)}</g>
+  </svg>
+  <svg class="landscape rainforest-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs><linearGradient id="forestMist" x2="0" y2="1"><stop stop-color="var(--snow)" stop-opacity=".15"/><stop offset="1" stop-color="var(--snow)" stop-opacity="0"/></linearGradient></defs>
+    <path d="M500 495Q721 235 929 350T1440 280V700H500Z" fill="var(--ridge-back)"/>
+    <g stroke="var(--ridge-mid)" fill="var(--ridge-mid)">{Array.from({length:18},(_,i)=>{const x=620+i*52,y=170+(i*47%150);return <g><path d={`M${x} ${y}v390`} stroke-width={9+i%7}/><ellipse cx={x} cy={y+20} rx={50+i%3*9} ry="85"/><ellipse cx={x-18} cy={y+95} rx="52" ry="62"/></g>;})}</g>
+    <path d="M540 345Q920 255 1440 378V560H540Z" fill="url(#forestMist)"/>
+    <path d="M0 624Q375 577 650 626Q847 540 1000 594T1440 549V700H0Z" fill="var(--ridge-front)"/>
+    <path d="M1220 546Q1040 578 1175 613T1070 700H763Q1111 642 1060 612T1220 546Z" fill="var(--ridge-back)" opacity=".7"/>
+    <g fill="none" stroke="var(--snow)" opacity=".3"><ellipse cx="1157" cy="615" rx="25" ry="4"/><ellipse cx="1000" cy="669" rx="41" ry="6"/><path d="m1110 649 42-2m-142 30 103-3m26-44 61-3"/></g>
+    <g fill="var(--ridge-front)" stroke="var(--ridge-front)"><path d="M1311 0q-41 170-13 306t-29 303h30q35-210 4-308t50-301Z"/><path d="m1309 250-131-113m134 75 116-102m-128 220-137-71" fill="none" stroke-width="10"/>
+      {Array.from({length:12},(_,i)=><ellipse cx={1100+(i*47%330)} cy={45+(i*43%225)} rx="72" ry="24" transform={`rotate(${-35+i*13} ${1100+i*47%330} ${45+i*43%225})`}/>)}
+    </g>
+    <g fill="none" stroke="var(--ridge-mid)" stroke-width="3">{Array.from({length:7},(_,i)=><path d={`M${1350+i*9} 680q${-25+i*8} -74 ${-65+i*21} -105`}/>)}</g>
+    <g stroke="var(--snow)" stroke-width="1" opacity=".17">{Array.from({length:42},(_,i)=><path d={`m${690+i*37%720} ${30+i*83%520} -4 24`}/>)}</g>
+  </svg>
+  <svg class="landscape ocean-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
+    <defs><linearGradient id="oceanRay" x1="0" y1="0" x2=".25" y2="1"><stop stop-color="var(--snow)" stop-opacity=".24"/><stop offset="1" stop-color="var(--snow)" stop-opacity="0"/></linearGradient></defs>
+    <path d="M920 0 740 594 1063 630 1000 0Z M1150 0 1050 500 1260 618 1190 0Z M1320 0 1310 513 1440 496 1350 0Z" fill="url(#oceanRay)"/>
+    <g fill="none" stroke="var(--snow)" opacity=".28">{Array.from({length:8},(_,i)=><path d={`M600 ${35+i*12}Q805 ${i*11} 1000 ${35+i*12}T1480 ${20+i*10}`}/>)}</g>
+    <path d="M0 645Q540 575 704 612T1078 556Q1200 518 1440 559V700H0Z" fill="var(--ridge-back)" opacity=".65"/>
+    <path d="M0 683Q471 623 730 652T1120 604Q1290 573 1440 614V700H0Z" fill="var(--ridge-mid)"/>
+    <g stroke="var(--ridge-front)" stroke-width="6" fill="none" stroke-linecap="round">{Array.from({length:9},(_,i)=>{const x=1270+i*17,h=95+(i*53%135);return <path d={`M${x} 700q-38 -${h*.3} -7 -${h*.6}t-5 -${h*.4}`}/>;})}</g>
+    <g fill="var(--ridge-front)">{Array.from({length:13},(_,i)=><ellipse cx={1250+i*14} cy={570+(i*33%95)} rx="8" ry="24" transform={`rotate(${i%2?40:-35} ${1250+i*14} ${570+i*33%95})`}/>)}</g>
+    <g fill="var(--snow)" opacity=".4">{Array.from({length:11},(_,i)=>{const x=890+(i*67%280),y=250+i*29%140;return <path d={`M${x} ${y}q12-8 24 0-12 8-24 0l-6 5v-10Z`}/>;})}</g>
+    <g stroke="var(--snow)" fill="none" opacity=".3">{Array.from({length:14},(_,i)=><circle cx={770+(i*97%590)} cy={160+i*53%420} r={1.5+i%3}/>)}</g>
+    <g fill="none" stroke="var(--snow)" opacity=".14"><path d="M790 639q135-52 271-10t322-6M907 667q190-64 377-11M1117 602q152-10 223 7"/></g>
+  </svg>
+  <canvas class="atmosphere" data-atmosphere></canvas>
+  <div class="scene-shade"></div>
+</div>
+<style>
+  .scene { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .sky { position: absolute; inset: 0; background: linear-gradient(180deg,var(--sky-top),var(--sky-bottom)); }
+  .landscape { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .atmosphere { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .8; }
+  .aurora-static { position: absolute; left: 40%; right: -5%; top: -90px; height: 420px; background: radial-gradient(ellipse at 55% 15%,transparent 30%,#74d8ae30 44%,#6395a31c 47%,transparent 59%); transform: rotate(-17deg); filter: blur(20px); }
+  .scene-shade { position: absolute; inset: 0; background: linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 90%,transparent) 23%,transparent 67%),linear-gradient(0deg,var(--bg),transparent 17%); }
+  .landscape, .aurora-static { display:none; }
+  :global([data-theme='aurora']) .aurora-landscape { display:block; }
+  :global([data-theme='desert']) .desert-landscape { display:block; }
+  :global([data-theme='coffee']) .coffee-landscape { display:block; }
+  :global([data-theme='alpine']) .alpine-landscape { display:block; }
+  :global([data-theme='rainforest']) .rainforest-landscape { display:block; }
+  :global([data-theme='ocean']) .ocean-landscape { display:block; }
+  :global([data-theme='aurora']) .aurora-static { display:block; }
+  .scene[data-animate='false'] .steam { animation-play-state: paused; }
+  .steam { animation: breathe 9s ease-in-out infinite alternate; transform-origin: 1080px 320px; }
+  @keyframes breathe { to { transform: translateY(-14px) scaleX(1.07); opacity: .3; } }
+  @media (max-width: 820px) {
+    .landscape { width: 120%; left: -20%; }
+    .scene-shade { background: linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 85%,transparent) 30%,transparent 80%,var(--bg) 100%); }
+    .coffee-landscape { width: 150%; left: -50%; top: 145px; height: 80%; }
+  }
+  @media (max-width: 520px) { .desert-sun { transform: translateX(-135px); } .desert-caravan { transform: translate(-140px, 28px); } .landscape { width: 175%; left: -75%; } .coffee-landscape { width: 220%; left: -120%; height: 75%; top: 205px; } .aurora-static { left: -30%; top: 240px; } }
+</style>
+<script>
+  import { mountAtmosphere } from '../lib/atmosphere';
+  document.querySelectorAll<HTMLCanvasElement>('[data-atmosphere]').forEach(mountAtmosphere);
+</script>

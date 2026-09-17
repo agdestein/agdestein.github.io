@@ -1,0 +1,15 @@
+---
+import { posts, featuredSlug } from '../../lib/catalog';
+const post=posts.find(p=>p.slug===featuredSlug)!;
+import Base from '../../layouts/Base.astro';
+import Content from '../../content/2026-07-05-time-integration-as-filtering.mdx';
+import '../../styles/article.css';
+import 'katex/dist/katex.min.css';
+const sections=[['a-finite-difference-is-a-filter','A finite difference is a filter'],['the-twist-forward-euler-is-also-a-filter','The time axis'],['an-exact-space-time-coarse-equation','The coarse equation'],['who-actually-dominates-the-residual','The residual budget'],['a-closure-that-knows-the-clock','A closure with a clock'],['does-it-work-when-you-actually-run-it','Running the simulation'],['why-i-think-this-matters','Why it matters']];
+---
+<Base title={post.title} active="Writing" description={post.description} image={post.image}>
+  <div class="shell">
+    <header class="article-header"><a href="/posts/" class="eyebrow">← Back to writing</a><h1>Your time integrator<br/>is a filter</h1><p class="lede">The grid smooths space. The time step smooths time. A closure model needs to know about both.</p><div class="article-meta"><time datetime="2026-07-05">5 July 2026</time><span>Syver Døving Agdestein</span><span>Interactive essay</span></div></header>
+    <div class="article-layout"><aside class="article-toc" aria-label="On this page"><div><span class="eyebrow">On this page</span>{sections.map(([id,title])=><a href={`#${id}`}>{title}</a>)}<a href="https://doi.org/10.48550/arXiv.2606.17759">Read the paper ↗</a><a href="https://github.com/agdestein/DLES15CompanionCode">Companion code ↗</a></div></aside><article class="prose"><Content /></article></div>
+  </div>
+</Base>

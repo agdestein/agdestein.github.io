@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 150" fill="none">
+<path d="M25 47C37 17 96 7 133 35s44 78-8 92S9 91 25 47Z" fill="var(--art-2)" opacity=".09"/>
+<path d="m53 27 77 10-11 94-77-10Z" fill="var(--art-2)" fill-opacity=".15"/>
+<g transform="rotate(-8 84 72)"><path d="M45 20h60l22 23v80H45Z" fill="var(--art-paper)" stroke="var(--art-4)" stroke-width="2"/><path d="M105 20v23h22" fill="var(--art-4)" fill-opacity=".2" stroke="var(--art-4)" stroke-width="1.5"/><path d="M58 56h45M58 66h31M58 104h47" stroke="var(--art-2)" stroke-width="2" stroke-linecap="round"/><path d="M58 90q12-26 23-4t24-3" fill="none" stroke="var(--art-1)" stroke-width="3"/></g><path d="m138 75 7-10 6 4-8 9-18 26-5-3Z" fill="var(--art-3)"/><circle cx="27" cy="108" r="4" fill="var(--art-1)"/>
+</svg>

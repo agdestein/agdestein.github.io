@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryArt from '../components/EntryArt.astro';
+import { talks, localLink } from '../lib/catalog';
+---
+<Base title="Talks" active="Talks">
+  <div class="shell page-body">
+    <header class="page-heading"><p class="eyebrow">Ideas in conversation</p><h1>Talks</h1><p class="lede">Conference contributions, seminars, and invited talks. Slides and related material to keep the conversation going.</p></header>
+    {talks.map(t => <article class="entry entry--talk">
+      <span class="entry-year">{new Date(t.date).getFullYear()}</span>
+      <div class="entry-copy"><h2>{t.title}</h2><p class="entry-meta">{t.venue} · {t.location}<br/>{t.date}</p>
+        <div class="badges">
+          {t.invited && <span class="tag invited-label">Invited talk</span>}
+          {t.slidesUrl && <a class="badge" href={t.slidesUrl}>Slides ↗</a>}
+          {t.abstractUrl && <a class="badge" href={t.abstractUrl}>Abstract ↗</a>}
+          {t.webpageUrl && <a class="badge" href={t.webpageUrl}>Event ↗</a>}
+          {t.badges?.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}
+        </div>
+      </div>
+      <EntryArt artwork={t.artwork} kind="talk" size="medium"/>
+    </article>)}
+  </div>
+</Base>
+
+<style>
+  .invited-label { color: var(--accent); border-color: color-mix(in srgb,var(--accent) 40%,var(--line)); }
+</style>

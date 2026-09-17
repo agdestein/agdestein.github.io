@@ -1,0 +1,120 @@
+
+.xcl-zones {
+  --xcl-grid: var(--series-3);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+  background: var(--vp-c-bg-soft);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.xcl-zone-bar {
+  position: relative;
+  height: 130px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--vp-c-text-3) 14%, transparent);
+  overflow: hidden;
+}
+.xcl-zone-grid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--xcl-grid);
+  border-radius: 0 0 6px 6px;
+}
+.xcl-zone-grid span {
+  position: absolute;
+  top: -1.4em;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+.xcl-zone-name {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  text-align: center;
+  line-height: 1.4;
+}
+.xcl-zone-name em {
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--vp-c-text-2);
+}
+.xcl-zones-caption {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+.xcl-sym {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  background: var(--vp-c-bg-soft);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.xcl-sym-fig {
+  flex: 1 1 180px;
+  max-width: 240px;
+  margin: 0;
+  text-align: center;
+}
+.xcl-sym-fig svg {
+  width: 100%;
+  height: auto;
+}
+.xcl-sym-fig figcaption {
+  font-size: 0.78rem;
+  color: var(--vp-c-text-2);
+  margin-top: 0.25rem;
+}
+.xcl-sym-cell {
+  fill: none;
+  stroke: var(--vp-c-text-3);
+  stroke-width: 1.5;
+}
+.xcl-sym-face {
+  stroke: var(--vp-c-brand-1);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.xcl-sym-facelabel {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--vp-c-brand-1);
+}
+.xcl-sym-xi {
+  font-size: 20px;
+  font-weight: 700;
+  fill: var(--vp-c-text-1);
+}
+.xcl-sym-axis {
+  stroke: var(--vp-c-text-3);
+  stroke-width: 1.5;
+  marker-end: none;
+}
+.xcl-sym-axislabel {
+  font-size: 11px;
+  fill: var(--vp-c-text-3);
+}
+@media (max-width: 560px) {
+  .xcl-zones {
+    grid-template-columns: 1fr;
+  }
+  .xcl-zone-bar {
+    height: 80px;
+  }
+}
