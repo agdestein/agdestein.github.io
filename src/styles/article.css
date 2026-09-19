@@ -59,7 +59,7 @@
   vertical-align: middle;
 }
 
-.illustration-note { display:block; font-size:11px; margin-top:8px; }
+.illustration-note { display:block; font-size:12px; margin-top:8px; }
 
 /* Reading and figures share the same palette; original raster data stays intact. */
 .prose :is(.symhero,.symcut,.symrg,.symeq,.symsat,.symcm,.symbs,.symre,.symstat,.xclm,.xclp,.xcll) {

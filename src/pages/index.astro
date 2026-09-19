@@ -54,13 +54,13 @@ const recent = [...talks.map(t=>({title:t.title,date:new Date(t.date),kind:'Talk
   gap: 20px;
   align-items: center;
   padding: 17px 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
 }
 .recent-art { grid-area: art; display: block; }
-.recent-date { grid-area: date; color: var(--muted); font: 10px/1.7 'IBM Plex Mono', monospace; }
+.recent-date { grid-area: date; color: var(--muted); font: 11px/1.7 'IBM Plex Mono', monospace; }
 .recent-title { grid-area: title; min-width: 0; }
-.recent-kind { grid-area: kind; text-align: right; color: var(--muted); font-size: 10px; }
+.recent-kind { grid-area: kind; text-align: right; color: var(--muted); font-size: 11px; }
 .recent-entry:hover .recent-title { color: var(--accent); }
 @media (max-width: 520px) {
   .recent-entry {

@@ -56,7 +56,12 @@ export function mountAtmosphere(canvas: HTMLCanvasElement) {
   const a = gl.getAttribLocation(program, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
   const uniforms = Object.fromEntries(['size','time','theme','tint','tint2'].map(k=>[k,gl.getUniformLocation(program,k)]));
   let frame = 0, visible = true, lost = false, elapsed = 0, last = 0, theme = 0;
-  function color(name: string) { const hex = getComputedStyle(document.documentElement).getPropertyValue(name).trim(); return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255); }
+  // Browsers may serialize `#ffffff` as `#fff`, so expand short hex before parsing.
+  function color(name: string) {
+    let hex = getComputedStyle(document.documentElement).getPropertyValue(name).trim().replace('#','');
+    if (hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
+    return [0,2,4].map(i=>parseInt(hex.slice(i,i+2),16)/255);
+  }
   function resize() {
     const r=canvas.getBoundingClientRect(), ratio=Math.min(devicePixelRatio,1.5);
     canvas.width=Math.round(r.width*ratio); canvas.height=Math.round(r.height*ratio);
