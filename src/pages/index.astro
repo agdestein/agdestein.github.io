@@ -28,9 +28,11 @@ const recent = [...talks.map(t=>({title:t.title,date:new Date(t.date),kind:'Talk
     <div class="section-heading"><h2><span class="number-label">02</span> Notes from the work</h2><a href="/posts/" class="small-link">All writing ↗</a></div>
     <WritingList limit={3}/>
   </section>
-  <section class="section shell about-strip">
+  <section class="band">
+    <div class="section shell about-strip">
     <div><p class="eyebrow"><span class="number-label">03</span> A little context</p><h2>Between mathematics<br/>and the moving world</h2><p>I’m a postdoctoral researcher at CWI in Amsterdam. My work connects numerical methods, machine learning, and the physics of turbulence. Away from it: history, languages, and the piano.</p><a href="/about" class="text-link">More about me <span aria-hidden="true">↗</span></a></div>
-    <a href="/software" class="software-tile"><div class="software-tile-top"><span class="eyebrow">Built in the open · Julia</span><EntryArt artwork="ins" kind="software"/></div><h3>IncompressibleNavierStokes.jl</h3><p>Differentiable, GPU-accelerated fluid simulation. The software behind the questions, and a place to start asking your own.</p><span class="text-link">Explore the software <span aria-hidden="true">↗</span></span></a>
+    <a href="/software" class="software-tile"><div class="software-tile-top"><span class="eyebrow">Built in the open · Julia</span><EntryArt artwork="ins" kind="software" size="large"/></div><h3>IncompressibleNavierStokes.jl</h3><p>Differentiable, GPU-accelerated fluid simulation. The software behind the questions, and a place to start asking your own.</p><span class="text-link">Explore the software <span aria-hidden="true">↗</span></span></a>
+    </div>
   </section>
   <section class="section shell" id="recently">
     <div class="section-heading"><h2><span class="number-label">04</span> Recently</h2><a href="/talks" class="small-link">Talks & appearances ↗</a></div>

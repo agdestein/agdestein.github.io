@@ -2,11 +2,26 @@
 import Base from '../layouts/Base.astro';
 import EntryArt from '../components/EntryArt.astro';
 import { publications, localLink } from '../lib/catalog';
+const [featured, ...rest] = publications;
+const years = publications.map(p => p.year);
+const span = `${Math.min(...years)}–${Math.max(...years)}`;
 ---
 <Base title="Publications" active="Publications">
   <div class="shell page-body">
     <header class="page-heading"><p class="eyebrow">The research, in print</p><h1>Publications</h1><p class="lede">Papers, preprints, my PhD thesis, and an internship report. Follow an idea into the full text, the code, or an interactive companion.</p></header>
-    {publications.map(p => <article class="entry entry--publication">
+    <article class="feature-card">
+      <div class="feature-card-copy">
+        <p class="eyebrow">Latest · {featured.venue} · {featured.year}</p>
+        <h2 lang={featured.titleLanguage}>{featured.title}</h2>
+        {featured.summary && <p class="feature-card-summary">{featured.summary}</p>}
+        <p class="entry-meta">{featured.authors}</p>
+        {featured.badges?.length && <div class="badges">{featured.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}</div>}
+        {featured.bibtex && <details class="citation"><summary>Cite this work · BibTeX</summary><pre>{featured.bibtex}</pre></details>}
+      </div>
+      <div class="feature-card-art"><EntryArt artwork={featured.artwork} kind="publication" size="large"/></div>
+    </article>
+    <p class="eyebrow list-label">All publications · {publications.length} entries · {span}</p>
+    {rest.map(p => <article class="entry entry--publication">
       <div class="entry-margin"><EntryArt artwork={p.artwork} kind="publication" size="large"/><span class="entry-year">{p.year}</span></div>
       <div class="entry-copy">
         <h2 lang={p.titleLanguage}>{p.title}</h2>

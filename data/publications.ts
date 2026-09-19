@@ -23,6 +23,8 @@ export interface Publication {
   image?: string
   // Optional decorative SVG name in src/artwork (without .svg).
   artwork?: string
+  // One plain sentence on what the work shows; used by the featured card.
+  summary?: string
   // BibTeX entry shown by the "cite" toggle in PublicationList.
   // Entries follow the Zotero export (MyPapers.bib, not committed), minus
   // abstract/file/keywords fields.
@@ -38,6 +40,7 @@ export const publications: Publication[] = [
     date: "2026-07-09",
     work: "symmetry",
     artwork: "symmetry",
+    summary: "What do symmetry constraints buy a neural turbulence closure? The same accuracy floor with 25× fewer parameters, and one missing input for Reynolds-number generalization.",
     badges: [
       { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325", emphasized: true },
       { label: "code", url: "https://github.com/agdestein/SymmetryCode.jl" },

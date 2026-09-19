@@ -38,7 +38,15 @@ const sections: { id: string; title: string; intro: string; entries: SoftwareEnt
 <Base title="Software" active="Software">
   <div class="shell page-body">
     <header class="page-heading"><p class="eyebrow">Built in the open</p><h1>Ideas you can run</h1><p class="lede">Scientific software is where the mathematics meets the experiment. My solvers, the code behind my papers, and projects I contribute to.</p></header>
-    <section class="software-feature"><div class="software-feature-art"><EntryArt artwork="ins" kind="software" size="large"/></div><p class="eyebrow">Julia · GPU computing · Automatic differentiation</p><h2>IncompressibleNavierStokes.jl</h2><p>A differentiable, GPU-accelerated incompressible Navier–Stokes solver for large-eddy simulation and data-driven closure modeling. Train neural closure models through the solver while they are embedded in a running simulation.</p><div class="badges"><a class="badge" href="https://github.com/agdestein/IncompressibleNavierStokes.jl">Repository ↗</a><a class="badge" href="https://doi.org/10.48550/arXiv.2604.18536">Software paper ↗</a><a class="badge" href="/posts/2024-10-06-differentiable-fluid-solver">Development notes ↗</a></div></section>
+    <section class="feature-card" aria-labelledby="ins">
+      <div class="feature-card-copy">
+        <p class="eyebrow">Flagship · Julia · GPU computing · Automatic differentiation</p>
+        <h2 id="ins">IncompressibleNavierStokes.jl</h2>
+        <p class="feature-card-summary">A differentiable, GPU-accelerated incompressible Navier–Stokes solver for large-eddy simulation and data-driven closure modeling. Train neural closure models through the solver while they are embedded in a running simulation.</p>
+        <div class="badges"><a class="badge" href="https://github.com/agdestein/IncompressibleNavierStokes.jl">Repository ↗</a><a class="badge" href="https://doi.org/10.48550/arXiv.2604.18536">Software paper ↗</a><a class="badge" href="/posts/2024-10-06-differentiable-fluid-solver">Development notes ↗</a></div>
+      </div>
+      <div class="feature-card-art"><EntryArt artwork="ins" kind="software" size="large"/></div>
+    </section>
     {sections.map(({id,title,intro,entries})=><section aria-labelledby={id}>
       <h2 class="group-heading" id={id}>{title}</h2>
       <p class="section-intro">{intro}</p>
@@ -50,4 +58,4 @@ const sections: { id: string; title: string; intro: string; entries: SoftwareEnt
     <section aria-labelledby="teaching"><h2 class="group-heading" id="teaching">Teaching</h2><div class="prose"><p><a href="https://github.com/agdestein/NeuralClosureTutorials">NeuralClosureTutorials</a> contains pedagogical notebooks on learning neural closure models for fluid flows.</p></div></section>
   </div>
 </Base>
-<style>.software-feature { padding:20px 0 35px; display:flow-root; } .software-feature-art { float:right; margin:0 15px 20px 40px; }.software-feature h2 { font-size:clamp(25px,4vw,45px); overflow-wrap:anywhere; }.software-feature p:not(.eyebrow) { max-width:720px; color:var(--muted); font-size:15px; line-height:1.8; }.group-heading { font-size:35px; margin:55px 0 30px; }.section-intro { max-width:760px; color:var(--muted); line-height:1.8; margin:-12px 0 24px; } .entry--software h3 { font-size:clamp(22px,3vw,28px); margin:0 0 10px; overflow-wrap:anywhere; } .contribution { max-width:760px; margin-top:10px; } .contribution strong { color:var(--ink); font-weight:500; } .prose { max-width:760px; } @media(max-width:520px) { .software-feature { padding:12px 0 22px; } .software-feature-art { float:none; margin:0 0 20px; } }</style>
+<style>.group-heading { font-size:35px; margin:55px 0 30px; }.section-intro { max-width:760px; color:var(--muted); line-height:1.8; margin:-12px 0 24px; } .entry--software h3 { font-size:clamp(22px,3vw,28px); margin:0 0 10px; overflow-wrap:anywhere; } .contribution { max-width:760px; margin-top:10px; } .contribution strong { color:var(--ink); font-weight:500; } .prose { max-width:760px; }</style>
