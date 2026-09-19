@@ -28,6 +28,13 @@ class Page(HTMLParser):
                 self.references.append(value)
 
 pages = {p: Page(p.read_text()) for p in OUT.rglob('*.html')}
+
+# U+2197 may be rendered as a blue emoji button by iOS Safari. Every northeast
+# arrow in the interface must carry U+FE0E to request the text glyph instead.
+for file in (file for file in pages if 'slides' not in file.relative_to(OUT).parts):
+    html = file.read_text()
+    assert '\u2197' not in html.replace('\u2197\ufe0e', ''), f'{file.relative_to(OUT)}: emoji-prone northeast arrow'
+
 def resolve_url(url):
     path = OUT / unquote(urlparse(url).path).lstrip('/')
     if path.is_file(): return path

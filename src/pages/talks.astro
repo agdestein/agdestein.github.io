@@ -19,10 +19,10 @@ const years = [...groups.entries()].sort(([a], [b]) => b - a);
           <div class="entry-copy"><h3>{t.title}</h3><p class="entry-meta">{t.venue} · {t.location}<br/>{t.date}</p>
             <div class="badges">
               {t.invited && <span class="tag invited-label">Invited talk</span>}
-              {t.slidesUrl && <a class="badge" href={t.slidesUrl}>Slides ↗</a>}
-              {t.abstractUrl && <a class="badge" href={t.abstractUrl}>Abstract ↗</a>}
-              {t.webpageUrl && <a class="badge" href={t.webpageUrl}>Event ↗</a>}
-              {t.badges?.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}
+              {t.slidesUrl && <a class="badge" href={t.slidesUrl}>Slides ↗︎</a>}
+              {t.abstractUrl && <a class="badge" href={t.abstractUrl}>Abstract ↗︎</a>}
+              {t.webpageUrl && <a class="badge" href={t.webpageUrl}>Event ↗︎</a>}
+              {t.badges?.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗︎</a>)}
             </div>
           </div>
           <EntryArt artwork={t.artwork} kind="talk" size="medium"/>

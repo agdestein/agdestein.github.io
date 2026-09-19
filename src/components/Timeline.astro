@@ -9,7 +9,7 @@ const {items, kind='employment'}=Astro.props;
   <span class="entry-year">{item.period}</span>
   <div class="timeline-copy">
     <h3>{item.title}{item.tag && <span class="tag">{item.tag}</span>}</h3>
-    <p class="entry-meta">{item.orgUrl?<a href={item.orgUrl}>{item.org} ↗</a>:item.org}{item.location && <> · {item.location}</>}{item.note && <><br/>{item.note}</>}</p>
+    <p class="entry-meta">{item.orgUrl?<a href={item.orgUrl}>{item.org} ↗︎</a>:item.org}{item.location && <> · {item.location}</>}{item.note && <><br/>{item.note}</>}</p>
     {item.sub?.map(sub => <div class:list={["sub-entry", {"sub-entry--illustrated":sub.artwork}]}>{sub.artwork && <EntryArt artwork={sub.artwork} kind={kind} size="tiny"/>}<div><span class="eyebrow">{sub.period} · {sub.title}</span><p class="entry-meta">{sub.org} · {sub.location}{sub.note && <><br/>{sub.note}</>}</p></div></div>)}
   </div>
 </div>)}

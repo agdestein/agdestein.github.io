@@ -43,7 +43,7 @@ const sections: { id: string; title: string; intro: string; entries: SoftwareEnt
         <p class="eyebrow">Flagship · Julia · GPU computing · Automatic differentiation</p>
         <h2 id="ins">IncompressibleNavierStokes.jl</h2>
         <p class="feature-card-summary">A differentiable, GPU-accelerated incompressible Navier–Stokes solver for large-eddy simulation and data-driven closure modeling. Train neural closure models through the solver while they are embedded in a running simulation.</p>
-        <div class="badges"><a class="badge" href="https://github.com/agdestein/IncompressibleNavierStokes.jl">Repository ↗</a><a class="badge" href="https://doi.org/10.48550/arXiv.2604.18536">Software paper ↗</a><a class="badge" href="/posts/2024-10-06-differentiable-fluid-solver">Development notes ↗</a></div>
+        <div class="badges"><a class="badge" href="https://github.com/agdestein/IncompressibleNavierStokes.jl">Repository ↗︎</a><a class="badge" href="https://doi.org/10.48550/arXiv.2604.18536">Software paper ↗︎</a><a class="badge" href="/posts/2024-10-06-differentiable-fluid-solver">Development notes ↗︎</a></div>
       </div>
       <div class="feature-card-art"><EntryArt artwork="ins" kind="software" size="large"/></div>
     </section>
@@ -52,7 +52,7 @@ const sections: { id: string; title: string; intro: string; entries: SoftwareEnt
       <p class="section-intro">{intro}</p>
       {entries.map(({name,url,description,artwork,contribution})=><article class="entry entry--software">
         <EntryArt artwork={artwork} kind="software" size="small"/>
-        <div><h3><a href={url}>{name} ↗</a></h3><p class="entry-meta">{description}</p>{contribution && <p class="entry-meta contribution"><strong>My contribution:</strong> {contribution}</p>}</div>
+        <div><h3><a href={url}>{name} ↗︎</a></h3><p class="entry-meta">{description}</p>{contribution && <p class="entry-meta contribution"><strong>My contribution:</strong> {contribution}</p>}</div>
       </article>)}
     </section>)}
     <section aria-labelledby="teaching"><h2 class="group-heading" id="teaching">Teaching</h2><div class="prose"><p><a href="https://github.com/agdestein/NeuralClosureTutorials">NeuralClosureTutorials</a> contains pedagogical notebooks on learning neural closure models for fluid flows.</p></div></section>

@@ -15,7 +15,7 @@ const span = `${Math.min(...years)}–${Math.max(...years)}`;
         <h2 lang={featured.titleLanguage}>{featured.title}</h2>
         {featured.summary && <p class="feature-card-summary">{featured.summary}</p>}
         <p class="entry-meta">{featured.authors}</p>
-        {featured.badges?.length && <div class="badges">{featured.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}</div>}
+        {featured.badges?.length && <div class="badges">{featured.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗︎</a>)}</div>}
         {featured.bibtex && <details class="citation"><summary>Cite this work · BibTeX</summary><pre>{featured.bibtex}</pre></details>}
       </div>
       <div class="feature-card-art"><EntryArt artwork={featured.artwork} kind="publication" size="large"/></div>
@@ -28,7 +28,7 @@ const span = `${Math.min(...years)}–${Math.max(...years)}`;
         {p.titleTranslation && <p class="entry-meta" lang="en">{p.titleTranslation}</p>}<p class="entry-meta">{p.authors}<br/><em>{p.venue}</em></p>
         {p.summary && <p class="entry-summary">{p.summary}</p>}
         {p.note && <p class="entry-meta">{p.note}</p>}
-        {p.badges?.length && <div class="badges">{p.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}</div>}
+        {p.badges?.length && <div class="badges">{p.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗︎</a>)}</div>}
         {p.bibtex && <details class="citation"><summary>Cite this work · BibTeX</summary><pre>{p.bibtex}</pre></details>}
       </div>
     </article>)}

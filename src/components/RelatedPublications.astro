@@ -4,7 +4,7 @@ interface Props { work: string }
 const related=publications.filter(p=>p.work===Astro.props.work);
 ---
 <div class="related-publications">
-  {related.map(p=><div><strong>{p.title}</strong><p>{p.authors}<br/>{p.venue} · {p.year}</p><div class="related-links">{p.badges?.map(b=><a href={localLink(b.url)}>{b.label} ↗</a>)}</div></div>)}
+  {related.map(p=><div><strong>{p.title}</strong><p>{p.authors}<br/>{p.venue} · {p.year}</p><div class="related-links">{p.badges?.map(b=><a href={localLink(b.url)}>{b.label} ↗︎</a>)}</div></div>)}
 </div>
 <style>
 .related-publications { padding: 20px 24px; border-left: 3px solid var(--series-2); background: var(--surface); margin: 1.5em 0; font: 14px/1.7 'DM Sans',sans-serif; }
