@@ -121,6 +121,7 @@ h1, h2, h3, p { margin-top: 0; }
 .entry { display: grid; grid-template-columns: 90px 1fr; gap: 30px; border-top: 1px solid var(--line); padding: 28px 0; }
 .entry h2 { font-size: 26px; line-height: 1.25; max-width: 840px; margin-bottom: 12px; }
 .entry-meta { color: var(--muted); font-size: 13px; line-height: 1.8; }
+.entry-summary { color: var(--ink); font-size: 14px; line-height: 1.7; max-width: 640px; margin: 4px 0 8px; }
 .entry-year { color: var(--muted); font: 12px 'IBM Plex Mono', monospace; padding-top: 6px; }
 .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; align-items: center; }
 .badge { color: var(--accent); border-bottom: 1px solid var(--line); font-size: 12px; padding: 3px 0; margin-right: 8px; }

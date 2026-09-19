@@ -26,6 +26,7 @@ const span = `${Math.min(...years)}–${Math.max(...years)}`;
       <div class="entry-copy">
         <h2 lang={p.titleLanguage}>{p.title}</h2>
         {p.titleTranslation && <p class="entry-meta" lang="en">{p.titleTranslation}</p>}<p class="entry-meta">{p.authors}<br/><em>{p.venue}</em></p>
+        {p.summary && <p class="entry-summary">{p.summary}</p>}
         {p.note && <p class="entry-meta">{p.note}</p>}
         {p.badges?.length && <div class="badges">{p.badges.map(b => <a class="badge" href={localLink(b.url)}>{b.label} ↗</a>)}</div>}
         {p.bibtex && <details class="citation"><summary>Cite this work · BibTeX</summary><pre>{p.bibtex}</pre></details>}
