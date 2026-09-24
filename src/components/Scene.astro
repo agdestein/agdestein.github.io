@@ -1,23 +1,89 @@
 ---
-const stars = Array.from({length: 65}, (_, i) => ({ x: 410 + ((i * 137.51) % 940), y: 15 + ((i * 73.7) % 260), r: i % 7 === 0 ? 1.3 : .65 }));
+// Aurora: stars keep to the sky above the fjord, the Plough anchors the north.
+const stars = Array.from({length: 58}, (_, i) => ({ x: 410 + ((i * 137.51) % 940), y: 15 + ((i * 73.7) % 340), r: i % 7 === 0 ? 1.3 : .65 }));
+// Dubhe, Merak, Phecda, Megrez, Alioth, Mizar, Alkaid, laid out from the J2000
+// positions: bowl to the east, handle trailing west, Alkaid dropping at the tip.
+// The third value is the dot radius; Megrez is the faint one at magnitude 3.3.
+const plough = [[1382,212,2.6],[1390,255,2.3],[1327,279,2.3],[1307,249,1.8],[1261,247,2.6],[1225,242,2.4],[1178,272,2.6]];
+const skerries = [{x:205,w:118,h:31},{x:432,w:72,h:18},{x:688,w:158,h:40},{x:900,w:62,h:16},{x:1094,w:130,h:34},{x:1332,w:96,h:23}];
+// Glints lengthen, thicken, and space out as the water comes toward the viewer;
+// the dash pattern keeps each row broken so the sheen never reads as a stripe.
+const glints = Array.from({length: 22}, (_, i) => {
+  const d = Math.pow(i / 21, 1.35);
+  // Fourteen unequal segments span most of a row, so no rhythm repeats across its
+  // width. Each row then drifts and dims on its own slow clock, some against the rest.
+  const dashes = Array.from({length: 14}, (_, k) => 6 + ((i * 41 + k * 59 + k * k * 13) % 38));
+  const o = +((.3 - d * .2) * (i % 4 === 1 ? 1.7 : .8)).toFixed(3);
+  return { y: +(506 + d * 150).toFixed(1), x1: 660 + ((i * 419) % 520), x2: 1060 + ((i * 263) % 400) + d * 60,
+    w: +(1.1 + d * 2).toFixed(2), dash: dashes.join(' '),
+    cycle: dashes.reduce((a, b) => a + b, 0) * (i % 3 ? 1 : -1),
+    drift: 58 + ((i * 97) % 86), fade: 16 + ((i * 53) % 21), delay: -((i * 37) % 45),
+    o, o2: +(o * .34).toFixed(3) };
+});
+// One broad leaf, springing from the origin and curving to its tip. Slit monstera
+// fronds turn to noise at this size, so the blade stays whole and reads at a glance.
+const frond = 'M0 0C-23 24 -15 64 23 100C30 58 21 22 0 0Z';
+// Leaves hang in fans of three from four points along the limb.
+const fronds = [[1048,330],[1168,306],[1290,278],[1402,254]].flatMap(([x, y], g) =>
+  [-36, -6, 24].map((r, k) => ({x, y, r: r + (g % 2 ? 9 : -7),
+    s: +(.56 + ((g * 3 + k) % 4) * .12).toFixed(2), o: k === 1 ? 1 : .72})));
+const herd = [{x:942,y:606,s:.5},{x:1058,y:600,s:.57},{x:1176,y:604,s:.52}];
 ---
 <div class="scene" aria-hidden="true">
   <div class="sky"></div>
   <div class="aurora-static"></div>
   <svg class="landscape aurora-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
     <defs>
-      <linearGradient id="mountainFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ridge-back)"/><stop offset="1" stop-color="var(--ridge-mid)"/></linearGradient>
-      <linearGradient id="snowFade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="var(--snow)"/><stop offset="1" stop-color="var(--ridge-back)"/></linearGradient>
+      <linearGradient id="fjordWater" x1="0" y1="0" x2="0" y2="1"><stop stop-color="var(--ridge-mid)"/><stop offset=".55" stop-color="var(--ridge-front)"/><stop offset="1" stop-color="var(--sky-top)"/></linearGradient>
+      <linearGradient id="fjordSheen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="var(--glow)" stop-opacity=".2"/><stop offset="1" stop-color="var(--glow)" stop-opacity="0"/></linearGradient>
     </defs>
-    <g fill="var(--snow)" opacity=".65">{stars.map(s => <circle cx={s.x} cy={s.y} r={s.r}/>)}</g>
-    <circle cx="1210" cy="113" r="23" fill="var(--snow)" opacity=".5"/>
-    <path d="M0 585 110 536 201 565 330 490 439 532 562 448 677 476 818 315 883 390 945 282 1014 363 1080 245 1190 391 1272 323 1440 466V700H0Z" fill="url(#mountainFade)"/>
-    <path d="m677 476 141-161 65 75 62-108 69 81 66-118 110 146-82-57-28-61-32 84-34-12-31-34-38 43-34 63-45-28-35-39-30 55Z" fill="url(#snowFade)" opacity=".9"/>
-    <path d="m818 315-9 80-85 88 123-61 36-32-34-4Z M945 282l-8 102 77-21-45-13Z M1080 245l-6 116 70 76-36-103Z" fill="var(--ridge-mid)" opacity=".8"/>
-    <path d="M0 624 147 596 287 634 430 558 561 592 719 478 810 507 928 450 1047 516 1129 460 1260 528 1440 442V700H0Z" fill="var(--ridge-mid)"/>
-    <path d="m719 478 91 29 118-57 119 66-117-37-115 49-67-23-55 25Z" fill="var(--snow)" opacity=".38"/>
-    <path d="M0 657Q155 627 317 655T636 632Q795 560 925 597T1149 577Q1300 558 1440 595V700H0Z" fill="var(--ridge-front)"/>
-    <g stroke="var(--snow)" fill="none" opacity=".15"><path d="M775 635Q932 606 1097 640T1440 623"/><path d="M842 658Q998 630 1160 663T1440 647"/></g>
+    <g fill="var(--snow)" opacity=".6">{stars.map(s => <circle cx={s.x} cy={s.y} r={s.r}/>)}</g>
+    <!-- The Plough, the one figure in the sky that always points north. -->
+    <g class="aurora-plough">
+      <path d="M1382 212 1307 249 1327 279 1390 255Z M1307 249 1261 247 1225 242 1178 272" fill="none" stroke="var(--snow)" opacity=".13"/>
+      <g fill="var(--snow)" opacity=".8">{plough.map(([x, y, r]) => <circle cx={x} cy={y} r={r}/>)}</g>
+    </g>
+    <!-- A far shore, then bare skerries standing on the waterline. -->
+    <path d="M0 478Q180 460 330 476Q480 492 640 468Q820 448 990 470Q1130 488 1262 458Q1362 452 1440 464V502H0Z" fill="var(--ridge-back)" opacity=".5"/>
+    <g fill="var(--ridge-mid)">{skerries.map(k => <path d={`M${k.x - k.w / 2} 501Q${k.x} ${501 - k.h * 2} ${k.x + k.w / 2} 501Z`}/>)}</g>
+    <g fill="none" stroke="var(--snow)" opacity=".25">{skerries.map(k => <path d={`M${k.x - k.w * .18} ${501 - k.h * .88}Q${k.x + k.w * .06} ${501 - k.h * 1.5} ${k.x + k.w * .36} ${501 - k.h * .62}`}/>)}</g>
+    <!-- The fjord holds the curtain's echo: a diffuse wash broken into drifting glints. -->
+    <rect y="500" width="1440" height="200" fill="url(#fjordWater)"/>
+    <g fill="var(--sky-top)" opacity=".35">{skerries.map(k => <path d={`M${k.x - k.w / 2} 501Q${k.x} ${501 + k.h * 1.4} ${k.x + k.w / 2} 501Z`}/>)}</g>
+    <rect class="aurora-wash" y="500" width="1440" height="135" fill="url(#fjordSheen)"/>
+    <g class="aurora-sheen" stroke="var(--glow)" stroke-linecap="round">{glints.map(g => <path d={`M${g.x1} ${g.y}H${g.x2}`} stroke-width={g.w} stroke-dasharray={g.dash}
+      style={`--o:${g.o};--o2:${g.o2};--cycle:${g.cycle};--drift:${g.drift}s;--fade:${g.fade}s;--delay:${g.delay}s`}/>)}</g>
+    <!-- Near shore, with a rim of snow where the water reaches it. -->
+    <path d="M0 670Q240 642 490 660Q700 672 880 618Q1060 592 1230 608Q1340 616 1440 600V700H0Z" fill="var(--ridge-front)"/>
+    <path d="M0 670Q240 642 490 660Q700 672 880 618Q1060 592 1230 608Q1340 616 1440 600" fill="none" stroke="var(--snow)" stroke-width="3" opacity=".28"/>
+    <!-- A small herd works along the shore; hooves rest on the snow rim. -->
+    <g class="aurora-herd" fill="var(--ridge-front)" stroke="var(--ridge-front)" stroke-linecap="round" stroke-linejoin="round">
+      {herd.map(({x, y, s}) => <g transform={`translate(${x} ${y}) scale(${s})`}>
+        <g transform="translate(-70 -125)">
+          <!-- Far pair of legs, offset in stride and carried a shade behind. -->
+          <g fill="none" stroke-width="4.2" opacity=".7"><path d="M69 84 65 104 64 125"/><path d="M42 80 39 98 46 110 45 125"/></g>
+          <!-- Short deep barrel with a shoulder rise and a rounded rump. -->
+          <path d="M23 66C21 55 28 47 40 46L63 44C73 43 80 48 83 57L86 69C88 79 82 88 71 89L44 91C31 92 22 84 22 73Z"/>
+          <!-- Neck climbing to a low-held head, with the winter mane hanging at the throat. -->
+          <path d="M80 58C80 44 86 33 98 27L110 22 118 30 112 38C104 44 97 54 95 67L92 81Q78 78 74 64Z"/>
+          <path d="M96 60Q86 66 82 80Q91 76 97 68Z"/>
+          <path d="M104 20C110 16 119 16 125 20L139 28C142 30 141 35 137 35L126 34C118 35 109 31 103 26Z"/>
+          <path d="M24 62Q17 66 18 75Q23 71 27 72Z"/>
+          <!-- Near pair of legs carries the weight; the hind hock angles back. -->
+          <g fill="none" stroke-width="4.8"><path d="M78 84 82 104 80 125"/><path d="M32 80 25 100 34 112 33 125"/></g>
+          <!-- Antlers: beams sweeping far back, tines curling forward, brow tine out over the muzzle. -->
+          <g fill="none" stroke-linecap="round">
+            <path d="M107 22C102 6 90 -10 72 -16" stroke-width="2.4" opacity=".6"/>
+            <path d="M88 -4C90 -13 96 -19 105 -20" stroke-width="2" opacity=".6"/>
+            <path d="M111 22C106 4 92 -14 70 -22" stroke-width="3.4"/>
+            <path d="M93 -4C94 -15 100 -22 110 -24" stroke-width="2.8"/>
+            <path d="M74 -19C70 -28 74 -35 83 -35M70 -22C63 -27 64 -34 72 -36" stroke-width="2.6"/>
+            <path d="M112 23C119 13 128 10 136 13" stroke-width="3"/>
+            <path d="M131 11C130 5 133 1 139 0" stroke-width="2.4"/>
+          </g>
+        </g>
+      </g>)}
+    </g>
   </svg>
   <svg class="landscape desert-landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
     <defs><linearGradient id="duneLight" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="var(--snow)"/><stop offset="1" stop-color="var(--ridge-back)"/></linearGradient></defs>
@@ -88,8 +154,24 @@ const stars = Array.from({length: 65}, (_, i) => ({ x: 410 + ((i * 137.51) % 940
     <path d="M0 624Q375 577 650 626Q847 540 1000 594T1440 549V700H0Z" fill="var(--ridge-front)"/>
     <path d="M1220 546Q1040 578 1175 613T1070 700H763Q1111 642 1060 612T1220 546Z" fill="var(--ridge-back)" opacity=".7"/>
     <g fill="none" stroke="var(--snow)" opacity=".3"><ellipse cx="1157" cy="615" rx="25" ry="4"/><ellipse cx="1000" cy="669" rx="41" ry="6"/><path d="m1110 649 42-2m-142 30 103-3m26-44 61-3"/></g>
-    <g fill="var(--ridge-front)" stroke="var(--ridge-front)"><path d="M1311 0q-41 170-13 306t-29 303h30q35-210 4-308t50-301Z"/><path d="m1309 250-131-113m134 75 116-102m-128 220-137-71" fill="none" stroke-width="10"/>
-      {Array.from({length:12},(_,i)=><ellipse cx={1100+(i*47%330)} cy={45+(i*43%225)} rx="72" ry="24" transform={`rotate(${-35+i*13} ${1100+i*47%330} ${45+i*43%225})`}/>)}
+    <!-- A limb crosses the foreground, hung with leaves and carrying a toucan that is
+         waiting out the shower. The bill is the whole silhouette, so the bird sits a
+         shade darker than the limb behind it. -->
+    <g class="rainforest-canopy">
+      <g fill="var(--ridge-front)">
+        <path d="M1440 251C1350 262 1240 292 1140 316C1060 335 970 347 892 351C942 356 1050 345 1146 328C1246 305 1354 276 1440 265Z"/>
+        {fronds.map(f => <g transform={`translate(${f.x} ${f.y}) rotate(${f.r}) scale(${f.s})`} opacity={f.o}>
+          <path d={frond}/>
+        </g>)}
+      </g>
+      <g fill="var(--ridge-front)" stroke="var(--ridge-front)" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(1030 195) scale(.95)">
+          <path d="M48 22C48 12 58 4 72 4C88 4 98 14 100 28C104 34 112 40 122 48C142 62 154 82 150 98C147 110 136 118 122 120C108 122 92 121 82 118C66 113 56 98 53 82C51 70 48 40 48 22Z"/>
+          <path d="M48 20C16 22 -14 42 -34 64C-37 66 -35 70 -31 70C-6 68 26 64 46 56C52 53 55 48 53 42Z"/>
+          <path d="M140 88L198 58C202 56 206 59 205 63L202 76C201 80 198 83 194 84L138 104Z"/>
+          <g fill="none" stroke-width="3.5"><path d="M86 118 85 129M79 131 93 130M102 117 101 128M96 131 110 130"/></g>
+        </g>
+      </g>
     </g>
     <g fill="none" stroke="var(--ridge-mid)" stroke-width="3">{Array.from({length:7},(_,i)=><path d={`M${1350+i*9} 680q${-25+i*8} -74 ${-65+i*21} -105`}/>)}</g>
     <g stroke="var(--snow)" stroke-width="1" opacity=".17">{Array.from({length:42},(_,i)=><path d={`m${690+i*37%720} ${30+i*83%520} -4 24`}/>)}</g>
@@ -124,15 +206,22 @@ const stars = Array.from({length: 65}, (_, i) => ({ x: 410 + ((i * 137.51) % 940
   :global([data-theme='rainforest']) .rainforest-landscape { display:block; }
   :global([data-theme='ocean']) .ocean-landscape { display:block; }
   :global([data-theme='aurora']) .aurora-static { display:block; }
-  .scene[data-animate='false'] .steam { animation-play-state: paused; }
+  .scene[data-animate='false'] .steam, .scene[data-animate='false'] .aurora-wash,
+  .scene[data-animate='false'] .aurora-sheen path { animation-play-state: paused; }
   .steam { animation: breathe 9s ease-in-out infinite alternate; transform-origin: 1080px 320px; }
   @keyframes breathe { to { transform: translateY(-14px) scaleX(1.07); opacity: .3; } }
+  /* Still water: the glints creep along their own row and wink out of phase. */
+  .aurora-sheen path { opacity: var(--o); animation: drift var(--drift) linear infinite, wink var(--fade) ease-in-out infinite alternate; animation-delay: var(--delay), calc(var(--delay) / 3); }
+  @keyframes drift { to { stroke-dashoffset: calc(var(--cycle) * 1px); } }
+  @keyframes wink { to { opacity: var(--o2); } }
+  .aurora-wash { animation: wash 23s ease-in-out infinite alternate; }
+  @keyframes wash { to { opacity: .6; } }
   @media (max-width: 820px) {
     .landscape { width: 120%; left: -20%; }
     .scene-shade { background: linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 85%,transparent) 30%,transparent 80%,var(--bg) 100%); }
     .coffee-landscape { width: 150%; left: -50%; top: 145px; height: 80%; }
   }
-  @media (max-width: 520px) { .desert-sun { transform: translateX(-135px); } .desert-caravan { transform: translate(-140px, 28px); } .landscape { width: 175%; left: -75%; } .coffee-landscape { width: 220%; left: -120%; height: 75%; top: 205px; } .aurora-static { left: -30%; top: 240px; } }
+  @media (max-width: 520px) { .desert-sun { transform: translateX(-135px); } .desert-caravan { transform: translate(-140px, 28px); } .aurora-herd { transform-origin: 1060px 600px; transform: translate(-210px, 14px) scale(.76); } .aurora-plough { display: none; } .rainforest-canopy { transform-origin: 1110px 300px; transform: translate(-240px, 170px) scale(.62); } .landscape { width: 175%; left: -75%; } .coffee-landscape { width: 220%; left: -120%; height: 75%; top: 205px; } .aurora-static { left: -30%; top: 240px; } }
 </style>
 <script>
   import { mountAtmosphere } from '../lib/atmosphere';
