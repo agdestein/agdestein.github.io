@@ -27,7 +27,8 @@ const frond = 'M0 0C-23 24 -15 64 23 100C30 58 21 22 0 0Z';
 const fronds = [[1048,330],[1168,306],[1290,278],[1402,254]].flatMap(([x, y], g) =>
   [-36, -6, 24].map((r, k) => ({x, y, r: r + (g % 2 ? 9 : -7),
     s: +(.56 + ((g * 3 + k) % 4) * .12).toFixed(2), o: k === 1 ? 1 : .72})));
-const herd = [{x:942,y:606,s:.5},{x:1058,y:600,s:.57},{x:1176,y:604,s:.52}];
+// The herd walks east along the shore; the middle one has dropped its head to graze.
+const herd = [{x:942,y:611,s:.5},{x:1058,y:602,s:.57,graze:true},{x:1176,y:604,s:.52}];
 ---
 <div class="scene" aria-hidden="true">
   <div class="sky"></div>
@@ -58,28 +59,31 @@ const herd = [{x:942,y:606,s:.5},{x:1058,y:600,s:.57},{x:1176,y:604,s:.52}];
     <path d="M0 670Q240 642 490 660Q700 672 880 618Q1060 592 1230 608Q1340 616 1440 600" fill="none" stroke="var(--snow)" stroke-width="3" opacity=".28"/>
     <!-- A small herd works along the shore; hooves rest on the snow rim. -->
     <g class="aurora-herd" fill="var(--ridge-front)" stroke="var(--ridge-front)" stroke-linecap="round" stroke-linejoin="round">
-      {herd.map(({x, y, s}) => <g transform={`translate(${x} ${y}) scale(${s})`}>
+      {herd.map(({x, y, s, graze}) => <g transform={`translate(${x} ${y}) scale(${s})`}>
         <g transform="translate(-70 -125)">
-          <!-- Far pair of legs, offset in stride and carried a shade behind. -->
-          <g fill="none" stroke-width="4.2" opacity=".7"><path d="M69 84 65 104 64 125"/><path d="M42 80 39 98 46 110 45 125"/></g>
-          <!-- Short deep barrel with a shoulder rise and a rounded rump. -->
-          <path d="M23 66C21 55 28 47 40 46L63 44C73 43 80 48 83 57L86 69C88 79 82 88 71 89L44 91C31 92 22 84 22 73Z"/>
-          <!-- Neck climbing to a low-held head, with the winter mane hanging at the throat. -->
-          <path d="M80 58C80 44 86 33 98 27L110 22 118 30 112 38C104 44 97 54 95 67L92 81Q78 78 74 64Z"/>
-          <path d="M96 60Q86 66 82 80Q91 76 97 68Z"/>
-          <path d="M104 20C110 16 119 16 125 20L139 28C142 30 141 35 137 35L126 34C118 35 109 31 103 26Z"/>
-          <path d="M24 62Q17 66 18 75Q23 71 27 72Z"/>
-          <!-- Near pair of legs carries the weight; the hind hock angles back. -->
-          <g fill="none" stroke-width="4.8"><path d="M78 84 82 104 80 125"/><path d="M32 80 25 100 34 112 33 125"/></g>
-          <!-- Antlers: beams sweeping far back, tines curling forward, brow tine out over the muzzle. -->
-          <g fill="none" stroke-linecap="round">
-            <path d="M107 22C102 6 90 -10 72 -16" stroke-width="2.4" opacity=".6"/>
-            <path d="M88 -4C90 -13 96 -19 105 -20" stroke-width="2" opacity=".6"/>
-            <path d="M111 22C106 4 92 -14 70 -22" stroke-width="3.4"/>
-            <path d="M93 -4C94 -15 100 -22 110 -24" stroke-width="2.8"/>
-            <path d="M74 -19C70 -28 74 -35 83 -35M70 -22C63 -27 64 -34 72 -36" stroke-width="2.6"/>
-            <path d="M112 23C119 13 128 10 136 13" stroke-width="3"/>
-            <path d="M131 11C130 5 133 1 139 0" stroke-width="2.4"/>
+          <!-- Traced from a walking bull in profile. Far legs mid-stride, a shade behind. -->
+          <g opacity=".7"><path d="M43 96 41 101 49 110 56 118 58 121 54 122 48 113 37 103 39 95Z M102 90 106 98 109 106 111 120 108 120 106 108 102 100 95 92Z"/></g>
+          <!-- A long, deep barrel on a level back, with a short tail cocked at the rump. -->
+          <path d="M80 59C74 60 68 61 62 62C56 62 49 62 45 63C40 63 39 63 37 65C35 66 34 68 34 71C34 73 35 77 36 80C36 82 37 86 39 88C41 90 43 91 46 92C49 93 53 93 58 93C63 93 70 94 76 93C81 93 86 91 90 91C95 90 98 91 101 89C103 87 104 82 104 78C105 74 104 69 103 65C101 62 99 59 95 58C91 57 85 58 80 59Z"/>
+          <path d="M36 66C35 65 33 66 32 66C30 67 29 69 29 70C29 71 31 71 32 71C33 71 34 71 35 70C36 69 36 66 36 66Z"/>
+          <!-- Near legs: the hind stands on an angled hock, the fore swings back. -->
+          <path d="M46 90 38 99 34 104 33 116 33 124 34 125 28 125 29 120 28 105 27 101 31 95 35 87Z M94 90 87 104 79 118 79 125 75 125 75 118 82 104 82 91Z"/>
+          <!-- Neck, head and antlers pivot inside the shoulder, so a grazer lowers its muzzle
+               without lifting a hump. The neck is carried forward and low, the throat mane
+               hangs shaggy, and the long muzzle ends blunt. -->
+          <g transform={graze ? 'rotate(46 93 72)' : undefined}>
+            <g fill="none" stroke-width="2.6" opacity=".6">
+              <path d="M132 65C131 64 129 60 126 58C124 55 121 52 119 50C117 47 115 45 114 42C113 40 114 37 114 34C115 31 116 28 117 26C119 24 122 21 123 20"/>
+              <path d="M115 44C113 44 107 45 105 44C103 44 102 42 102 42M114 38C113 37 109 34 108 34M133 64C134 64 139 63 142 63C145 63 148 63 150 64C152 65 153 68 153 68"/>
+            </g>
+            <path d="M92 58C94 56 96 57 100 57C104 58 111 60 115 61C119 62 124 63 126 63C128 63 126 61 127 60C128 60 128 59 129 59C129 59 130 61 131 62C133 62 134 63 136 64C138 65 139 67 142 68C144 70 147 72 149 74C151 75 153 75 153 76C154 77 155 79 154 80C154 81 152 82 151 82C149 83 147 84 145 83C142 83 140 81 137 81C134 81 130 83 127 84C124 85 122 88 120 89C118 90 118 92 117 92C116 93 115 91 114 91C113 91 112 92 110 92C108 92 104 90 101 90C98 90 95 91 93 90C91 89 88 87 87 83C86 79 86 72 86 67C87 63 90 60 92 58Z"/>
+            <!-- Antlers stand taller than the body is deep: the beam sweeps back, then curls
+                 forward in a C with tines off its rear edge, and the brow tine reaches out
+                 over the face. The far antler sits behind, its brow tine dropping as a shovel. -->
+            <g fill="none">
+              <path d="M135 64C134 63 133 59 130 57C128 54 125 51 123 48C121 46 119 44 118 41C117 38 118 35 118 32C119 29 120 27 122 24C123 22 125 20 127 18C130 16 133 13 134 12" stroke-width="3.6"/>
+              <path d="M119 27C119 27 117 25 116 25M118 37C117 36 112 32 111 31M119 44C117 44 111 44 108 44C106 43 105 41 104 40M126 20C125 20 121 19 120 19M136 61C137 61 140 59 142 58C144 57 148 57 150 56C152 55 154 55 155 54C156 53 156 51 156 51" stroke-width="2.6"/>
+            </g>
           </g>
         </g>
       </g>)}
@@ -221,7 +225,7 @@ const herd = [{x:942,y:606,s:.5},{x:1058,y:600,s:.57},{x:1176,y:604,s:.52}];
     .scene-shade { background: linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 85%,transparent) 30%,transparent 80%,var(--bg) 100%); }
     .coffee-landscape { width: 150%; left: -50%; top: 145px; height: 80%; }
   }
-  @media (max-width: 520px) { .desert-sun { transform: translateX(-135px); } .desert-caravan { transform: translate(-140px, 28px); } .aurora-herd { transform-origin: 1060px 600px; transform: translate(-210px, 14px) scale(.76); } .aurora-plough { display: none; } .rainforest-canopy { transform-origin: 1110px 300px; transform: translate(-240px, 170px) scale(.62); } .landscape { width: 175%; left: -75%; } .coffee-landscape { width: 220%; left: -120%; height: 75%; top: 205px; } .aurora-static { left: -30%; top: 240px; } }
+  @media (max-width: 520px) { .desert-sun { transform: translateX(-135px); } .desert-caravan { transform: translate(-140px, 28px); } .aurora-herd { transform-origin: 1060px 600px; transform: translate(-175px, 15px) rotate(-6deg) scale(.76); } .aurora-herd > g:first-child { display: none; } .aurora-plough { display: none; } .rainforest-canopy { transform-origin: 1110px 300px; transform: translate(-240px, 170px) scale(.62); } .landscape { width: 175%; left: -75%; } .coffee-landscape { width: 220%; left: -120%; height: 75%; top: 205px; } .aurora-static { left: -30%; top: 240px; } }
 </style>
 <script>
   import { mountAtmosphere } from '../lib/atmosphere';
