@@ -1,0 +1,38 @@
+---
+/**
+ * A small framed landscape for a CV chapter. The sky is painted here in CSS, so
+ * the scene inside needs no gradient IDs; the scene draws land and figures only.
+ * Day plates lighten toward the horizon so silhouettes read in every theme;
+ * night plates darken the sky from the nearest ridge color.
+ */
+interface Props { sky?: 'day' | 'night'; }
+const { sky = 'day' } = Astro.props;
+---
+<figure class:list={['plate', `plate--${sky}`]} aria-hidden="true">
+  <div class="plate-frame"><slot/></div>
+</figure>
+<style>
+  .plate { margin: 0; }
+  .plate-frame {
+    --figure: var(--ridge-front);
+    --plate-top: color-mix(in srgb, var(--sky-top) 55%, var(--bg));
+    --plate-bottom: color-mix(in srgb, var(--sky-bottom) 72%, var(--glow));
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--plate-top), var(--plate-bottom));
+    box-shadow: var(--shadow);
+  }
+  .plate--night .plate-frame {
+    --figure: color-mix(in srgb, var(--ridge-front) 62%, #000);
+    --plate-top: color-mix(in srgb, var(--ridge-front) 55%, #000);
+    --plate-bottom: color-mix(in srgb, var(--ridge-front) 78%, var(--glow));
+  }
+  /* Fire and glowing iron take the warmest palette color each theme offers;
+     the sun leans toward the glow so it still shows against pale skies. */
+  .plate-frame { --fire: var(--series-3); --sun: color-mix(in srgb, var(--snow) 70%, var(--glow)); }
+  :global([data-theme='desert']) .plate-frame, :global([data-theme='coffee']) .plate-frame { --fire: var(--glow); }
+  .plate-frame :global(svg) { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+</style>

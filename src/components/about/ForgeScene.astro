@@ -1,0 +1,70 @@
+---
+import Person from './Person.astro';
+// Education: at the anvil the smith holds the hot iron in the tongs, his hand
+// hammer up, while the striker's sledge comes over. Sparks fan out from the iron.
+const hit: [number, number] = [300, 276];
+const sparks = [-168, -150, -134, -118, -100, -84, -66, -50, -34, -18, -6, 174].map((a, i) => {
+  const t = a * Math.PI / 180, r0 = 11 + (i * 7) % 12, len = 7 + (i * 5) % 11;
+  return { d: `M${(hit[0] + Math.cos(t) * r0).toFixed(1)} ${(hit[1] + Math.sin(t) * r0).toFixed(1)}l${(Math.cos(t) * len).toFixed(1)} ${(Math.sin(t) * len).toFixed(1)}`,
+    delay: -((i * 0.37) % 1.1).toFixed(2) };
+});
+// Stepped rings stand in for a soft glow without gradient IDs.
+const glow = [[100, .05], [72, .07], [48, .1], [28, .16]];
+const s = 1.3;
+---
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice">
+  <!-- Evening hills beyond the open side of the smithy. -->
+  <path d="M240 266Q330 232 420 246T600 232V340H240Z" fill="var(--ridge-back)" opacity=".7"/>
+  <!-- Chimney, hood, and hearth, with the roof running out to a corner post. -->
+  <g fill="var(--ridge-mid)" stroke="var(--ridge-mid)" stroke-linejoin="round">
+    <path d="M62 0H104V140H62Z"/>
+    <path d="M34 212 62 138H104L132 212Z"/>
+    <path d="M18 336V262H148V336Z"/>
+    <path d="M100 50 572 18M566 20V336" fill="none" stroke-width="9"/>
+  </g>
+  <g fill="var(--fire)">
+    {glow.map(([r, o]) => <circle cx="84" cy="250" r={r} opacity={o}/>)}
+    {glow.slice(1).map(([r, o]) => <circle cx="300" cy="278" r={r * .55} opacity={o * 1.4}/>)}
+  </g>
+  <path class="forge-flame" d="M84 214C90 228 102 234 104 248C108 244 108 238 107 232C116 242 120 254 116 262H52C48 254 52 244 60 236C60 242 62 246 66 248C66 234 76 226 84 214Z" fill="var(--fire)"/>
+  <path d="M84 234C88 243 96 247 96 256Q96 262 90 262H78Q72 262 72 256C72 248 80 244 84 234Z" fill="var(--snow)" opacity=".8"/>
+  <path d="M0 336H600V400H0Z" fill="var(--figure)"/>
+  <path d="M0 337H600" stroke="var(--snow)" stroke-width="2" opacity=".2"/>
+  <g fill="var(--figure)" stroke="var(--figure)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Anvil on its stump: horn to the smith, heel to the striker. -->
+    <path d="M284 336 286 302H316L318 336Z"/>
+    <path d="M246 285Q258 281 270 280H334L341 282V288H322Q314 290 313 295L321 302H281L289 295Q288 290 280 289Q262 289 246 285Z"/>
+    <!-- The smith: apron and beard, tongs in one hand, hand hammer in the other. -->
+    <Person at={[205, 336]} scale={s} hip={[0, -46]} shoulder={[6, -76]} head={[13, -86]} headR={7.5}
+      hipW={17} shoulderW={17} chest={4} back={3}
+      legs={[[[0, -46], [-6, -24], [-10, -3], [-2, -1]], [[0, -46], [9, -24], [12, -3], [20, -1]]]}
+      arms={[[[4, -74], [-2, -88], [8, -98]], [[8, -74], [16, -59], [30, -52]]]}>
+      <path d="M9 -83Q16 -80 23 -83Q25 -73 18 -63Q12 -70 8 -77Z"/>
+      <path d="M3 -70H14L20 -42 22 -20H3L1 -44Z"/>
+      <path d="M30 -52 61 -45M30 -50 61 -43" fill="none" stroke-width="2.2"/>
+      <path d="M8 -98 15 -111" fill="none" stroke-width="2.6"/>
+      <path d="M9.7 -113.8 20.3 -108.2" fill="none" stroke-width="6"/>
+    </Person>
+    <!-- The striker: sledge coming over, arms long, weight going forward. -->
+    <Person at={[398, 336]} scale={s} flip hip={[0, -46]} shoulder={[2, -75]} head={[6, -86]} headR={6.8}
+      hipW={12} shoulderW={14}
+      legs={[[[0, -46], [-9, -25], [-16, -3], [-8, -1]], [[0, -46], [11, -26], [15, -3], [23, -1]]]}
+      arms={[[[1, -73], [12, -80], [24, -79]], [[3, -73], [14, -82], [27, -78]]]}>
+      <path d="M21 -75 58 -108" fill="none" stroke-width="3.2"/>
+      <path d="M68 -104.2 60.6 -97.6 48 -111.8 55.4 -118.4Z" stroke-width="1.5"/>
+    </Person>
+  </g>
+  <path d="M286 277H322" stroke="var(--fire)" stroke-width="4.5" stroke-linecap="round"/>
+  <g class="forge-sparks" stroke="var(--fire)" stroke-width="1.7" stroke-linecap="round">
+    {sparks.map((p, i) => <path d={p.d} style={`animation-delay:${p.delay}s`} stroke={i % 3 ? undefined : 'var(--snow)'}/>)}
+  </g>
+</svg>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .forge-sparks path { animation: spark 1.1s ease-out infinite; }
+    .forge-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 2.3s ease-in-out infinite alternate; }
+  }
+  :global(html[data-motion='off']) .forge-sparks path, :global(html[data-motion='off']) .forge-flame { animation: none; }
+  @keyframes spark { 0% { opacity: 1; } 70% { opacity: .15; } 100% { opacity: 1; } }
+  @keyframes flicker { 50% { transform: scale(.96, 1.05); } to { transform: scale(1.03, .96); } }
+</style>

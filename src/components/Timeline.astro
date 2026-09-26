@@ -4,24 +4,33 @@ import EntryArt from './EntryArt.astro';
 interface Props { items:TimelineItem[]; kind?:'employment'|'education'; }
 const {items, kind='employment'}=Astro.props;
 ---
-{items.map(item => <div class="entry timeline-entry">
-  <EntryArt artwork={item.artwork} kind={kind} size="small"/>
-  <span class="entry-year">{item.period}</span>
-  <div class="timeline-copy">
-    <h3>{item.title}{item.tag && <span class="tag">{item.tag}</span>}</h3>
-    <p class="entry-meta">{item.orgUrl?<a href={item.orgUrl}>{item.org} ↗︎</a>:item.org}{item.location && <> · {item.location}</>}{item.note && <><br/>{item.note}</>}</p>
-    {item.sub?.map(sub => <div class:list={["sub-entry", {"sub-entry--illustrated":sub.artwork}]}>{sub.artwork && <EntryArt artwork={sub.artwork} kind={kind} size="tiny"/>}<div><span class="eyebrow">{sub.period} · {sub.title}</span><p class="entry-meta">{sub.org} · {sub.location}{sub.note && <><br/>{sub.note}</>}</p></div></div>)}
-  </div>
-</div>)}
+<ol class="timeline">
+  {items.map(item => <li class="timeline-entry">
+    <EntryArt artwork={item.artwork} kind={kind} size="small"/>
+    <div class="timeline-copy">
+      <span class="entry-year">{item.period}</span>
+      <h3>{item.title}{item.tag && <span class="tag">{item.tag}</span>}</h3>
+      <p class="entry-meta">{item.orgUrl?<a href={item.orgUrl}>{item.org} ↗︎</a>:item.org}{item.org && item.location && ' · '}{item.location}{item.note && <><br/>{item.note}</>}</p>
+      {item.sub?.map(sub => <div class:list={["sub-entry", {"sub-entry--illustrated":sub.artwork}]}>{sub.artwork && <EntryArt artwork={sub.artwork} kind={kind} size="tiny"/>}<div><span class="eyebrow">{sub.period} · {sub.title}</span><p class="entry-meta">{[sub.org, sub.location].filter(Boolean).join(' · ')}{sub.note && <><br/>{sub.note}</>}</p></div></div>)}
+    </div>
+  </li>)}
+</ol>
 <style>
-  h3 { font-size:25px; margin-bottom:10px; }
-  h3 .tag { margin-left:12px; vertical-align:middle; font-family:'DM Sans',sans-serif; }
-  .sub-entry { margin-top:20px; padding-left:18px; border-left:2px solid color-mix(in srgb,var(--series-2) 45%,transparent); }
-  .sub-entry--illustrated { display:flex; gap:12px; align-items:start; }
-  .sub-entry--illustrated > div:last-child { min-width:0; }
-  .timeline-entry { grid-template-columns:76px 130px minmax(0,1fr); gap:24px; border-top:0; padding:22px 0; align-items:start; }
-  .timeline-entry .entry-year { padding-top:12px; }
-  .timeline-copy { padding-top:5px; }
-  @media(max-width:820px) { .timeline-entry { grid-template-columns:65px minmax(0,1fr); column-gap:18px; row-gap:4px; } .timeline-entry :global(.entry-art) { grid-row:1 / 3; } .timeline-entry .entry-year { grid-column:2; } .timeline-copy { grid-column:2; } }
-  @media(max-width:520px) { .timeline-entry { grid-template-columns:52px minmax(0,1fr); gap:4px 14px; } h3 { font-size:23px; } h3 .tag { display:table; margin:8px 0 0; } }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline-entry { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 26px; align-items: start; padding: 22px 0; }
+  .timeline-entry + .timeline-entry { border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent); }
+  .timeline-copy { min-width: 0; }
+  .entry-year { display: block; padding: 0; margin-bottom: 8px; }
+  h3 { font-size: 25px; line-height: 1.25; margin-bottom: 10px; }
+  h3 .tag { margin-left: 12px; vertical-align: middle; font-family: 'DM Sans', sans-serif; }
+  .entry-meta { margin: 0; }
+  .sub-entry { margin-top: 20px; padding-left: 18px; border-left: 2px solid color-mix(in srgb, var(--series-2) 45%, transparent); }
+  .sub-entry--illustrated { display: flex; gap: 12px; align-items: start; }
+  .sub-entry--illustrated > div:last-child { min-width: 0; }
+  .sub-entry .eyebrow { display: block; margin-bottom: 2px; }
+  @media (max-width: 520px) {
+    .timeline-entry { grid-template-columns: 52px minmax(0, 1fr); gap: 16px; }
+    h3 { font-size: 22px; }
+    h3 .tag { display: table; margin: 8px 0 0; }
+  }
 </style>

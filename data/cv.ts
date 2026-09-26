@@ -94,3 +94,100 @@ export const education: TimelineItem[] = [
     ],
   },
 ]
+
+export interface Supervision {
+  year: string
+  student: string
+  thesis: string
+  institution: string
+}
+
+export const supervision: Supervision[] = [
+  {
+    year: "2026",
+    student: "Lucas Ronckers",
+    thesis: "Probabilistic turbulence modeling with ideal large eddy simulation: Bayesian inverse filtering and flow matching",
+    institution: "Eindhoven University of Technology",
+  },
+  {
+    year: "2023",
+    student: "Viviane Desgrange",
+    thesis: "An inverse problem approach for closure modelling",
+    institution: "University of Amsterdam",
+  },
+]
+
+export interface Lecture {
+  date: string
+  title: string
+  event: string
+  venue: string
+}
+
+export const lectures: Lecture[] = [
+  {
+    date: "October 2023",
+    title: "Learning neural closure models for fluid flows",
+    event: "Autumn School on Scientific Machine Learning",
+    venue: "CWI",
+  },
+  {
+    date: "May 2022",
+    title: "Learning physics from data",
+    event: "Masterclass on Machine Learning for Inverse Problems: A Bayesian Perspective",
+    venue: "CWI",
+  },
+]
+
+// Each entry shows its short form as a large label, e.g. a journal abbreviation.
+export interface Service {
+  kind: string
+  short: string
+  name: string
+  period?: string
+}
+
+export const service: Service[] = [
+  { kind: "Peer review", short: "CMAME", name: "Computer Methods in Applied Mechanics and Engineering" },
+  { kind: "Peer review", short: "JCP", name: "Journal of Computational Physics" },
+  { kind: "Works council", short: "CWI", name: "CWI works council", period: "2023–2025" },
+]
+
+export const skills = {
+  research: [
+    "Numerical analysis",
+    "Partial differential equations",
+    "Finite-element and finite-volume methods",
+    "Spectral methods",
+    "Turbulence and large-eddy simulation",
+    "Structure-preserving machine learning",
+    "Generative modeling",
+  ],
+  computing: [
+    "Julia",
+    "Python",
+    "MATLAB",
+    "High-performance computing with Slurm",
+    "Differentiable programming",
+    "Multi-GPU kernel programming",
+    "Git",
+    "Continuous integration",
+    "Agentic workflows",
+  ],
+}
+
+// The greeting also labels an arm of the signpost in the skills illustration.
+export interface Language {
+  name: string
+  level: "Fluent" | "Basic"
+  greeting: string
+  code: string // language tag, so the greeting is pronounced correctly
+}
+
+export const languages: Language[] = [
+  { name: "Norwegian", level: "Fluent", greeting: "Hei", code: "no" },
+  { name: "English", level: "Fluent", greeting: "Hello", code: "en" },
+  { name: "French", level: "Fluent", greeting: "Bonjour", code: "fr" },
+  { name: "Russian", level: "Basic", greeting: "Привет", code: "ru" },
+  { name: "Dutch", level: "Basic", greeting: "Hallo", code: "nl" },
+]

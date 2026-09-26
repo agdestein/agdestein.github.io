@@ -12,6 +12,7 @@ See [REDESIGN.md](REDESIGN.md) for the implementation and migration record.
 - Root build and GitHub Pages workflow switched to Astro.
 - Single-source MDX metadata, RSS, sitemap, social images, and legacy URL redirects.
 - Obsolete components, duplicate slide source, and unused public assets removed.
+- About page: theme-tinted portrait and five illustrated CV chapters.
 
 ## Deferred
 

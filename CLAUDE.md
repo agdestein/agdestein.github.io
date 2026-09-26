@@ -25,6 +25,9 @@ Set ASTRO_TELEMETRY_DISABLED=1 in restricted environments.
 - src/lib/catalog.ts: publications/talks and MDX metadata, search, date helpers.
 - data/: publications, talks, CV, original scientific JSON, legacy work metadata.
 - src/components/: Vue scientific figures and Astro layout/entry components.
+- src/components/about/: About page portrait, illustrated chapter plates, and
+  the joint-posed silhouette figure they share.
+- src/assets/: images optimized at build time (the About portrait).
 - src/styles/: layout, article styling, and shared theme palette tokens.
 - src/artwork/: trusted inline SVG decorations, with optional entry artwork keys.
 - public/: linked media, favicon, and self-contained slide HTML/PDF deliverables.

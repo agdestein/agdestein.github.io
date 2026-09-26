@@ -48,6 +48,7 @@ and the interactive scientific figures.
 - `src/pages/posts/[slug].astro`: article routes and contents navigation.
   The time-integration essay has a custom page layout at its matching slug.
 - `data/publications.ts`, `data/talks.ts`, `data/cv.ts`: publication, talk, and CV entries.
+  The CV file also holds supervision, lectures, service, skills, and languages.
 - `src/lib/catalog.ts`: article metadata, search index, and shared content helpers.
 - `src/artwork/`: theme-aware SVG entry illustrations.
 - `src/styles/theme.css`: interface, scientific-series, and landscape colors.
@@ -87,6 +88,29 @@ migration (only relative data-import prefixes are normalized).
 Intentional scientific/media changes need review before updating these fixtures.
 
 See [the migration record](REDESIGN.md) and [remaining tasks](PLAN.md).
+
+## About page
+
+The About page opens with the full studio portrait (`src/assets/about/portrait.jpg`)
+in an arched frame. `Portrait.astro` recolors it in CSS for the active theme, so
+there is one photograph and no per-theme copies; Astro serves AVIF/WebP sizes.
+
+Each CV chapter pairs its content with an illustrated plate in `src/components/about/`:
+
+| Chapter | Scene |
+| --- | --- |
+| Employment | `DykeScene`: a crew with pick, shovel, and barrow raising a dyke; a mill turns behind |
+| Education | `ForgeScene`: smith and striker at the anvil |
+| Teaching & supervision | `StarsScene`: an elder showing a child how the Plough points to Polaris |
+| Service & outreach | `RopeScene`: a climber helping a partner over the lip, beside a cairn |
+| Skills & languages | `RoadScene`: a journeyman at a signpost greeting in each CV language |
+
+`Plate.astro` paints the sky, so scenes draw only land and figures with the landscape
+tokens (`--ridge-*`, `--snow`) plus `--figure`, `--fire`, and `--sun`. Figures come from
+`Person.astro`, posed by joint coordinates: feet on y = 0, a standing adult about
+100 units tall, facing right unless `flip` is set. The signpost reads its greetings
+from `languages` in `data/cv.ts`. The mill, water, sparks, flames, and embers move
+only when motion is on; otherwise every scene is a still picture.
 
 ## Entry illustrations
 

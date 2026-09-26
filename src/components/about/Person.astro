@@ -1,0 +1,66 @@
+---
+/**
+ * One silhouette figure, posed by its joints. Local units put the feet on y = 0
+ * with a standing adult about 100 tall, facing +x; `flip` turns it to face -x.
+ * Limbs are round-capped strokes, so every part merges into one silhouette.
+ * Hats, beards, aprons, and held tools go in the slot, in the same coordinates.
+ */
+type Pt = [number, number];
+interface Props {
+  at: Pt;
+  scale?: number;
+  flip?: boolean;
+  hip: Pt;
+  shoulder: Pt;
+  head: Pt;
+  headR?: number;
+  /** Far leg first: hip, knee, ankle, toe. */
+  legs: Pt[][];
+  /** Far arm first: shoulder, elbow, hand. */
+  arms: Pt[][];
+  hipW?: number;
+  shoulderW?: number;
+  chest?: number;
+  back?: number;
+  thigh?: number;
+  shin?: number;
+  upper?: number;
+  fore?: number;
+}
+const {
+  at, scale = 1, flip = false, hip, shoulder, head, headR = 7, legs, arms,
+  hipW = 14, shoulderW = 15, chest = 3, back = 2, thigh = 8.5, shin = 6.5, upper = 6, fore = 5,
+} = Astro.props;
+
+const line = (...pts: Pt[]) => 'M' + pts.map(([x, y]) => `${+x.toFixed(2)} ${+y.toFixed(2)}`).join('L');
+// The torso is a rounded wedge from hip to shoulder, bulging at chest and back.
+const [vx, vy] = [shoulder[0] - hip[0], shoulder[1] - hip[1]];
+const length = Math.hypot(vx, vy);
+const [nx, ny] = [-vy / length, vx / length];
+const off = (p: Pt, d: number): Pt => [p[0] + nx * d, p[1] + ny * d];
+const mid = (a: Pt, b: Pt): Pt => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const [hf, hb, sf, sb] = [off(hip, hipW / 2), off(hip, -hipW / 2), off(shoulder, shoulderW / 2), off(shoulder, -shoulderW / 2)];
+const crown: Pt = [shoulder[0] + vx / length * 3, shoulder[1] + vy / length * 3];
+const fmt = (p: Pt) => `${+p[0].toFixed(2)} ${+p[1].toFixed(2)}`;
+const torso = `M${fmt(hb)}Q${fmt(off(mid(hb, sb), -back))} ${fmt(sb)}Q${fmt(crown)} ${fmt(sf)}Q${fmt(off(mid(hf, sf), chest))} ${fmt(hf)}Z`;
+const limb = (pts: Pt[], widths: number[]) => pts.slice(1).map((p, i) => ({ d: line(pts[i], p), w: widths[i] }));
+const legSegments = (leg: Pt[]) => limb(leg, [thigh, shin, 4.5]);
+const armSegments = (arm: Pt[]) => limb(arm, [upper, fore]);
+const [farLeg, nearLeg] = legs;
+const [farArm, nearArm] = arms;
+const transform = `translate(${at[0]} ${at[1]}) scale(${flip ? -scale : scale} ${scale})`;
+---
+<g transform={transform}>
+  <g fill="none" opacity=".72">
+    {farLeg && legSegments(farLeg).map(s => <path d={s.d} stroke-width={s.w}/>)}
+    {farArm && armSegments(farArm).map(s => <path d={s.d} stroke-width={s.w}/>)}
+  </g>
+  <path d={torso} stroke-width="2"/>
+  <path d={line(shoulder, head)} stroke-width={headR * .75} fill="none"/>
+  <circle cx={head[0]} cy={head[1]} r={headR} stroke="none"/>
+  <g fill="none">
+    {nearLeg && legSegments(nearLeg).map(s => <path d={s.d} stroke-width={s.w}/>)}
+    {nearArm && armSegments(nearArm).map(s => <path d={s.d} stroke-width={s.w}/>)}
+  </g>
+  <slot/>
+</g>

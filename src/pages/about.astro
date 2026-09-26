@@ -1,7 +1,217 @@
 ---
 import Base from '../layouts/Base.astro';
 import Timeline from '../components/Timeline.astro';
-import { employment, education } from '../../data/cv';
+import Portrait from '../components/about/Portrait.astro';
+import Plate from '../components/about/Plate.astro';
+import DykeScene from '../components/about/DykeScene.astro';
+import ForgeScene from '../components/about/ForgeScene.astro';
+import StarsScene from '../components/about/StarsScene.astro';
+import RopeScene from '../components/about/RopeScene.astro';
+import RoadScene from '../components/about/RoadScene.astro';
+import { employment, education, supervision, lectures, service, skills, languages } from '../../data/cv';
+// Each chapter pairs an illustrated plate with its part of the CV; plates alternate sides.
+const chapters = [
+  {id: 'employment', title: 'Employment', short: 'Employment', kicker: 'Digging in'},
+  {id: 'education', title: 'Education', short: 'Education', kicker: 'Learning the trade'},
+  {id: 'teaching', title: 'Teaching & supervision', short: 'Teaching', kicker: 'Passing it on'},
+  {id: 'service', title: 'Service & outreach', short: 'Service', kicker: 'Lending a hand'},
+  {id: 'skills', title: 'Skills & languages', short: 'Skills', kicker: 'Tools for the road'},
+];
+const [work, study, teach, serve, tools] = chapters;
+const number = (i: number) => String(i + 1).padStart(2, '0');
 ---
-<Base title="About & CV" active="About"><div class="shell page-body"><header class="page-heading"><p class="eyebrow">A little about me</p><h1>Curiosity across scales</h1><p class="lede">I’m Syver Døving Agdestein, a postdoctoral researcher in scientific computing at CWI in Amsterdam.</p></header><div class="about-intro"><div class="prose"><p>I work on probabilistic simulation of turbulence, closure models, and differentiable programming in Julia. The central question: how do we account for the detail that a practical simulation cannot resolve?</p><p>I did my PhD at Eindhoven University of Technology on data-driven closure models for large-eddy simulation, treating the numerical discretization as part of the physics.</p><p>Away from research, I’m drawn to history, languages, and the piano. I’ve lived in Asker, Gembloux, Toulouse, Saint Petersburg, Paris, and now Amsterdam.</p></div><img src="/logo.png" alt="Syver Døving Agdestein" width="220" height="220" /></div><section class="cv-section"><h2>Employment</h2><Timeline items={employment}/></section><section class="cv-section"><h2>Education</h2><Timeline items={education} kind="education"/></section><section class="cv-section"><h2>Teaching & supervision</h2><div class="prose"><p>Master’s thesis supervision:</p><ul><li>Lucas Ronckers — <em>Probabilistic turbulence modeling with ideal large eddy simulation: Bayesian inverse filtering and flow matching</em> — Eindhoven University of Technology (2026)</li><li>Viviane Desgrange — <em>An inverse problem approach for closure modelling</em> — University of Amsterdam (2023)</li></ul><p>Lectures at schools and masterclasses:</p><ul><li><em>Learning neural closure models for fluid flows</em> — Autumn School on Scientific Machine Learning, CWI (October 2023)</li><li><em>Learning physics from data</em> — Masterclass on Machine Learning for Inverse Problems: A Bayesian Perspective, CWI (May 2022)</li></ul></div></section><section class="cv-section"><h2>Service & outreach</h2><div class="prose"><ul><li>Peer review: Computer Methods in Applied Mechanics and Engineering (CMAME); Journal of Computational Physics</li><li>CWI works council (2023–2025)</li></ul></div></section><section class="cv-section"><h2>Skills & languages</h2><div class="prose"><p><strong>Research:</strong> Numerical analysis, partial differential equations, finite-element and finite-volume methods, spectral methods, turbulence and large-eddy simulation, structure-preserving machine learning, and generative modeling.</p><p><strong>Computing:</strong> Julia, Python, MATLAB, high-performance computing with Slurm, differentiable programming, multi-GPU kernel programming, Git, continuous integration, and agentic workflows.</p><p><strong>Languages:</strong> Fluent in Norwegian, English, and French; basic Russian and Dutch.</p></div></section></div></Base>
-<style>.about-intro { display:grid; grid-template-columns:minmax(0,760px) 220px; gap:75px; align-items:start; } .about-intro img { border-radius:50%; filter:saturate(.65); } .cv-section { margin-top:55px; } .cv-section h2 { font-size:35px; letter-spacing:-.03em; } .cv-section .prose { max-width:760px; } @media(max-width:820px) { .about-intro { grid-template-columns:1fr; gap:25px; } .about-intro img { width:140px; grid-row:1; } }</style>
+<Base title="About & CV" active="About" description="About Syver Døving Agdestein: employment, education, teaching, service, skills, and languages.">
+  <header class="shell about-hero">
+    <div class="about-head">
+      <p class="eyebrow">A little about me</p>
+      <h1>Curiosity across scales</h1>
+      <p class="lede">I’m Syver Døving Agdestein, a postdoctoral researcher in scientific computing at CWI in Amsterdam.</p>
+    </div>
+    <Portrait/>
+    <div class="about-body">
+      <div class="prose">
+        <p>I work on probabilistic simulation of turbulence, closure models, and differentiable programming in Julia. The central question: how do we account for the detail that a practical simulation cannot resolve?</p>
+        <p>I did my PhD at CWI on data-driven closure models for large-eddy simulation, treating the numerical discretization as part of the physics. The degree was awarded by Eindhoven University of Technology.</p>
+        <p>Away from research, I’m drawn to history, languages, and the piano. I’ve lived in Asker, Gembloux, Toulouse, Saint Petersburg, Paris, and now Amsterdam.</p>
+      </div>
+      <nav class="chapter-index" aria-label="Curriculum vitae">
+        {chapters.map((c, i) => <a href={`#${c.id}`}><span class="number-label">{number(i)}</span>{c.short}</a>)}
+      </nav>
+    </div>
+  </header>
+
+  <section id={work.id} class="chapter-wrap" aria-labelledby={`${work.id}-title`}>
+    <div class="shell chapter chapter--long">
+      <Plate><DykeScene/></Plate>
+      <div class="chapter-body">
+        <p class="eyebrow"><span class="number-label">01</span>{work.kicker}</p>
+        <h2 id={`${work.id}-title`}>{work.title}</h2>
+        <Timeline items={employment}/>
+      </div>
+    </div>
+  </section>
+
+  <section id={study.id} class="chapter-wrap band" aria-labelledby={`${study.id}-title`}>
+    <div class="shell chapter chapter--long chapter--flip">
+      <Plate><ForgeScene/></Plate>
+      <div class="chapter-body">
+        <p class="eyebrow"><span class="number-label">02</span>{study.kicker}</p>
+        <h2 id={`${study.id}-title`}>{study.title}</h2>
+        <Timeline items={education} kind="education"/>
+      </div>
+    </div>
+  </section>
+
+  <section id={teach.id} class="chapter-wrap" aria-labelledby={`${teach.id}-title`}>
+    <div class="shell chapter">
+      <Plate sky="night"><StarsScene/></Plate>
+      <div class="chapter-body">
+        <p class="eyebrow"><span class="number-label">03</span>{teach.kicker}</p>
+        <h2 id={`${teach.id}-title`}>{teach.title}</h2>
+        <h3 class="group-label">Master’s thesis supervision</h3>
+        <ul class="tiles">
+          {supervision.map(s => <li class="tile">
+            <span class="tile-meta">{s.year} · {s.institution}</span>
+            <strong class="tile-title">{s.student}</strong>
+            <em class="tile-text">{s.thesis}</em>
+          </li>)}
+        </ul>
+        <h3 class="group-label">Lectures at schools and masterclasses</h3>
+        <ul class="tiles">
+          {lectures.map(l => <li class="tile">
+            <span class="tile-meta">{l.date} · {l.venue}</span>
+            <em class="tile-title">{l.title}</em>
+            <span class="tile-text">{l.event}</span>
+          </li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id={serve.id} class="chapter-wrap band" aria-labelledby={`${serve.id}-title`}>
+    <div class="shell chapter chapter--flip">
+      <Plate><RopeScene/></Plate>
+      <div class="chapter-body">
+        <p class="eyebrow"><span class="number-label">04</span>{serve.kicker}</p>
+        <h2 id={`${serve.id}-title`}>{serve.title}</h2>
+        <ul class="stamps">
+          {service.map(s => <li class="stamp">
+            <span class="tile-meta">{s.kind}</span>
+            <strong class="stamp-mark">{s.short}</strong>
+            <span class="tile-text">{s.name}{s.period && <><br/>{s.period}</>}</span>
+          </li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id={tools.id} class="chapter-wrap" aria-labelledby={`${tools.id}-title`}>
+    <div class="shell chapter">
+      <Plate><RoadScene/></Plate>
+      <div class="chapter-body">
+        <p class="eyebrow"><span class="number-label">05</span>{tools.kicker}</p>
+        <h2 id={`${tools.id}-title`}>{tools.title}</h2>
+        <h3 class="group-label">Research</h3>
+        <ul class="chips">{skills.research.map(s => <li>{s}</li>)}</ul>
+        <h3 class="group-label">Computing</h3>
+        <ul class="chips chips--code">{skills.computing.map(s => <li>{s}</li>)}</ul>
+        <h3 class="group-label">Languages</h3>
+        <ul class="languages">
+          {languages.map(l => <li class:list={['language', {'language--basic': l.level === 'Basic'}]}>
+            <span class="greeting" lang={l.code}>{l.greeting}</span>
+            <span class="language-name">{l.name}</span>
+            <span class="language-level">{l.level}</span>
+          </li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  /* Opening: a portrait in an arched frame beside the introduction. */
+  .about-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-areas: "head portrait" "body portrait";
+    column-gap: 90px;
+    align-items: start;
+    padding: 75px 0 85px;
+  }
+  .about-head { grid-area: head; max-width: 760px; }
+  .about-head h1 { font-size: clamp(48px, 7vw, 78px); letter-spacing: -.05em; line-height: 1.05; margin: 20px 0; }
+  .about-head .lede { font-size: 17px; line-height: 1.8; color: var(--muted); max-width: 620px; }
+  .about-hero > :global(.portrait) { grid-area: portrait; align-self: center; margin-top: 20px; }
+  .about-body { grid-area: body; max-width: 700px; }
+  .chapter-index { display: flex; flex-wrap: wrap; gap: 12px 26px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; }
+  .chapter-index a { color: var(--muted); }
+  .chapter-index a:hover { color: var(--accent); }
+  .chapter-index .number-label { margin-right: 9px; }
+
+  /* Chapters: plate and text side by side, alternating, on alternating bands. */
+  .chapter-wrap { border-top: 1px solid var(--line); }
+  .band + .chapter-wrap { border-top: 0; }
+  .chapter { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 70px; align-items: start; padding-block: 72px; }
+  .chapter--flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .chapter--flip > :global(.plate) { order: 2; }
+  .chapter--long > :global(.plate) { position: sticky; top: 32px; }
+  .chapter-body { min-width: 0; }
+  .chapter-body h2 { font-size: 42px; letter-spacing: -.03em; line-height: 1.1; margin: 16px 0 24px; }
+  .group-label { font: 11px/1.6 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); margin: 34px 0 14px; }
+  .chapter-body h2 + .group-label { margin-top: 0; }
+
+  /* Tiles for students, lectures, and service. */
+  .tiles, .stamps, .chips, .languages { list-style: none; margin: 0; padding: 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .tile, .stamp { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 22px; background: var(--surface-raised); border: 1px solid var(--line); border-radius: 12px; }
+  .tile-meta { color: var(--muted); font: 11px/1.6 'IBM Plex Mono', monospace; }
+  .tile-title { font: 400 22px/1.25 'STIX Two Text', Georgia, serif; letter-spacing: -.01em; }
+  .tile-text { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  em.tile-text { font: italic 16px/1.5 'STIX Two Text', Georgia, serif; color: var(--ink); }
+  .tile { border-top: 3px solid color-mix(in srgb, var(--series-2) 55%, var(--line)); }
+  .tiles + .group-label + .tiles .tile { border-top-color: color-mix(in srgb, var(--series-3) 55%, var(--line)); }
+  .stamps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .stamp-mark { font: 400 40px/1 'STIX Two Text', Georgia, serif; letter-spacing: -.02em; color: var(--accent); margin: 6px 0 2px; }
+
+  /* Skills as chips; languages as greetings with a two-step level. */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-raised); font-size: 13px; line-height: 1.4; }
+  .chips--code li { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+  .languages { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 12px; }
+  .language { display: flex; flex-direction: column; gap: 4px; padding: 16px 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-raised); }
+  .greeting { font: 400 27px/1.15 'STIX Two Text', Georgia, serif; color: var(--accent); }
+  .language-name { font-size: 14px; }
+  .language-level { color: var(--muted); font: 10px/1.6 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .12em; }
+  .language-level::after { content: ''; display: block; height: 3px; margin-top: 8px; border-radius: 3px; background: linear-gradient(90deg, var(--accent) var(--level, 100%), color-mix(in srgb, var(--line) 70%, transparent) 0); }
+  .language--basic .greeting { color: var(--ink); }
+  .language--basic .language-level { --level: 35%; }
+
+  @media (max-width: 1100px) {
+    .about-hero { grid-template-columns: minmax(0, 1fr) 290px; column-gap: 60px; }
+    .chapter { gap: 48px; }
+  }
+  @media (max-width: 900px) {
+    .chapter, .chapter--flip { grid-template-columns: minmax(0, 1fr); gap: 34px; padding-block: 50px; }
+    .chapter--flip > :global(.plate) { order: 0; }
+    .chapter--long > :global(.plate) { position: static; }
+    .chapter > :global(.plate) { max-width: 640px; }
+  }
+  @media (max-width: 820px) {
+    .about-hero { grid-template-columns: minmax(0, 1fr) 200px; column-gap: 36px; padding: 50px 0 60px; }
+    .about-hero > :global(.portrait) { margin-top: 10px; }
+    .chapter-body h2 { font-size: 34px; }
+  }
+  @media (max-width: 600px) {
+    .about-hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "portrait" "body"; }
+    .about-hero > :global(.portrait) { width: min(64vw, 260px); margin: 16px 0 44px; }
+  }
+  @media (max-width: 520px) {
+    .tile, .stamp { padding: 18px; }
+    .stamp-mark { font-size: 34px; }
+    .greeting { font-size: 24px; }
+  }
+  @media print {
+    .chapter-wrap :global(.plate), .chapter-index { display: none; }
+    .chapter, .chapter--flip { display: block; padding-block: 24px; }
+    .band { background: none; }
+  }
+</style>

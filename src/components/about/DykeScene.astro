@@ -1,0 +1,83 @@
+---
+import Person from './Person.astro';
+// Employment: a crew raises a dyke against the sea while a mill turns behind them.
+// Broken glints on the water, spaced like the fjord's on the home page.
+const glints = Array.from({length: 9}, (_, i) => ({ y: 246 + i * 9, x: 170 + ((i * 197) % 330), w: 18 + ((i * 53) % 40) }));
+const gulls: [number, number, number][] = [[300, 80, 1], [330, 62, .8], [356, 92, .7]];
+// Four identical sails keep the rotating group centered on the hub.
+const sails = [20, 110, 200, 290];
+const s = 1.3;
+---
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice">
+  <circle cx="500" cy="96" r="42" fill="var(--sun)" opacity=".16"/>
+  <circle cx="500" cy="96" r="26" fill="var(--sun)"/>
+  <g fill="none" stroke="var(--ridge-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    {gulls.map(([x, y, g]) => <path transform={`translate(${x} ${y}) scale(${g})`} d="M-10 0Q-5 -6 0 0Q5 -6 10 0"/>)}
+  </g>
+  <!-- Open water behind the works, and a mill standing on the old dyke. -->
+  <path d="M0 236H600V350H0Z" fill="var(--ridge-back)" opacity=".75"/>
+  <g class="dyke-glints" stroke="var(--snow)" stroke-width="1.6" stroke-linecap="round" opacity=".4">
+    {glints.map(g => <path d={`M${g.x} ${g.y}h${g.w}`}/>)}
+  </g>
+  <path d="M0 240Q40 228 96 231Q118 233 130 241Z" fill="var(--ridge-mid)"/>
+  <g fill="var(--ridge-mid)" stroke="var(--ridge-mid)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 236 38 196H54L58 236Z"/>
+    <path d="M36 198Q46 185 56 198Z"/>
+    <path d="M29 218H63" stroke-width="2.4"/>
+    <g transform="translate(46 192)"><g class="mill-sails">
+      {sails.map(a => <g transform={`rotate(${a})`}>
+        <path d="M0 -3V-38" stroke-width="2"/>
+        <path d="M1.5 -9H8V-37H1.5M1.5 -16H8M1.5 -23H8M1.5 -30H8" fill="none" stroke-width="1"/>
+      </g>)}
+    </g></g>
+  </g>
+  <!-- The new dyke, with a heap of fresh earth and a plank run for the barrow. -->
+  <path d="M0 340C120 334 220 334 330 336S520 332 600 330V400H0Z" fill="var(--ridge-mid)"/>
+  <path d="M322 337Q352 314 388 335Z" fill="var(--ridge-mid)"/>
+  <path d="M0 340C120 334 220 334 330 336S520 332 600 330" fill="none" stroke="var(--snow)" stroke-width="2.5" opacity=".28"/>
+  <path d="M0 382Q180 372 360 378T600 372V400H0Z" fill="var(--figure)" opacity=".85"/>
+  <path d="M0 390Q200 382 400 387T600 383" fill="none" stroke="var(--snow)" stroke-width="1.6" opacity=".22"/>
+  <g fill="var(--figure)" stroke="var(--figure)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M394 335 590 331" stroke-width="3"/>
+    <!-- Pick: raised high, weight on the back foot before the stroke. -->
+    <Person at={[135, 337]} scale={s} hip={[0, -47]} shoulder={[-3, -76]} head={[1, -87]}
+      legs={[[[0, -47], [-9, -25], [-16, -3], [-8, -1]], [[0, -47], [10, -26], [16, -3], [24, -1]]]}
+      arms={[[[-5, -74], [-9, -92], [2, -104]], [[-1, -74], [8, -90], [5, -104]]]}>
+      <path d="M-6 -89Q1 -98 8 -89L13 -88H-6Z"/>
+      <path d="M9 -97-16 -138" fill="none" stroke-width="3"/>
+      <path d="M-33.1 -127.6Q-19.6 -144 1.1 -148.4" fill="none" stroke-width="4"/>
+    </Person>
+    <!-- Shovel: the clods leave the blade toward the heap. -->
+    <Person at={[255, 337]} scale={s} hip={[0, -44]} shoulder={[14, -72]} head={[22, -81]}
+      legs={[[[0, -44], [-12, -24], [-20, -3], [-12, -1]], [[0, -44], [16, -27], [15, -3], [23, -1]]]}
+      arms={[[[12, -71], [4, -58], [4, -50]], [[16, -71], [24, -60], [33, -58]]]}>
+      <path d="M15 -83Q22 -92 29 -83L34 -82H15Z"/>
+      <path d="M1 -48 50 -66M-2 -45 4 -51" fill="none" stroke-width="3"/>
+      <path d="M52.2 -59.9 47.8 -72.1 64.1 -77.1Q70 -72 67.9 -66.7Z"/>
+      <g stroke="none"><circle cx="76" cy="-86" r="3"/><circle cx="85" cy="-95" r="2.3"/><circle cx="90" cy="-82" r="2"/><circle cx="80" cy="-104" r="1.6"/><circle cx="96" cy="-92" r="1.4"/></g>
+    </Person>
+    <!-- Barrow: leaning into the load, the back foot pushing off. -->
+    <Person at={[420, 335]} scale={s} hip={[0, -45]} shoulder={[13, -72]} head={[21, -81]}
+      legs={[[[0, -45], [-10, -25], [-22, -8], [-16, -1]], [[0, -45], [12, -26], [9, -3], [17, -1]]]}
+      arms={[[[12, -71], [18, -57], [26, -47]], [[14, -71], [21, -57], [28, -45]]]}>
+      <path d="M14 -83Q21 -92 28 -83L33 -82H14Z"/>
+      <path d="M22 -48 104 -11M63 -32 60 -12M91 -28 100 -16" fill="none" stroke-width="3"/>
+      <path d="M50 -55 110 -50 94 -28 62 -33Z" stroke-width="2.5"/>
+      <g stroke="none"><circle cx="60" cy="-57" r="4"/><circle cx="70" cy="-59" r="5"/><circle cx="81" cy="-59" r="4.5"/><circle cx="92" cy="-57" r="5"/><circle cx="102" cy="-54" r="4"/></g>
+      <circle cx="104" cy="-11" r="10.5" fill="none" stroke-width="3"/>
+      <circle cx="104" cy="-11" r="2.6" stroke="none"/>
+    </Person>
+  </g>
+</svg>
+<style>
+  .mill-sails { transform-box: fill-box; transform-origin: 50% 50%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mill-sails { animation: turn 48s linear infinite; }
+    .dyke-glints path { animation: glint 7s ease-in-out infinite alternate; }
+    .dyke-glints path:nth-child(3n+2) { animation-duration: 11s; animation-delay: -4s; }
+    .dyke-glints path:nth-child(3n) { animation-duration: 9s; animation-delay: -2s; }
+  }
+  :global(html[data-motion='off']) .mill-sails, :global(html[data-motion='off']) .dyke-glints path { animation: none; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+  @keyframes glint { to { opacity: .25; transform: translateX(14px); } }
+</style>

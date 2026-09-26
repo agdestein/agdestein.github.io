@@ -1,0 +1,79 @@
+---
+import Person from './Person.astro';
+// Teaching: by the fire, an elder shows a child how to find north. The Plough is
+// the home page's J2000 layout, scaled down and low in an autumn sky; Polaris
+// lies on the line through the pointers Merak and Dubhe, 5.3 pointer-lengths on.
+type Star = [number, number, number];
+const home: Star[] = [[1382,212,2.6],[1390,255,2.3],[1327,279,2.3],[1307,249,1.8],[1261,247,2.6],[1225,242,2.4],[1178,272,2.6]];
+const [dubhe, merak] = home;
+const north = [dubhe[0] + 5.3 * (dubhe[0] - merak[0]), dubhe[1] + 5.3 * (dubhe[1] - merak[1])];
+const polaris: [number, number] = [404, 46];
+const k = .55;
+const plough = home.map(([x, y, r]): Star => [+(polaris[0] + (x - north[0]) * k).toFixed(1), +(polaris[1] + (y - north[1]) * k).toFixed(1), r * .72]);
+const [D, M, Ph, Me, Al, Mi, Ak] = plough.map(([x, y]) => `${x} ${y}`);
+// Background stars come from a small seeded generator (mulberry32): scattered
+// without the lattice lines that evenly stepped coordinates would draw, yet the
+// same sky on every build. They keep clear of the named stars.
+let seed = 20260705;
+const random = () => {
+  seed = (seed + 0x6D2B79F5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+const stars = Array.from({length: 70}, () => ({ x: +(random() * 600).toFixed(1), y: +(8 + random() ** 1.3 * 236).toFixed(1), r: random() < .15 ? 1.1 : .65 }))
+  .filter(s => [...plough, [...polaris, 0]].every(([x, y]) => Math.hypot(s.x - x, s.y - y) > 16));
+const embers = Array.from({length: 7}, (_, i) => ({ x: 294 + (i * 7) % 16, y: 246 + (i * 13) % 40, r: .9 + (i % 3) * .35, delay: -(i * 1.3).toFixed(1) }));
+// Stepped rings stand in for a soft glow without gradient IDs.
+const glow = [[112, .05], [80, .07], [54, .1], [32, .16]];
+const s = 1.3;
+---
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice">
+  <g fill="var(--snow)" opacity=".7">{stars.map(t => <circle cx={t.x} cy={t.y} r={t.r}/>)}</g>
+  <g fill="none" stroke="var(--snow)" stroke-width="1">
+    <path d={`M${D}L${Me}L${Ph}L${M}ZM${Me}L${Al}L${Mi}L${Ak}`} opacity=".22"/>
+    <path d={`M${M}L${polaris.join(' ')}`} stroke-dasharray="2 5" opacity=".4"/>
+  </g>
+  <g fill="var(--snow)">{plough.map(([x, y, r]) => <circle cx={x} cy={y} r={r}/>)}</g>
+  <circle cx={polaris[0]} cy={polaris[1]} r="7" fill="var(--snow)" opacity=".16"/>
+  <circle cx={polaris[0]} cy={polaris[1]} r="2.4" fill="var(--snow)"/>
+  <!-- Far hills with a stand of spruce, then the near slope where they sit. -->
+  <g fill="var(--ridge-mid)">
+    <path d="M0 286Q80 262 170 272T350 266Q430 256 500 262T600 256V340H0Z"/>
+    {[476, 494, 508, 526, 541, 560, 578].map((x, i) => { const h = 24 + (i * 7) % 16, y = 262 - (i % 2) * 2; return <path d={`M${x} ${y - h}l${-h * .28} ${h * .55}h${h * .12}l${-h * .2} ${h * .45}h${h * .72}l${-h * .2} ${-h * .45}h${h * .12}Z`}/>; })}
+  </g>
+  <g fill="var(--fire)">{glow.map(([r, o]) => <circle cx="300" cy="322" r={r} opacity={o}/>)}</g>
+  <path d="M0 330Q150 322 300 328T600 322V400H0Z" fill="var(--figure)"/>
+  <g fill="var(--figure)" stroke="var(--figure)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="166" y="310" width="68" height="20" rx="10"/>
+    <!-- The elder: seated on the log, beard lifted, arm along the line to north. -->
+    <Person at={[200, 336]} scale={s} hip={[0, -21]} shoulder={[1, -50]} head={[4, -60]} hipW={16} shoulderW={15}
+      legs={[[[0, -21], [19, -25], [22, -3], [29, -1]], [[0, -21], [22, -23], [25, -3], [32, -1]]]}
+      arms={[[[-1, -48], [6, -34], [17, -27]], [[2, -48], [11.3, -58.5], [19.9, -68.2]]]}>
+      <path d="M19.9 -68.2 22.9 -71.6" fill="none" stroke-width="2"/>
+      <path d="M4 -55Q10 -55 13 -56Q15 -47 9 -38Q5 -44 2 -50Z"/>
+      <path d="M-5 -48Q-14 -31 -13 -16L2 -18Z"/>
+    </Person>
+    <!-- The child: leaning back on both hands, face up. -->
+    <Person at={[392, 336]} flip hip={[0, -6]} shoulder={[-10, -34]} head={[-12, -44]} headR={7.5}
+      hipW={11} shoulderW={11} thigh={6.5} shin={5} upper={4.5} fore={4}
+      legs={[[[0, -6], [15, -16], [27, -4], [32, -7]], [[0, -6], [17, -6], [33, -4], [36, -9]]]}
+      arms={[[[-10, -32], [-17, -20], [-23, -4]], [[-8, -32], [-15, -19], [-19, -4]]]}>
+      <path d="M-19.6 -45Q-19 -55 -10 -53Q-5 -52 -5 -47Z"/>
+      <circle cx="-17" cy="-54" r="2.6" stroke="none"/>
+    </Person>
+    <path d="M278 340 322 328M282 328 326 340" fill="none" stroke-width="6"/>
+  </g>
+  <path class="fire-flame" d="M300 284C305 296 314 301 315 312C318 309 318 304 317 299C324 307 327 318 323 330H277C273 320 276 311 283 303C283 309 285 312 288 314C288 302 294 295 300 284Z" fill="var(--fire)"/>
+  <path d="M300 302C303 309 309 312 309 320Q309 330 303 330H297Q291 330 291 322C291 315 297 311 300 302Z" fill="var(--snow)" opacity=".85"/>
+  <g class="fire-embers" fill="var(--fire)">{embers.map(e => <circle cx={e.x} cy={e.y} r={e.r} style={`animation-delay:${e.delay}s`}/>)}</g>
+</svg>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .fire-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.9s ease-in-out infinite alternate; }
+    .fire-embers circle { animation: rise 4.5s linear infinite; }
+  }
+  :global(html[data-motion='off']) .fire-flame, :global(html[data-motion='off']) .fire-embers circle { animation: none; }
+  @keyframes flicker { 50% { transform: scale(.93, 1.07); } to { transform: scale(1.05, .94); } }
+  @keyframes rise { from { transform: translateY(24px); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(-46px); opacity: 0; } }
+</style>

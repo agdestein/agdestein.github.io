@@ -1,0 +1,46 @@
+---
+import Person from './Person.astro';
+// Service: a climber tops out over the lip, one hand on the ledge and the other
+// held by a partner kneeling at the edge, who keeps the rope run around a boulder.
+// A cairn marks the route for whoever comes next. The two hands meet at (370, 200).
+const s = 1.3;
+const choughs: [number, number, number][] = [[430, 96, 1], [456, 82, .8], [474, 108, .7]];
+---
+<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice">
+  <circle cx="204" cy="200" r="46" fill="var(--sun)" opacity=".16"/>
+  <circle cx="204" cy="200" r="28" fill="var(--sun)"/>
+  <!-- A far range catching first light, then a nearer ridge. -->
+  <path d="M0 250 46 212 84 230 150 150 206 214 250 180 292 212 330 196 400 244V320H0Z" fill="var(--ridge-back)"/>
+  <path d="M150 150 128 176 140 173 150 185 161 171 172 178ZM250 180 238 195 249 192 257 199 264 190Z" fill="var(--snow)" opacity=".9"/>
+  <path d="M0 300 70 268 140 286 220 254 300 288 380 278V400H0Z" fill="var(--ridge-mid)"/>
+  <g fill="none" stroke="var(--figure)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    {choughs.map(([x, y, c]) => <path transform={`translate(${x} ${y}) scale(${c})`} d="M-10 1Q-5 -6 0 0Q5 -6 10 1"/>)}
+  </g>
+  <!-- The buttress: face on the left, the ledge running off to the right. -->
+  <path class="rock" d="M296 400 314 356 328 330 334 302 344 280 350 258 358 236Q420 226 480 230L600 222V400Z"/>
+  <path d="M322 360l10 8M350 300l8 12M420 272l-6 16M488 300l10 18M540 262l-4 12" fill="none" stroke="var(--figure)" stroke-width="1.6" stroke-linecap="round" opacity=".4"/>
+  <g fill="var(--figure)" stroke="var(--figure)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M452 230Q450 210 468 204Q488 200 496 214Q500 226 496 230Z"/>
+    <ellipse cx="560" cy="217" rx="15" ry="6"/><ellipse cx="559" cy="207" rx="11" ry="5"/>
+    <ellipse cx="561" cy="198" rx="8" ry="4.5"/><ellipse cx="560" cy="190" rx="5.5" ry="3.5"/>
+    <!-- The partner: one knee down at the lip, the rope held back at the hip. -->
+    <Person at={[404, 234]} scale={s} flip hip={[0, -30]} shoulder={[10, -54]} head={[13, -64]}
+      legs={[[[0, -30], [14, -32], [12, -3], [19, -1]], [[0, -30], [3, -3], [-16, -2], [-21, -1]]]}
+      arms={[[[8, -53], [1, -42], [-4, -35]], [[11, -53], [18.1, -40.2], [26.2, -26.2]]]}>
+      <path d="M5.2 -65A7.8 7.8 0 0 1 20.8 -65Z"/>
+    </Person>
+    <!-- The climber: head over the edge, a hand flat on the ledge, a foot on the face. -->
+    <Person at={[340, 330]} scale={s} hip={[3, -45]} shoulder={[9, -72]} head={[8, -83]} hipW={13} shoulderW={14}
+      legs={[[[3, -45], [12, -33], [10, -16], [15, -17]], [[3, -45], [6, -24], [2, -2], [8, -1]]]}
+      arms={[[[8.5, -71], [14, -66], [20, -72.7]], [[10, -71], [15.4, -87.7], [23.1, -100]]]}>
+      <path d="M.2 -84A7.8 7.8 0 0 1 15.8 -84Z"/>
+    </Person>
+  </g>
+  <g fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
+    <ellipse cx="474" cy="217" rx="21" ry="4"/>
+    <path d="M454 218Q434 198 409 188Q384 194 370 220Q358 246 344 268"/>
+  </g>
+</svg>
+<style>
+  .rock { fill: color-mix(in srgb, var(--ridge-mid) 60%, var(--ridge-back)); }
+</style>
