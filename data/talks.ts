@@ -22,6 +22,20 @@ export interface Talk {
 
 export const talks: Talk[] = [
   {
+    title: "What a coarse grid cannot know",
+    venue: "Woudschoten Conference",
+    location: "Zeist, the Netherlands",
+    date: "October 2, 2026",
+    work: "symmetry",
+    artwork: "symmetry",
+    // Interactive HTML deck (self-contained single file, with the talk's animations and clips).
+    slidesUrl: "/slides/20261002-Woudschoten.html",
+    webpageUrl: "https://sites.cwi.nl/en/scs/woudschoten-conferences/2026-conference/2026-program/",
+    // badges: [
+    //   { label: "preprint", url: "https://doi.org/10.48550/arXiv.2603.05325" },
+    // ],
+  },
+  {
     title: "Agents for research",
     artwork: "agents",
     image: "agents-for-research.webp",
